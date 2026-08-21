@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/somoscoders/',
+    base: process.env.VERCEL ? '/' : (process.env.GITHUB_ACTIONS ? '/somoscoders/' : '/'),
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
