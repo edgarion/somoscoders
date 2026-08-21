@@ -25,6 +25,9 @@ interface HeaderProps {
   currentCategoryFilter?: string;
   onSetCategoryFilter?: (cat: string | undefined) => void;
   userName: string;
+  userEmail?: string;
+  userPicture?: string;
+  onOpenLogin: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -34,7 +37,10 @@ export const Header: React.FC<HeaderProps> = ({
   onAdjustFontSize,
   highContrast,
   onToggleHighContrast,
-  userName
+  userName,
+  userEmail,
+  userPicture,
+  onOpenLogin,
 }) => {
   return (
     <header id="app-header" className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
@@ -146,7 +152,9 @@ export const Header: React.FC<HeaderProps> = ({
         {/* User profile action */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex flex-col text-right">
-            <span className="text-xs text-gray-400">Sesión de Alumno</span>
+            <span className="text-xs text-gray-400">
+              {userEmail ? userEmail : 'Mi Cuenta'}
+            </span>
             <span className="text-sm font-semibold text-gray-800 flex items-center gap-1">
               {userName}
               <UserCheck className="w-3.5 h-3.5 text-emerald-500 inline" />
@@ -154,16 +162,40 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <button 
-            onClick={() => onNavigate('dashboard')}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 text-amber-950 border-2 border-amber-300 hover:bg-amber-200 transition focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 overflow-hidden shadow-inner"
-            title="Ver mi perfil de estudiante"
+            onClick={onOpenLogin}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-gray-200 hover:border-amber-400 shadow-sm hover:shadow transition focus:outline-none focus:ring-2 focus:ring-amber-400"
+            title="Cuenta / Iniciar sesión con Google"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" 
-              alt="Avatar del alumno" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+            {userPicture ? (
+              <img 
+                src={userPicture} 
+                alt={userName} 
+                className="w-7 h-7 rounded-full object-cover border border-amber-300"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path
+                  fill="#4285F4"
+                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.27v3.15C3.25 21.3 7.31 24 12 24z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.27C.46 8.2.01 10.05.01 12c0 1.95.45 3.8 1.26 5.42l4.01-3.15z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.27 6.58l4.01 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                />
+              </svg>
+            )}
+            <span className="text-xs font-semibold text-gray-700 hidden lg:inline">
+              {userEmail ? 'Perfil' : 'Google Login'}
+            </span>
           </button>
         </div>
       </div>

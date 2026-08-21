@@ -10,6 +10,7 @@ import { DashboardView } from './components/DashboardView';
 import { AboutView } from './components/AboutView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
+import { LoginModal } from './components/LoginModal';
 
 import { Course, CourseCategory, EnrollmentState } from './types';
 import { coursesData } from './data/coursesData';
@@ -25,7 +26,9 @@ export default function App() {
   const [fontSizeMultiplier, setFontSizeMultiplier] = useState<number>(1.0);
   const [highContrast, setHighContrast] = useState<boolean>(false);
 
-  // Student profile states
+  // Auth & Student profile states
+  const [user, setUser] = useState<{ name: string; email: string; picture: string } | null>(null);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('Edgar Costilla');
 
   // Academic Enrollment progress database states (with initial active progress to feel premium on opening)
@@ -125,7 +128,10 @@ export default function App() {
         onAdjustFontSize={handleAdjustFontSize}
         highContrast={highContrast}
         onToggleHighContrast={handleToggleHighContrast}
-        userName={userName}
+        userName={user ? user.name : userName}
+        userEmail={user?.email}
+        userPicture={user?.picture}
+        onOpenLogin={() => setIsLoginModalOpen(true)}
       />
 
       {/* Main Dynamic Workspace Router */}
@@ -209,6 +215,20 @@ export default function App() {
 
       {/* GDPR Cookie Consent Panel */}
       <CookieConsent />
+
+      {/* Google Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        user={user}
+        onLoginSuccess={(loggedInUser) => {
+          setUser(loggedInUser);
+          setUserName(loggedInUser.name);
+        }}
+        onLogout={() => {
+          setUser(null);
+        }}
+      />
     </div>
   );
 }
