@@ -116,12 +116,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* Upper Student Profile Summary Panel */}
       <section className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-center gap-4.5">
-          <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center text-amber-900 border-2 border-amber-300 font-bold shrink-0 overflow-hidden relative shadow-inner">
+          <div className="w-16 h-16 rounded-full bg-[#F7F6F1] flex items-center justify-center border-2 border-[#00A98F] shrink-0 overflow-hidden relative shadow-inner">
             <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" 
-              alt="Estudiante" 
+              src="/images/avatars/avatar_girl_headphones.png" 
+              alt="Estudiante SomosCoders" 
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
             />
           </div>
 

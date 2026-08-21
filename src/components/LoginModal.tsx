@@ -1,5 +1,5 @@
-import React from 'react';
-import { LogOut, CheckCircle2, ShieldCheck, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { LogOut, CheckCircle2, ShieldCheck, AlertCircle, Mail, Lock, User, ArrowRight } from 'lucide-react';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 interface UserProfile {
@@ -12,27 +12,81 @@ interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   user: UserProfile | null;
+  initialMode?: 'login' | 'register';
   onLoginSuccess: (user: UserProfile) => void;
   onLogout: () => void;
 }
+
+type AuthMode = 'login' | 'register';
 
 export const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   onClose,
   user,
+  initialMode = 'register',
   onLoginSuccess,
   onLogout,
 }) => {
-  const [authError, setAuthError] = React.useState<string | null>(null);
+  const [mode, setMode] = useState<AuthMode>(initialMode);
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  // Sync mode when modal opens or initialMode changes
+  useEffect(() => {
+    if (isOpen) {
+      setMode(initialMode);
+      setAuthError(null);
+    }
+  }, [isOpen, initialMode]);
+
+  // Form inputs for traditional Auth
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   if (!isOpen) return null;
 
-  // Custom login trigger via Google OAuth2 UserInfo API
-  const loginWithCustomPopup = useGoogleLogin({
+  const resetForm = () => {
+    setFullName('');
+    setEmail('');
+    setPassword('');
+    setAuthError(null);
+  };
+
+  const handleTraditionalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError(null);
+
+    if (!email.trim() || !password.trim()) {
+      setAuthError('Por favor completa todos los campos requeridos.');
+      return;
+    }
+
+    if (mode === 'register' && !fullName.trim()) {
+      setAuthError('Por favor introduce tu nombre completo.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setAuthError('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+
+    // Process traditional registration/login
+    const userDisplayName = mode === 'register' ? fullName : (email.split('@')[0] || 'Estudiante');
+    onLoginSuccess({
+      name: userDisplayName,
+      email: email,
+      picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(email)}`,
+    });
+    resetForm();
+    onClose();
+  };
+
+  // Google OAuth Popup Trigger
+  const loginWithGooglePopup = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         setAuthError(null);
-        // Real fetch to Google UserInfo API
         const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: {
             Authorization: `Bearer ${tokenResponse.access_token}`,
@@ -44,26 +98,25 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           onLoginSuccess({
             name: googleUser.name || googleUser.email.split('@')[0],
             email: googleUser.email,
-            picture: googleUser.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
+            picture: googleUser.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(googleUser.email)}`,
           });
+          resetForm();
           onClose();
         }
       } catch (err) {
         console.error('Error fetching Google UserInfo:', err);
-        setAuthError('No se pudo obtener el perfil de Google. Inténtalo de nuevo.');
+        setAuthError('No se pudo verificar tu cuenta con Google. Inténtalo nuevamente.');
       }
     },
-    onError: (error) => {
-      console.error('Google OAuth error:', error);
-      setAuthError('El inicio de sesión con Google fue cancelado o falló.');
+    onError: () => {
+      setAuthError('La conexión con Google fue cancelada.');
     },
   });
 
-  const handleCredentialSuccess = async (credentialResponse: any) => {
+  const handleGoogleCredentialSuccess = async (credentialResponse: any) => {
     try {
       setAuthError(null);
       if (credentialResponse.credential) {
-        // Decode JWT token payload safely from Google One Tap / Button
         const base64Url = credentialResponse.credential.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(
@@ -77,25 +130,35 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         onLoginSuccess({
           name: payload.name || payload.email,
           email: payload.email,
-          picture: payload.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
+          picture: payload.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(payload.email)}`,
         });
+        resetForm();
         onClose();
       }
     } catch (e) {
       console.error('Error decoding Google JWT:', e);
-      setAuthError('Error al procesar las credenciales de Google.');
+      setAuthError('Error al validar las credenciales de Google.');
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-gray-100 relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1117]/70 backdrop-blur-sm p-4 animate-fadeIn">
+      <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 border border-gray-100 relative overflow-hidden max-h-[90vh] overflow-y-auto">
         {/* Modal Header */}
         <div className="flex justify-between items-center pb-4 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-amber-500" />
-            {user ? 'Tu Cuenta' : 'Acceso & Registro con Google'}
-          </h2>
+          <div className="flex items-center gap-2.5">
+            <div className="w-10 h-10 rounded-2xl bg-[#F7F6F1] text-[#00A98F] border border-[#00A98F]/30 flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg font-extrabold font-display text-[#0D1117]">
+                {user ? 'Tu Cuenta' : mode === 'register' ? 'Crear Cuenta en SomosCoders' : 'Iniciar Sesión'}
+              </h2>
+              <p className="text-xs text-gray-500 font-sans">
+                {user ? 'Sesión activa' : mode === 'register' ? 'Únete a la comunidad abierta y gratuita' : 'Accede a tus cursos y comunidad'}
+              </p>
+            </div>
+          </div>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition"
@@ -105,82 +168,105 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="py-6">
+        <div className="pt-6">
           {user ? (
             <div className="text-center space-y-4">
               <div className="relative inline-block">
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-20 h-20 rounded-full mx-auto border-4 border-amber-400 shadow-md object-cover"
+                  className="w-20 h-20 rounded-full mx-auto border-4 border-[#00A98F] shadow-md object-cover bg-[#F7F6F1]"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
                       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100';
                   }}
                 />
-                <span className="absolute bottom-0 right-0 bg-emerald-500 border-2 border-white w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute bottom-0 right-0 bg-[#00A98F] border-2 border-white w-5 h-5 rounded-full flex items-center justify-center">
                   <CheckCircle2 className="w-3.5 h-3.5 text-white" />
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900">{user.name}</h3>
-                <p className="text-sm text-gray-500">{user.email}</p>
+                <h3 className="text-lg font-bold font-display text-[#0D1117]">{user.name}</h3>
+                <p className="text-xs text-gray-500 font-mono">{user.email}</p>
               </div>
-              <div className="bg-amber-50 rounded-xl p-3 text-xs text-amber-800 border border-amber-200">
-                Sesión iniciada correctamente con tu cuenta de <strong>Google API</strong>.
+              <div className="bg-[#F7F6F1] rounded-2xl p-3.5 text-xs text-[#087A65] border border-[#00A98F]/30 font-medium">
+                Has iniciado sesión correctamente. Ya tienes acceso completo a todos los cursos y al chat de la comunidad.
               </div>
               <button
                 onClick={() => {
                   onLogout();
                   onClose();
                 }}
-                className="w-full py-2.5 px-4 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold rounded-xl transition flex items-center justify-center gap-2 border border-rose-200"
+                className="w-full py-3 px-4 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold rounded-2xl transition flex items-center justify-center gap-2 border border-rose-200 text-xs"
               >
                 <LogOut className="w-4 h-4" />
                 Cerrar Sesión
               </button>
             </div>
           ) : (
-            <div className="space-y-6 text-center">
-              <p className="text-sm text-gray-600">
-                Inicia sesión o regístrate en <strong>SomosCoders</strong> con tu cuenta real de Google para guardar tus avances.
-              </p>
+            <div className="space-y-5">
+              {/* Tab Selector: Register vs Login */}
+              <div className="flex bg-[#F7F6F1] p-1.5 rounded-2xl border border-gray-200/80">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMode('register');
+                    setAuthError(null);
+                  }}
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl transition ${
+                    mode === 'register'
+                      ? 'bg-[#00A98F] text-white shadow-sm'
+                      : 'text-gray-600 hover:text-[#0D1117]'
+                  }`}
+                >
+                  Registrarse (Únete)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMode('login');
+                    setAuthError(null);
+                  }}
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl transition ${
+                    mode === 'login'
+                      ? 'bg-white text-[#0D1117] shadow-sm'
+                      : 'text-gray-600 hover:text-[#0D1117]'
+                  }`}
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
 
               {authError && (
-                <div className="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-2 rounded-xl text-xs flex items-center gap-2 justify-center">
+                <div className="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-2.5 rounded-xl text-xs flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{authError}</span>
                 </div>
               )}
 
-              <div className="flex flex-col items-center justify-center gap-3">
-                {/* Official Google OAuth Sign-In Component */}
+              {/* Google Fast Authentication Button Option */}
+              <div className="space-y-2.5">
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block text-center font-mono">
+                  {mode === 'register' ? 'Registro rápido con Google' : 'Acceso rápido con Google'}
+                </span>
+                
                 <div className="w-full flex justify-center">
                   <GoogleLogin
-                    onSuccess={handleCredentialSuccess}
-                    onError={() => setAuthError('Error al autenticar con la API de Google.')}
+                    onSuccess={handleGoogleCredentialSuccess}
+                    onError={() => setAuthError('Error al conectar con Google.')}
                     useOneTap
                     shape="pill"
                     size="large"
-                    text="continue_with"
+                    text={mode === 'register' ? 'signup_with' : 'signin_with'}
                   />
                 </div>
 
-                <div className="relative w-full my-2">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200"></div>
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-gray-400 font-mono">o vía Popup OAuth</span>
-                  </div>
-                </div>
-
-                {/* Backup OAuth Popup Trigger */}
                 <button
-                  onClick={() => loginWithCustomPopup()}
-                  className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 rounded-full border border-gray-300 shadow-sm transition-all active:scale-98 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  type="button"
+                  onClick={() => loginWithGooglePopup()}
+                  className="w-full flex items-center justify-center gap-2.5 bg-white hover:bg-gray-50 text-[#0D1117] font-semibold py-2.5 px-4 rounded-full border border-gray-200 text-xs transition shadow-xs"
                 >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path
                       fill="#4285F4"
                       d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
@@ -198,20 +284,115 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                       d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.27 6.58l4.01 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
                     />
                   </svg>
-                  <span>Abrir Ventana Google OAuth2</span>
+                  <span>{mode === 'register' ? 'Registrarse con Google (Ventana)' : 'Entrar con Google (Ventana)'}</span>
                 </button>
               </div>
 
-              <div className="text-xs text-gray-400">
-                Al iniciar sesión, aceptas nuestras{' '}
-                <a href="#legal" className="underline hover:text-gray-600">
-                  Condiciones de Servicio
-                </a>{' '}
-                y{' '}
-                <a href="#privacy" className="underline hover:text-gray-600">
-                  Política de Privacidad
-                </a>
-                .
+              {/* Divider */}
+              <div className="relative my-3">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
+                </div>
+                <div className="relative flex justify-center text-xs">
+                  <span className="bg-white px-3 text-gray-400 font-medium">o con tu email</span>
+                </div>
+              </div>
+
+              {/* Traditional Form (Email & Password) */}
+              <form onSubmit={handleTraditionalSubmit} className="space-y-3.5 text-left">
+                {mode === 'register' && (
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">
+                      Nombre Completo
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                      <input
+                        type="text"
+                        placeholder="Ej. Ana García"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                        required={mode === 'register'}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">
+                    Correo Electrónico
+                  </label>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                    <input
+                      type="email"
+                      placeholder="tu@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">
+                    Contraseña
+                  </label>
+                  <div className="relative">
+                    <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                    <input
+                      type="password"
+                      placeholder="Mínimo 6 caracteres"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 bg-[#00A98F] hover:bg-[#087A65] text-white font-bold rounded-xl transition flex items-center justify-center gap-2 text-xs font-sans shadow-sm mt-2"
+                >
+                  <span>{mode === 'register' ? 'Completar Registro en SomosCoders' : 'Iniciar Sesión'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+
+              {/* Bottom switch mode hint */}
+              <div className="text-xs text-gray-500 pt-2 text-center">
+                {mode === 'register' ? (
+                  <p>
+                    ¿Ya tienes una cuenta registrada?{' '}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMode('login');
+                        setAuthError(null);
+                      }}
+                      className="font-bold text-[#00A98F] hover:underline"
+                    >
+                      Inicia sesión aquí
+                    </button>
+                  </p>
+                ) : (
+                  <p>
+                    ¿Aún no tienes cuenta?{' '}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMode('register');
+                        setAuthError(null);
+                      }}
+                      className="font-bold text-[#00A98F] hover:underline"
+                    >
+                      Regístrate gratis
+                    </button>
+                  </p>
+                )}
               </div>
             </div>
           )}

@@ -3,85 +3,90 @@ import React from 'react';
 interface LogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  isLight?: boolean;
 }
 
-export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
+export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', isLight = false }) => {
   const getSizes = () => {
     switch (size) {
       case 'sm':
         return {
-          iconWidth: 28,
-          iconHeight: 28,
+          iconWidth: 32,
+          iconHeight: 32,
           textSize: 'text-xs',
-          titleSize: 'text-sm font-extrabold tracking-tight',
-          spacing: 'gap-1.5'
+          titleSize: 'text-sm font-extrabold',
+          spacing: 'gap-2',
+          strokeW: '9'
         };
       case 'lg':
         return {
-          iconWidth: 54,
-          iconHeight: 54,
-          textSize: 'text-lg',
-          titleSize: 'text-2xl font-extrabold tracking-tight',
-          spacing: 'gap-3.5'
+          iconWidth: 56,
+          iconHeight: 56,
+          textSize: 'text-base',
+          titleSize: 'text-2xl font-extrabold',
+          spacing: 'gap-3.5',
+          strokeW: '10'
         };
       case 'md':
-    default:
+      default:
         return {
-          iconWidth: 42,
-          iconHeight: 42,
-          textSize: 'text-sm font-medium leading-none tracking-normal',
-          titleSize: 'text-lg font-bold leading-tight tracking-normal',
-          spacing: 'gap-2.5'
+          iconWidth: 44,
+          iconHeight: 44,
+          textSize: 'text-sm font-semibold',
+          titleSize: 'text-xl font-extrabold',
+          spacing: 'gap-2.5',
+          strokeW: '9.5'
         };
     }
   };
 
   const dims = getSizes();
+  const colorClass = isLight ? 'text-white' : 'text-[#0D1117]';
 
   return (
-    <div id="somoscoders-logo" className={`flex items-center ${dims.spacing} select-none ${className}`}>
-      {/* Exact replica of the speech-bubble terminal vector icon */}
+    <div id="somoscoders-logo" className={`flex items-center ${dims.spacing} select-none ${colorClass} ${className}`}>
+      {/* Icono de terminal en globo de conversación idéntico al logo original */}
       <svg
         width={dims.iconWidth}
         height={dims.iconHeight}
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="text-gray-900 dark:text-white shrink-0"
+        className="shrink-0"
       >
-        {/* Rounded speech bubble speech container */}
+        {/* Globo de terminal con contorno */}
         <path
-          d="M15 15H85C89.4 15 93 18.6 93 23V67C93 71.4 89.4 75 85 75H38.5L20 90V75H15C10.6 75 7 71.4 7 67V23C7 18.6 10.6 15 15 15Z"
+          d="M14 16H86C90.4 16 94 19.6 94 24V66C94 70.4 90.4 74 86 74H38L20 88V74H14C9.6 74 6 70.4 6 66V24C6 19.6 9.6 16 14 16Z"
           fill="none"
           stroke="currentColor"
-          strokeWidth="11"
+          strokeWidth={dims.strokeW}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        {/* Prompt CLI symbol ">" */}
+        {/* Prompt > */}
         <path
-          d="M28 35L42 45L28 55"
+          d="M26 34L42 46L26 58"
           stroke="currentColor"
-          strokeWidth="10"
+          strokeWidth={dims.strokeW}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        {/* Blink block cursor "_" */}
+        {/* Cursor guión bajo _ */}
         <line
-          x1="48"
-          y1="55"
-          x2="65"
-          y2="55"
+          x1="50"
+          y1="58"
+          x2="68"
+          y2="58"
           stroke="currentColor"
-          strokeWidth="10"
+          strokeWidth={dims.strokeW}
           strokeLinecap="round"
         />
       </svg>
 
-      {/* Typography: "somos coders" in stacked lowercase format aligned with the image */}
-      <div className="flex flex-col text-left font-sans text-gray-900 dark:text-white">
-        <span className={`${dims.textSize} lowercase leading-none`}>somos</span>
-        <span className={`${dims.titleSize} lowercase leading-none font-bold mt-0.5`}>coders</span>
+      {/* Wordmark oficial: somos / coders */}
+      <div className="flex flex-col text-left font-sans leading-none">
+        <span className={`${dims.textSize} lowercase tracking-normal font-semibold`}>somos</span>
+        <span className={`${dims.titleSize} lowercase tracking-tight font-extrabold mt-0.5`}>coders</span>
       </div>
     </div>
   );

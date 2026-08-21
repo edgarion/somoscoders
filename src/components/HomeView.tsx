@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, 
-  HelpCircle, 
-  Zap, 
-  Users, 
-  Award, 
   Sparkles, 
-  Compass, 
-  BookOpen, 
-  Search, 
-  Heart, 
-  HeartHandshake,
-  CheckCircle,
-  Laptop
+  Users, 
+  Briefcase, 
+  Building2, 
+  HeartHandshake, 
+  ArrowUpRight,
+  Code2,
+  ChevronRight,
+  Quote,
+  CheckCircle2,
+  Lock,
+  Search
 } from 'lucide-react';
 import { Course, CourseCategory } from '../types';
 
@@ -31,406 +31,489 @@ export const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 4 main categories list with description + course counts
-  const categories: { key: CourseCategory; name: string; desc: string; count: number; color: string; bg: string; border: string }[] = [
-    { 
-      key: 'ux', 
-      name: 'UX Design', 
-      desc: 'Diseña experiencias accesibles y centradas en el usuario.', 
-      count: 3, 
-      color: 'text-amber-600', 
-      bg: 'bg-amber-50', 
-      border: 'border-amber-200' 
-    },
-    { 
-      key: 'vibe-coding', 
-      name: 'Vibe Coding', 
-      desc: 'Programa con bienestar y asistencia de Inteligencia Artificial creativa.', 
-      count: 4, 
-      color: 'text-purple-600', 
-      bg: 'bg-purple-50', 
-      border: 'border-purple-200' 
-    },
-    { 
-      key: 'qa', 
-      name: 'QA Testing', 
-      desc: 'Analiza requerimientos, detecta errores y asegura calidad técnica.', 
-      count: 3, 
-      color: 'text-emerald-600', 
-      bg: 'bg-emerald-50', 
-      border: 'border-emerald-200' 
-    },
-    { 
-      key: 'testing', 
-      name: 'Testing', 
-      desc: 'Automatiza pruebas exhaustivas con Cypress, Jest y APIs.', 
-      count: 4, 
-      color: 'text-indigo-600', 
-      bg: 'bg-indigo-50', 
-      border: 'border-indigo-200' 
-    }
-  ];
-
   const handleCategorySelect = (cat: CourseCategory) => {
     onSetCategoryFilter(cat);
     onNavigate('cursos');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleCourseClick = (slug: string) => {
-    onSetSelectedCourseSlug(slug);
-    onNavigate(`curso-${slug}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // Get only first 4 courses for the featured section
-  const featuredCourses = courses.slice(0, 4);
-
   return (
-    <div className="space-y-24">
-      {/* Hero Section */}
-      <section id="hero-section" className="relative overflow-hidden bg-gradient-to-b from-amber-50/70 via-white to-transparent pt-12 md:pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Hero Left Info */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold leading-none bg-amber-100 text-amber-950 font-mono tracking-wide uppercase">
-                <Sparkles className="w-4 h-4 fill-amber-300 stroke-amber-800" />
-                <span>Bootcamp de Acceso Gratuito & 100% Inclusivo</span>
-              </span>
+    <div className="space-y-20 font-sans text-[#0D1117]">
+      
+      {/* 1. HERO SECTION */}
+      <section id="hero-section" className="relative pt-4 pb-12 lg:py-12 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Izquierda: Titulares y CTAs */}
+            <div className="lg:col-span-6 space-y-6 text-left relative">
+              {/* Overlay: Cuadrícula de cruces estilo editorial en la esquina superior izquierda */}
+              <img 
+                src="/images/stickers/sticker_cross_grid.png" 
+                alt="Grid decorativo" 
+                className="absolute -top-6 -left-6 w-16 h-auto opacity-30 pointer-events-none hidden sm:block" 
+              />
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                Aprende tecnología <span className="text-amber-500 underline decoration-amber-300 decoration-wavy py-1">sin límites</span>
-              </h1>
+              {/* Badge: TECNOLOGÍA CON IMPACTO SOCIAL */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F6F1] border border-[#00A98F]/40 text-[#087A65] text-xs font-semibold tracking-wide">
+                <span className="text-[#00A98F]">✳</span>
+                <span>Tecnología con impacto social</span>
+              </div>
 
-              <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Plataforma de e-learning inclusiva de <strong>SomosCoders</strong>. Cursos diseñados y adaptados de UX Design, Vibe Coding, QA y Testing para impulsar tu carrera en la industria del software.
+              {/* Titular Principal */}
+              <div className="relative">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#0D1117] leading-[1.1]">
+                  Código.<br />
+                  Comunidad.<br />
+                  <span className="text-[#00A98F] relative inline-block">
+                    Oportunidades.
+                    {/* Overlay: Trazo verde lima tipo brocha subrayando Oportunidades */}
+                    <img 
+                      src="/images/stickers/sticker_lime_brush.png" 
+                      alt="Subrayado lima" 
+                      className="absolute -bottom-2 -left-2 w-full h-4 object-contain opacity-70 pointer-events-none -z-10" 
+                    />
+                  </span>
+                </h1>
+              </div>
+
+              {/* Descripción */}
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
+                Formamos en tecnología a personas en riesgo de exclusión para que construyan un futuro con más oportunidades.
               </p>
 
-              {/* Direct Search Bar */}
-              <div className="pt-2 max-w-md mx-auto lg:mx-0">
-                <form 
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    onSetCategoryFilter(undefined);
-                    onNavigate('cursos');
-                  }}
-                  className="flex items-center bg-white border-2 border-gray-200 rounded-xl p-1 shadow-sm focus-within:border-amber-400 focus-within:ring-2 focus-within:ring-amber-200 transition-all"
-                >
-                  <Search className="w-5 h-5 text-gray-400 ml-3" />
-                  <input 
-                    type="text" 
-                    placeholder="¿Qué habilidad quieres aprender hoy?..." 
-                    className="w-full text-sm py-2 px-3 text-gray-700 placeholder-gray-400 bg-transparent outline-none"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button 
-                    type="submit"
-                    className="bg-gray-900 hover:bg-gray-800 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition"
-                  >
-                    Buscar
-                  </button>
-                </form>
-              
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4 w-full">
+              <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
                 <button
                   onClick={() => { onSetCategoryFilter(undefined); onNavigate('cursos'); }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold px-7 py-3.5 rounded-xl text-base transition shadow-md hover:shadow-lg focus:ring-4 focus:ring-amber-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#00A98F] hover:bg-[#087A65] text-white font-bold px-7 py-3.5 rounded-full text-sm font-sans transition shadow-sm hover:shadow-md cursor-pointer"
                 >
-                  <span>Explorar Cursos</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <span>Conoce nuestros programas</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
+
                 <button
-                  onClick={() => onNavigate('sobre-nosotros')}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-6 py-3.5 rounded-xl text-base border-2 border-gray-200 transition focus:ring-2 focus:ring-gray-300"
+                  onClick={() => onNavigate('colabora')}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#0D1117] font-semibold px-6 py-3.5 rounded-full text-sm border-2 border-gray-200 transition"
                 >
-                  <HeartHandshake className="w-5 h-5 text-amber-500" />
-                  <span>Nuestro Compromiso</span>
+                  <span>Colabora con nosotros</span>
+                  <ArrowRight className="w-4 h-4 text-gray-400" />
                 </button>
-              </div> </div>
-            </div>
+              </div>
 
-            {/* Hero Right Graph representation (Vector aesthetic) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-[380px] sm:max-w-[420px] aspect-square rounded-3xl bg-amber-400 p-3.5 rotate-2 shadow-xl hover:rotate-0 transition-transform duration-500">
-                <div className="w-full h-full bg-slate-900 rounded-2xl p-6 text-white flex flex-col justify-between font-mono text-xs select-none">
-                  {/* Top Bar of Code Panel */}
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                    </div>
-                    <span className="text-slate-500 text-[10px]">interactive_player.tsx</span>
-                  </div>
-
-                  {/* Code body lines */}
-                  <div className="space-y-4 py-6 overflow-hidden">
-                    <p className="text-amber-400">// Bienvenido a la academia inclusiva</p>
-                    <p className="text-slate-400">
-                      <span className="text-emerald-400">const</span> developer = &#123;
-                    </p>
-                    <p className="text-slate-400 pl-4">
-                      nombre: <span className="text-sky-300">"Tu Nombre Completo"</span>,
-                    </p>
-                    <p className="text-slate-400 pl-4">
-                      motivo: <span className="text-sky-300">"Aprender tecnología gratis"</span>,
-                    </p>
-                    <p className="text-slate-400 pl-4">
-                      accesible: <span className="text-amber-400">true</span>,
-                    </p>
-                    <p className="text-slate-400 pl-4">
-                      comunidad: <span className="text-sky-400">["Barcelona", "La Rioja", "Mundial"]</span>
-                    </p>
-                    <p className="text-slate-400">
-                      &#125;;
-                    </p>
-                    <p className="text-emerald-400 animate-pulse font-bold">
-                      &gt;_ cargando_modulo_de_exito_profesional...
-                    </p>
-                  </div>
-
-                  {/* Mini stats cards inside editor */}
-                  <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700/50 flex justify-between items-center text-[10px] font-sans">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="font-semibold text-gray-200">70% Empleabilidad</span>
-                    </div>
-                    <span className="text-amber-400 font-bold">100% Accesible</span>
-                  </div>
+              {/* Avatares oficiales SomosCoders y prueba social */}
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div className="flex -space-x-2">
+                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_headphones.png" alt="Comunidad SomosCoders" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_beanie.png" alt="Comunidad SomosCoders" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_ponytail.png" alt="Comunidad SomosCoders" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_curly.png" alt="Comunidad SomosCoders" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_dog_mascot.png" alt="Mascota SomosCoders" />
                 </div>
+                <span className="text-xs font-semibold text-gray-700">
+                  +2.500 personas ya forman parte
+                </span>
               </div>
             </div>
+
+            {/* Derecha: Hero Ilustración Principal con Globo Animado "Programar y aprender sin barreras" */}
+            <div className="lg:col-span-6 relative flex justify-center items-center">
+              <div className="relative w-full max-w-lg lg:max-w-none flex justify-center">
+                
+                {/* Globo de texto animado sobre la ilustración */}
+                <div className="absolute -top-6 left-2 sm:left-6 z-20 bg-white border-2 border-[#0D1117] rounded-3xl px-4 py-2.5 shadow-[4px_4px_0px_#0D1117] animate-float hover:scale-105 transition-transform duration-300">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#00A98F] animate-ping" />
+                    <span className="text-xs sm:text-sm font-extrabold text-[#0D1117] font-display tracking-tight">
+                      Programar y aprender <span className="text-[#00A98F] underline decoration-[#C8FF00] decoration-2">sin barreras</span>
+                    </span>
+                  </div>
+                  {/* Puntero del bocadillo */}
+                  <div className="absolute -bottom-2 left-8 w-3.5 h-3.5 bg-white border-r-2 border-b-2 border-[#0D1117] transform rotate-45"></div>
+                </div>
+
+                <img 
+                  src="/images/hero_main_characters.png"
+                  alt="SomosCoders - Programar y aprender sin barreras"
+                  className="w-[90%] max-w-[460px] h-auto object-contain max-h-[450px] drop-shadow-2xl hover:scale-[1.01] transition duration-300 mx-auto"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Categories Grid */}
-      <section id="categories-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-            Explora por Categoría
-          </h2>
-          <p className="text-gray-500">
-            Encuentra el camino de aprendizaje perfecto para ti entre nuestras cuatro áreas prioritarias de especialización
-          </p>
-        </div>
+      {/* 2. SECCIÓN DE IMPACTO (Con Overlays en las Cajas) */}
+      <section id="impact-section" className="bg-[#F7F6F1] rounded-3xl p-6 sm:p-10 border border-gray-200/80 relative overflow-hidden">
+        {/* Overlay fondo: Cuadrícula de cruces sutil */}
+        <img 
+          src="/images/stickers/sticker_cross_grid.png" 
+          alt="Grid fondo" 
+          className="absolute top-4 right-6 w-20 h-auto opacity-20 pointer-events-none" 
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => handleCategorySelect(cat.key)}
-              className={`p-6 rounded-2xl border-2 text-left cursor-pointer transition-all duration-300 hover:-translate-y-1 bg-white hover:bg-slate-50 border-gray-100 opacity-95 hover:opacity-100 flex flex-col justify-between aspect-[4/3] relative overflow-hidden`}
-            >
-              <div className="space-y-4">
-                <span className={`inline-block px-3 py-1 text-xs font-bold font-mono rounded-full ${cat.bg} ${cat.color} ${cat.border}`}>
-                  {cat.count} Cursos
-                </span>
-                <h3 className="text-xl font-bold text-gray-800 tracking-tight">
-                  {cat.name}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          
+          {/* Bloque Izquierdo con Ilustración del estudiante */}
+          <div className="lg:col-span-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="relative">
+                <img 
+                  src="/images/char_sitting_laptop.png" 
+                  alt="Estudiante SomosCoders" 
+                  className="w-20 h-20 object-contain rounded-2xl bg-white p-1 border border-gray-200 shadow-xs shrink-0" 
+                />
+                {/* Overlay: Huella de mascota con terminal sobre el avatar */}
+                <img 
+                  src="/images/stickers/sticker_paw_logo.png" 
+                  alt="Huella coder" 
+                  className="absolute -bottom-2 -right-2 w-7 h-7 object-contain drop-shadow-md" 
+                />
+              </div>
+              <div>
+                <span className="text-[11px] font-bold tracking-wider text-[#087A65] uppercase font-mono">NUESTRO IMPACTO</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#0D1117] mt-1">
+                  Así transformamos vidas con <span className="text-[#00A98F] underline decoration-[#C8FF00] decoration-wavy">código</span>.
+                </h2>
+              </div>
+            </div>
+
+            {/* Grid 4 métricas con iconos lineales */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
+                <Users className="w-5 h-5 text-[#00A98F]" />
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+2.500</p>
+                <p className="text-xs text-gray-500 font-medium">Personas formadas</p>
+              </div>
+
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
+                <Briefcase className="w-5 h-5 text-[#00A98F]" />
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">65%</p>
+                <p className="text-xs text-gray-500 font-medium">Inserción laboral</p>
+              </div>
+
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
+                <Building2 className="w-5 h-5 text-[#00A98F]" />
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+150</p>
+                <p className="text-xs text-gray-500 font-medium">Empresas aliadas</p>
+              </div>
+
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
+                <HeartHandshake className="w-5 h-5 text-[#00A98F]" />
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+300</p>
+                <p className="text-xs text-gray-500 font-medium">Personas voluntarias</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque Destacado Verde Lima con Overlays */}
+          <div className="lg:col-span-4 bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] text-[#0D1117] relative flex flex-col justify-between min-h-[220px] shadow-[4px_4px_0px_#0D1117] overflow-hidden">
+            {/* Overlay: Bocadillo de terminal en esquina superior derecha de la caja */}
+            <img 
+              src="/images/stickers/sticker_speech_terminal.png" 
+              alt="Terminal overlay" 
+              className="absolute -top-2 -right-2 w-12 h-auto opacity-20 pointer-events-none" 
+            />
+
+            <div className="flex items-start justify-between gap-3 relative z-10">
+              <div className="space-y-2">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#087A65]">{"{ }"} Oportunidad</span>
+                <h3 className="text-lg font-extrabold font-display leading-tight">
+                  Cada línea de código es una nueva oportunidad.
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed font-sans line-clamp-3">
-                  {cat.desc}
-                </p>
               </div>
-              <div className="flex items-center justify-between text-xs font-semibold text-amber-600 mt-4 pt-3 border-t border-gray-50">
-                <span>Ver cursos</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </button>
-          ))}
+              <img 
+                src="/images/char_girl_rocket.png" 
+                alt="Impulsa tu futuro SomosCoders" 
+                className="w-20 h-20 object-contain shrink-0 drop-shadow-md" 
+              />
+            </div>
+            <div className="flex justify-end pt-4 relative z-10">
+              <button 
+                onClick={() => onNavigate('sobre-nosotros')}
+                className="w-10 h-10 rounded-full bg-[#0D1117] text-white flex items-center justify-center hover:scale-105 transition cursor-pointer"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* Featured Courses / Cursos Destacados */}
-      <section id="featured-courses-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div className="space-y-3">
-            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-              Cursos Destacados
+      {/* 3. PROGRAMAS (Cards con Overlays estilizados) */}
+      <section id="programas-section" className="space-y-8 pt-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div>
+            <span className="text-[11px] font-bold tracking-wider text-[#087A65] uppercase font-mono">NUESTROS PROGRAMAS</span>
+            <h2 className="text-3xl font-extrabold font-display text-[#0D1117] mt-1">
+              Formación práctica, gratuita y de calidad.
             </h2>
-            <p className="text-gray-500">
-              Los programas formativos interactivos más populares para iniciar tu formación hoy mismo de forma gratuita
-            </p>
           </div>
           <button
             onClick={() => { onSetCategoryFilter(undefined); onNavigate('cursos'); }}
-            className="group inline-flex items-center gap-1.5 text-sm font-bold text-amber-600 hover:text-amber-700 hover:underline transition shrink-0"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#00A98F] hover:text-[#087A65] underline decoration-2 transition cursor-pointer"
           >
-            <span>Ver todos los cursos</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <span>VER TODOS LOS PROGRAMAS</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
+        {/* Grid de 4 tarjetas con stickers overlay */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredCourses.map((course) => {
-            // Category badges helper
-            let badgeBg = 'bg-amber-100 text-amber-900';
-            if (course.category === 'vibe-coding') badgeBg = 'bg-purple-100 text-purple-950';
-            if (course.category === 'qa') badgeBg = 'bg-emerald-100 text-emerald-950';
-            if (course.category === 'testing') badgeBg = 'bg-indigo-100 text-indigo-950';
+          {/* Card 1: Desarrollo Web con Overlay de Tablet Terminal */}
+          <div 
+            onClick={() => handleCategorySelect('vibe-coding')}
+            className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
+          >
+            {/* Overlay: Tablet Terminal en esquina */}
+            <img 
+              src="/images/stickers/sticker_tablet_terminal.png" 
+              alt="Tablet terminal overlay" 
+              className="absolute -top-3 -right-3 w-10 h-auto opacity-30 group-hover:opacity-80 transition duration-300 pointer-events-none" 
+            />
 
-            return (
-              <div 
-                key={course.id}
-                className="bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col justify-between course-card-shadow transition-all duration-300"
-              >
-                {/* Course Header card */}
-                <div className="p-5 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-bold font-mono tracking-wider uppercase px-2.5 py-1 rounded-full ${badgeBg}`}>
-                      {course.category}
-                    </span>
-                    <span className="text-[10px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">
-                      {course.level}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-gray-900 line-clamp-2 leading-snug">
-                    {course.title}
-                  </h3>
-
-                  <p className="text-xs text-gray-500 leading-relaxed font-sans line-clamp-3">
-                    {course.description}
-                  </p>
-                </div>
-
-                {/* Course Footer statistics */}
-                <div className="px-5 pb-5 pt-4 border-t border-gray-50 space-y-4">
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <BookOpen className="w-3.5 h-3.5 text-gray-400" />
-                      <span>{course.lessonsCount} Lecciones</span>
-                    </div>
-                    <span>{course.duration}</span>
-                  </div>
-
-                  <button
-                    onClick={() => handleCourseClick(course.slug)}
-                    className="w-full inline-flex items-center justify-center gap-1.5 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 px-4 rounded-xl text-xs transition"
-                  >
-                    <span>Ver Curso</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-[11px] font-bold font-mono px-3 py-1 rounded-full bg-[#00A98F]/10 text-[#00A98F]">
+                  {"</>"} Desarrollo Web
+                </span>
               </div>
-            );
-          })}
+              <div className="aspect-square rounded-2xl overflow-hidden bg-white p-3 border border-gray-100 flex items-center justify-center">
+                <img 
+                  src="/images/char_girl_laptop.png"
+                  alt="Desarrollo Web"
+                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                />
+              </div>
+            </div>
+            <div className="pt-4 flex items-center justify-between">
+              <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
+                Aprender a programar
+              </span>
+              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Lógica & Arquitectura con Overlay de Cuadrícula */}
+          <div 
+            onClick={() => handleCategorySelect('vibe-coding')}
+            className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
+          >
+            <img 
+              src="/images/stickers/sticker_cross_grid.png" 
+              alt="Grid overlay" 
+              className="absolute -top-2 -right-2 w-12 h-auto opacity-25 group-hover:opacity-60 transition duration-300 pointer-events-none" 
+            />
+
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-[11px] font-bold font-mono px-3 py-1 rounded-full bg-purple-100 text-purple-700">
+                  ⚡ Arquitectura & Lógica
+                </span>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden bg-white p-3 border border-gray-100 flex items-center justify-center">
+                <img 
+                  src="/images/char_whiteboard.png"
+                  alt="Lógica y Algoritmos"
+                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                />
+              </div>
+            </div>
+            <div className="pt-4 flex items-center justify-between">
+              <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
+                Lógica & Arquitectura
+              </span>
+              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: QA & Testing con Huella de Mascota Overlay */}
+          <div 
+            onClick={() => handleCategorySelect('qa')}
+            className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
+          >
+            <img 
+              src="/images/stickers/sticker_paw_logo.png" 
+              alt="Huella overlay" 
+              className="absolute -top-2 -right-2 w-8 h-8 opacity-30 group-hover:opacity-90 transition duration-300 pointer-events-none" 
+            />
+
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-[11px] font-bold font-mono px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">
+                  🔍 QA & Buenas Prácticas
+                </span>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden bg-white p-3 border border-gray-100 flex items-center justify-center">
+                <img 
+                  src="/images/char_sitting_laptop.png"
+                  alt="QA y Prácticas"
+                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                />
+              </div>
+            </div>
+            <div className="pt-4 flex items-center justify-between">
+              <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
+                Calidad & Testing
+              </span>
+              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Despegue Profesional con Bocadillo Terminal Overlay */}
+          <div 
+            onClick={() => handleCategorySelect('ux')}
+            className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
+          >
+            <img 
+              src="/images/stickers/sticker_speech_terminal.png" 
+              alt="Bocadillo overlay" 
+              className="absolute -top-2 -right-2 w-10 h-auto opacity-25 group-hover:opacity-75 transition duration-300 pointer-events-none" 
+            />
+
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-[11px] font-bold font-mono px-3 py-1 rounded-full bg-amber-100 text-amber-800">
+                  🚀 Proyectos & Carrera
+                </span>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden bg-white p-3 border border-gray-100 flex items-center justify-center">
+                <img 
+                  src="/images/char_girl_rocket.png"
+                  alt="Proyectos y Despegue Laboral"
+                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                />
+              </div>
+            </div>
+            <div className="pt-4 flex items-center justify-between">
+              <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
+                Despegue Profesional
+              </span>
+              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* "Why SomosCoders" Value Proposition */}
-      <section id="values-section" className="bg-slate-900 text-white py-20 rounded-3xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl" />
+      {/* 4. COMUNIDAD (Sección Emocional con Stickers Overlay) */}
+      <section id="comunidad-section" className="bg-[#F7F6F1] rounded-3xl p-8 sm:p-12 border border-gray-200/80 relative overflow-hidden">
+        {/* Overlay: Trazo de pintura lima sutil de fondo */}
+        <img 
+          src="/images/stickers/sticker_lime_brush.png" 
+          alt="Brush overlay" 
+          className="absolute -top-8 -left-8 w-40 h-auto opacity-25 pointer-events-none" 
+        />
 
-        <div className="relative z-10 space-y-16">
-          <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <span className="text-amber-400 font-bold font-mono text-xs tracking-wider uppercase">Nuestro ADN Social</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-              Por qué SomosCoders Academy
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-6 space-y-6">
+            <span className="text-[11px] font-bold tracking-wider text-[#087A65] uppercase font-mono">COMUNIDAD</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#0D1117]">
+              El talento crece cuando se comparte.
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed font-sans">
-              Nuestro compromiso inquebrantable es ofrecer educación tecnológica gratuita, accesible y de alta calidad para favorecer a personas en toda Hispanoamérica.
+            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+              SomosCoders es más que cursos: es un espacio seguro donde estudiantes, mentores y voluntarios colaboran diariamente para romper barreras en el sector tecnológico.
             </p>
+
+            <ul className="space-y-3 pt-2 text-sm font-semibold text-[#0D1117]">
+              <li className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#00A98F] text-white flex items-center justify-center text-xs">✓</span>
+                <span>Espacios seguros e inclusivos</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#00A98F] text-white flex items-center justify-center text-xs">✓</span>
+                <span>Mentoría personalizada y acompañamiento constante</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#00A98F] text-white flex items-center justify-center text-xs">✓</span>
+                <span>Eventos, hackathons y networking profesional</span>
+              </li>
+            </ul>
+
+            <div className="pt-4">
+              <button
+                onClick={() => onNavigate('foro')}
+                className="inline-flex items-center gap-2 bg-[#00A98F] hover:bg-[#087A65] text-white font-bold px-6 py-3 rounded-full text-xs font-sans uppercase tracking-wider transition shadow-sm cursor-pointer"
+              >
+                <span>ÚNETE A LA COMUNIDAD</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-amber-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center text-amber-400">
-                <Laptop className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">100% Accesible</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Plataforma diseñada de extremo a extremo para personas con necesidades especiales o diversidad funcional. Contenido y interfaces con validación WCAG AA de accesibilidad digital.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-emerald-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-emerald-400/10 flex items-center justify-center text-emerald-400">
-                <Heart className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">Totalmente Gratis</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Luchamos activamente contra la brecha digital y la exclusión de recursos. Ningún curso, recurso o tutoría de SomosCoders tendrá jamás un costo monetario para ti.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-blue-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-blue-400/10 flex items-center justify-center text-blue-400">
-                <HeartHandshake className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">Mentoría Personalizada</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                No aprendes solo. Contamos con una red de mentores voluntarios dispuestos a revisar tu código, agendar llamadas para resolver dudas y brindarte orientación personalizada.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-purple-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-purple-400/10 flex items-center justify-center text-purple-400">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">Metodologías Ágiles</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Aprenderás bajo dinámicas reales de la industria del software: Programación extrema (XP), metodologías Agile/Scrum, e integración de herramientas colaborativas.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-indigo-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-indigo-400/10 flex items-center justify-center text-indigo-400">
-                <Users className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">Comunidad Activa</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Entras a formar parte permanente de una red viva de coders y tecnólogos solidarios localizados en Barcelona, La Rioja, Buenos Aires y más sedes internacionales.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/40 space-y-4 font-sans hover:border-pink-400/40 transition">
-              <div className="w-12 h-12 rounded-xl bg-pink-400/10 flex items-center justify-center text-pink-400">
-                <Award className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold font-display text-white">70% de Empleabilidad</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Te preparamos con habilidades prácticas enfocadas en el trabajo real. Apoyamos activamente tu inserción laboral en empresas asociadas que valoran la diversidad y el talento.
-              </p>
+          <div className="lg:col-span-6 flex justify-center relative">
+            <div className="bg-white p-4 rounded-3xl border-4 border-white shadow-xl max-w-md relative">
+              <img 
+                src="/images/char_team_highfive.png" 
+                alt="Comunidad SomosCoders"
+                className="rounded-2xl w-full object-contain"
+              />
+              {/* Overlay: Huella de mascota con terminal flotante sobre la foto de equipo */}
+              <img 
+                src="/images/stickers/sticker_paw_logo.png" 
+                alt="Huella coder" 
+                className="absolute -top-3 -right-3 w-9 h-9 object-contain drop-shadow-lg" 
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Call To Action Footer Banner */}
-      <section id="cta-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-8">
-        <div className="bg-gradient-to-r from-amber-400 to-amber-300 rounded-3xl p-10 md:p-16 text-gray-950 space-y-6 shadow-md relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/50 via-transparent to-transparent pointer-events-none" />
-          
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl mx-auto leading-tight">
-            Comienza tu carrera en tecnología hoy mismo
-          </h2>
-          <p className="text-gray-800 max-w-xl mx-auto text-base leading-relaxed font-sans">
-            Únete a miles de estudiantes que ya están transformando sus vidas con SomosCoders. Formación gratuita, accesible e inclusiva con salida profesional directa.
-          </p>
+      {/* 5. COLABORA CON EMPRESAS con Overlays */}
+      <section id="colabora-section" className="bg-[#0D1117] text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden border-2 border-gray-800">
+        {/* Overlay: Grid de cruces blanco transparente */}
+        <img 
+          src="/images/stickers/sticker_cross_grid.png" 
+          alt="Grid decorativo" 
+          className="absolute -bottom-6 -left-6 w-28 h-auto opacity-10 pointer-events-none" 
+        />
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <button
-              onClick={() => { onSetCategoryFilter(undefined); onNavigate('cursos'); }}
-              className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-bold px-6 py-3.5 rounded-xl transition shadow"
-            >
-              <span>Explorar Catálogo</span>
-              <BookOpen className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => onNavigate('sobre-nosotros')}
-              className="inline-flex items-center gap-2 bg-white/70 hover:bg-white text-gray-900 font-semibold px-6 py-3.5 rounded-xl border border-amber-500/20 transition"
-            >
-              <span>Preguntas Frecuentes</span>
-            </button>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-8 space-y-6">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#C8FF00]">EMPRESAS Y ENTIDADES</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-display leading-tight">
+              Tu empresa también puede formar parte del cambio.
+            </h2>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+              Impulsa tu compromiso social incorporando talento formado en SomosCoders, ofreciendo mentoría o patrocinando nuevas becas de estudio accesible.
+            </p>
+
+            <div className="pt-4">
+              <button
+                onClick={() => onNavigate('colabora')}
+                className="inline-flex items-center gap-2 bg-[#C8FF00] hover:bg-amber-300 text-[#0D1117] font-extrabold px-8 py-3.5 rounded-full text-xs font-sans uppercase tracking-wider transition shadow-md cursor-pointer"
+              >
+                <span>COLABORA CON SOMOSCODERS</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4 flex justify-center relative">
+            <img 
+              src="/images/char_whiteboard.png" 
+              alt="Colaboración y Formación de Talento" 
+              className="w-48 h-auto object-contain drop-shadow-2xl" 
+            />
+            {/* Overlay: Bocadillo terminal en esquina del dibujo */}
+            <img 
+              src="/images/stickers/sticker_speech_terminal.png" 
+              alt="Terminal sticker" 
+              className="absolute top-0 right-4 w-10 h-auto drop-shadow-md" 
+            />
           </div>
         </div>
       </section>
+
     </div>
   );
 };

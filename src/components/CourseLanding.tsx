@@ -9,15 +9,17 @@ import {
   CheckCircle, 
   User, 
   Play, 
-  FileText,
-  Workflow,
-  Sparkles
+  Lock,
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 import { Course, EnrollmentState } from '../types';
 
 interface CourseLandingProps {
   course: Course;
   enrollment: EnrollmentState | undefined;
+  user: { name: string; email: string; picture: string } | null;
+  onRequestAuth: () => void;
   onNavigate: (view: string) => void;
   onEnroll: (courseId: string) => void;
   fontSizeMultiplier: number;
@@ -26,9 +28,10 @@ interface CourseLandingProps {
 export const CourseLanding: React.FC<CourseLandingProps> = ({
   course,
   enrollment,
+  user,
+  onRequestAuth,
   onNavigate,
   onEnroll,
-  fontSizeMultiplier
 }) => {
   const isEnrolled = !!enrollment;
   const progressPercent = enrollment
@@ -36,6 +39,12 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
     : 0;
 
   const handleStartResume = () => {
+    // Si NO está registrado, requerir registro primero
+    if (!user) {
+      onRequestAuth();
+      return;
+    }
+
     if (!isEnrolled) {
       onEnroll(course.id);
     }
@@ -44,81 +53,86 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 font-sans text-[#0D1117]">
       {/* Return button */}
       <button
         onClick={() => { onNavigate('cursos'); }}
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-gray-900 transition"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#00A98F] transition"
       >
         <ArrowLeft className="w-4 h-4" />
-        <span>Volver a Catálogo de Cursos</span>
+        <span>Volver a Catálogo de Programas</span>
       </button>
 
-      {/* Hero Header panel */}
-      <section className="bg-slate-900 text-white rounded-3xl p-8 md:p-12 relative overflow-hidden">
-        {/* Abstract background graphics */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Hero Header panel 2026 */}
+      <section className="bg-[#0D1117] text-white rounded-3xl p-8 md:p-12 relative overflow-hidden border-2 border-gray-800 shadow-xl">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00A98F]/15 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-6">
             <div className="flex flex-wrap gap-2 text-xs">
-              <span className="bg-amber-400 text-slate-950 font-bold font-mono tracking-wider uppercase px-3 py-1 rounded-full">
+              <span className="bg-[#00A98F] text-white font-bold font-mono tracking-wider uppercase px-3 py-1 rounded-full">
                 {course.category}
               </span>
-              <span className="bg-slate-800 text-gray-200 font-semibold px-3 py-1 rounded-full border border-slate-700">
-                {course.level}
+              <span className="bg-gray-800 text-gray-200 font-semibold px-3 py-1 rounded-full border border-gray-700">
+                Nivel {course.level}
               </span>
-              <span className="bg-slate-800 text-emerald-400 font-semibold font-mono px-3 py-1 rounded-full border border-slate-700">
-                Gratuito e Inclusivo
+              <span className="bg-[#F7F6F1] text-[#087A65] font-semibold font-mono px-3 py-1 rounded-full border border-[#00A98F]/30">
+                100% Gratuito & Accesible
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-white tracking-tight leading-tight">
               {course.title}
             </h1>
 
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl">
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl font-sans">
               {course.longDescription}
             </p>
 
             {/* Course general facts */}
-            <div className="flex flex-wrap items-center gap-6 pt-2 text-sm text-gray-300">
+            <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-gray-300">
               <div className="flex items-center gap-1.5">
-                <Clock className="w-5 h-5 text-amber-400" />
+                <Clock className="w-4 h-4 text-[#C8FF00]" />
                 <span>{course.duration} de estudio</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <BookOpen className="w-5 h-5 text-emerald-400" />
+                <BookOpen className="w-4 h-4 text-[#00A98F]" />
                 <span>{course.lessons.length} Módulos interactivos</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Users className="w-5 h-5 text-sky-400" />
-                <span>{course.studentsCount} Alumnos inscritos</span>
+                <Users className="w-4 h-4 text-[#C8FF00]" />
+                <span>{course.studentsCount} Alumnos</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                 <span className="font-bold text-white">{course.rating}</span>
-                <span>puntuación media</span>
+                <span>/ 5.0</span>
               </div>
             </div>
           </div>
 
           {/* Call to action panel card */}
-          <div className="lg:col-span-4 bg-slate-800 border border-slate-700 p-6 rounded-2xl space-y-6">
-            <h3 className="font-bold text-lg text-white">Inscripción libre</h3>
-            <p className="text-sm text-gray-400 leading-relaxed font-sans">
-              Accede de inmediato a las lecturas, simulación de código práctico y cuestionarios teóricos interactivos.
+          <div className="lg:col-span-4 bg-gray-900 border border-gray-800 p-6 rounded-3xl space-y-5 shadow-2xl">
+            <h3 className="font-bold text-base text-white font-display flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#00A98F]" />
+              <span>Inscripción Gratuita</span>
+            </h3>
+            
+            <p className="text-xs text-gray-400 leading-relaxed">
+              {user 
+                ? 'Estás conectado como ' + user.name + '. Tu progreso y certificado se guardarán en tu cuenta.' 
+                : 'Para iniciar el curso y guardar tu progreso necesitas registrarte gratis en SomosCoders.'}
             </p>
 
-            {isEnrolled && (
+            {isEnrolled && user && (
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-amber-400">Tu Progreso actual:</span>
+                  <span className="text-[#C8FF00]">Tu Progreso actual:</span>
                   <span className="text-white">{progressPercent}%</span>
                 </div>
-                <div className="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                <div className="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
                   <div 
-                    className="bg-amber-400 h-full rounded-full transition-all duration-300"
+                    className="bg-[#00A98F] h-full rounded-full transition-all duration-300"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -127,12 +141,19 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
 
             <button
               onClick={handleStartResume}
-              className="w-full inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-3.5 px-4 rounded-xl text-sm transition shadow cursor-pointer text-center"
+              className="w-full inline-flex items-center justify-center gap-2 bg-[#00A98F] hover:bg-[#087A65] text-white font-bold py-3.5 px-4 rounded-2xl text-xs uppercase tracking-wider font-sans transition shadow cursor-pointer text-center"
             >
-              <Play className="w-4 h-4 fill-slate-950" />
-              <span>
-                {isEnrolled ? 'Continuar Curso' : 'Comenzar Formación Gratis'}
-              </span>
+              {user ? (
+                <>
+                  <Play className="w-4 h-4 fill-white" />
+                  <span>{isEnrolled ? 'Continuar Curso' : 'Comenzar Formación Gratis'}</span>
+                </>
+              ) : (
+                <>
+                  <Lock className="w-4 h-4" />
+                  <span>Regístrate para Iniciar Curso</span>
+                </>
+              )}
             </button>
             <p className="text-[10px] text-gray-400 text-center uppercase font-mono tracking-wider">
               100% Sin Costo • Certificado Digital Incluido
@@ -148,19 +169,19 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
           
           {/* Syllabus Section */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-2xl font-extrabold font-display text-[#0D1117] tracking-tight">
               ¿Qué vas a aprender en este programa?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {course.syllabus.map((item, index) => (
                 <div 
                   key={index} 
-                  className="bg-white p-4 rounded-xl border border-gray-100 flex items-start gap-3.5"
+                  className="bg-[#F7F6F1] p-4 rounded-2xl border border-gray-200/80 flex items-start gap-3.5"
                 >
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-900 text-xs font-bold shrink-0">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#00A98F] text-white text-xs font-bold shrink-0">
                     {index + 1}
                   </span>
-                  <p className="text-sm font-medium text-gray-700 leading-relaxed pt-0.5">
+                  <p className="text-xs font-semibold text-gray-700 leading-relaxed pt-0.5">
                     {item}
                   </p>
                 </div>
@@ -171,10 +192,10 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
           {/* List of lessons (Curriculum) */}
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-              <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+              <h2 className="text-2xl font-extrabold font-display text-[#0D1117] tracking-tight">
                 Módulos del Curso
               </h2>
-              <span className="text-sm font-mono text-gray-400">
+              <span className="text-xs font-mono text-gray-500">
                 {course.lessons.length} Temas totales
               </span>
             </div>
@@ -185,11 +206,11 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
                 return (
                   <div 
                     key={lesson.id}
-                    className="bg-white p-5 rounded-xl border border-gray-100 flex items-center justify-between hover:border-gray-200 transition"
+                    className="bg-white p-5 rounded-2xl border border-gray-200/80 flex items-center justify-between hover:border-[#00A98F] transition"
                   >
                     <div className="flex items-center gap-4">
                       {isCompleted ? (
-                        <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#00A98F] flex items-center justify-center shrink-0">
                           <CheckCircle className="w-5 h-5 fill-emerald-100" />
                         </div>
                       ) : (
@@ -198,17 +219,16 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
                         </span>
                       )}
                       <div>
-                        <h4 className="text-sm font-bold text-gray-800">
+                        <h4 className="text-xs font-bold text-[#0D1117]">
                           {lesson.title}
                         </h4>
-                        <span className="text-xs text-gray-400 mt-1 block">
-                          Actividad de tipo:{' '}
-                          <span className="font-semibold text-gray-500 capitalize">{lesson.exerciseType}</span>
+                        <span className="text-[10px] text-gray-500 mt-0.5 block font-mono">
+                          Actividad: <span className="font-semibold text-gray-700 capitalize">{lesson.exerciseType}</span>
                         </span>
                       </div>
                     </div>
                     
-                    <span className="text-xs bg-gray-50 text-gray-500 py-1 px-2.5 rounded-lg border border-gray-100 font-semibold shrink-0">
+                    <span className="text-[10px] bg-[#F7F6F1] text-[#087A65] py-1 px-2.5 rounded-lg border border-gray-200 font-bold font-mono shrink-0">
                       {lesson.duration}
                     </span>
                   </div>
@@ -219,42 +239,50 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
         </div>
 
         {/* Right side Info: Instructor profile, cert */}
-        <aside className="lg:col-span-4 space-y-8">
-          
+        <aside className="lg:col-span-4 space-y-6">
           {/* Instructor Bio */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 space-y-4">
-            <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-              <User className="w-4 h-4 text-amber-500" />
+          <div className="bg-[#F7F6F1] p-6 rounded-3xl border border-gray-200/80 space-y-4">
+            <h3 className="text-base font-bold font-display text-[#0D1117] flex items-center gap-2">
+              <User className="w-4 h-4 text-[#00A98F]" />
               <span>Mentor del Bootcamp</span>
             </h3>
             <div className="flex items-center gap-3">
               <img 
                 src={course.instructor.avatar} 
                 alt={course.instructor.name} 
-                className="w-12 h-12 rounded-full object-cover border border-gray-100"
+                className="w-12 h-12 rounded-full object-cover border-2 border-[#00A98F]"
                 referrerPolicy="no-referrer"
               />
               <div>
-                <h4 className="text-sm font-bold text-gray-800">{course.instructor.name}</h4>
-                <p className="text-xs text-gray-400">{course.instructor.role}</p>
+                <h4 className="text-xs font-bold text-[#0D1117]">{course.instructor.name}</h4>
+                <p className="text-[10px] text-gray-500">{course.instructor.role}</p>
               </div>
             </div>
-            <p className="text-xs text-gray-500 leading-relaxed font-sans">
+            <p className="text-xs text-gray-600 leading-relaxed font-sans">
               {course.instructor.bio}
             </p>
           </div>
 
-          {/* Certificate Award Info */}
-          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border border-indigo-100 space-y-4 text-center">
-            <div className="mx-auto w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600">
-              <Award className="w-6 h-6" />
+          {/* Certificate Award Info con Overlay de Libros y Planta */}
+          <div className="bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] space-y-3 text-center text-[#0D1117] shadow-[4px_4px_0px_#0D1117] relative overflow-hidden">
+            {/* Overlay: Pila de libros con planta */}
+            <img 
+              src="/images/stickers/sticker_books_plant.png" 
+              alt="Libros de estudio" 
+              className="absolute -top-3 -right-3 w-16 h-auto opacity-40 pointer-events-none" 
+            />
+
+            <div className="relative z-10 space-y-3">
+              <div className="mx-auto w-10 h-10 bg-[#0D1117] text-[#C8FF00] rounded-xl flex items-center justify-center">
+                <Award className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-extrabold font-display">
+                Consigue tu Certificado
+              </h3>
+              <p className="text-xs text-[#0D1117] leading-relaxed font-medium">
+                Completa todos los módulos y retos interactivos para obtener tu credencial oficial firmada por SomosCoders.
+              </p>
             </div>
-            <h3 className="text-base font-bold text-indigo-950 font-display">
-              Consigue el Certificado
-            </h3>
-            <p className="text-xs text-indigo-800 leading-relaxed font-sans">
-              Completa todos los módulos respondiendo los retos teóricos y prácticos de forma interactiva y genera una credencial digital imprimible firmada por la organización.
-            </p>
           </div>
         </aside>
       </section>

@@ -14,7 +14,7 @@ export const coursesData: Course[] = [
     instructor: {
       name: 'Elena Gómez',
       role: 'Principal UX Designer & Accesibilidad Lead',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
+      avatar: '/images/avatars/avatar_girl_headphones.png',
       bio: 'Elena tiene más de 10 años de experiencia diseñando productos digitales inclusivos. Es activista por la accesibilidad web y mentora en SomosCoders.'
     },
     syllabus: [
@@ -123,7 +123,7 @@ La accesibilidad web (abreviada usualmente como **A11y**) se rige por las direct
     instructor: {
       name: 'Sofía Martínez',
       role: 'User Researcher Lead',
-      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
+      avatar: '/images/avatars/avatar_boy_beanie.png',
       bio: 'Sofía es experta en antropología digital. Ha dirigido investigaciones de usuarios internacionales y tiene una pasión por visibilizar a comunidades subrepresentadas.'
     },
     syllabus: [
@@ -210,7 +210,7 @@ Es un personaje ficticio pero altamente representativo, construido a partir de d
     instructor: {
       name: 'Carlos Ruiz',
       role: 'Software Craftsman & Vibe Coder',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+      avatar: '/images/avatars/avatar_girl_ponytail.png',
       bio: 'Carlos es ingeniero de software y promotor de la salud mental en tecnología. Es conocido por programar soluciones completas en minutos a través de flujos conversacionales interactivos.'
     },
     syllabus: [
@@ -308,7 +308,7 @@ Completa la función escribiendo la palabra reservada de javascript para retorna
     instructor: {
       name: 'Manuel Soria',
       role: 'QA Engineer Lead',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+      avatar: '/images/avatars/avatar_boy_glasses.png',
       bio: 'Manuel lleva 8 años liderando equipos de control de calidad. Su enfoque destaca por la empatía en el desarrollo de producto y la inclusión de perfiles becados en la industria.'
     },
     syllabus: [
@@ -388,7 +388,7 @@ Completa la función escribiendo la palabra reservada de javascript para retorna
     instructor: {
       name: 'Manuel Soria',
       role: 'QA Engineer Lead',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+      avatar: '/images/avatars/avatar_dog_mascot.png',
       bio: 'Manuel lleva 8 años liderando equipos de control de calidad. Su enfoque destaca por la empatía en el desarrollo de producto y la inclusión de perfiles becados en la industria.'
     },
     syllabus: [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { Mail, Heart, Github, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Mail, Heart, Github } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (view: string) => void;
@@ -17,181 +17,120 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSetCategoryFilter 
   };
 
   return (
-    <footer id="app-footer" className="bg-gray-900 text-gray-300 pt-16 pb-12 mt-20 border-t-4 border-amber-400 select-none">
+    <footer id="app-footer" className="bg-[#0D1117] text-gray-300 pt-16 pb-24 md:pb-12 mt-20 border-t-4 border-[#00A98F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Column 1: Info and Mission */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          
+          {/* Columna 1: LOGO ACTUAL + Mascota con sudadera + Misión */}
           <div className="space-y-4">
-            <div className="bg-white p-2.5 rounded-xl inline-block">
-              <Logo size="sm" />
+            <div className="flex items-center gap-3">
+              <div className="bg-white p-2 rounded-xl inline-block">
+                <Logo size="sm" />
+              </div>
+              <img 
+                src="/images/char_dog_back_hoodie.png" 
+                alt="Mascota SomosCoders con sudadera" 
+                className="w-12 h-auto object-contain" 
+              />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed pt-2">
-              El bootcamp totalmente accesible y gratis, sin límites de SomosCoders. Promovemos la integración de colectivos en riesgo de exclusión social y personas con diversidad funcional en el sector tecnológico.
+            <p className="text-xs text-gray-400 leading-relaxed">
+              SomosCoders es el bootcamp tecnológico inclusivo y 100% gratuito. Promovemos la integración de colectivos en riesgo de exclusión en el sector tecnológico.
             </p>
-            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono">
-              <Heart className="w-4 h-4 fill-amber-400 text-amber-500 animate-pulse" />
-              <span>Proyecto social y sin fines de lucro</span>
+            <div className="flex items-center gap-2 text-xs text-[#C8FF00] font-mono">
+              <Heart className="w-4 h-4 fill-[#C8FF00] text-[#00A98F]" />
+              <span>Código. Comunidad. Oportunidades.</span>
             </div>
           </div>
 
-          {/* Column 2: Courses / Categories */}
+          {/* Columna 2: Navegación */}
           <div>
-            <h3 className="text-white font-semibold text-base mb-4 tracking-wider uppercase text-sm border-l-2 border-amber-400 pl-3">
-              Áreas de Estudio
+            <h3 className="text-white font-bold text-sm mb-4 border-l-2 border-[#00A98F] pl-2 font-display">
+              Navegación
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs text-gray-400">
               <li>
-                <button 
-                  onClick={() => handleCategoryClick('ux')}
-                  className="hover:text-amber-400 hover:underline transition text-left"
-                >
-                  Diseño UX y Accesibilidad
+                <button onClick={() => onNavigate('home')} className="hover:text-[#C8FF00] transition">
+                  Inicio
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => handleCategoryClick('vibe-coding')}
-                  className="hover:text-amber-400 hover:underline transition text-left"
-                >
-                  Vibe Coding & IA Creativa
+                <button onClick={() => onNavigate('sobre-nosotros')} className="hover:text-[#C8FF00] transition">
+                  Quiénes somos
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => handleCategoryClick('qa')}
-                  className="hover:text-amber-400 hover:underline transition text-left"
-                >
-                  Aseguramiento de Calidad (QA)
+                <button onClick={() => onNavigate('cursos')} className="hover:text-[#C8FF00] transition">
+                  Programas
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => handleCategoryClick('testing')}
-                  className="hover:text-amber-400 hover:underline transition text-left"
-                >
-                  Automatización de Testing
+                <button onClick={() => onNavigate('foro')} className="hover:text-[#C8FF00] transition">
+                  Comunidad
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('colabora')} className="hover:text-[#C8FF00] transition">
+                  Colabora
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Platform Resources */}
+          {/* Columna 3: Programas */}
           <div>
-            <h3 className="text-white font-semibold text-base mb-4 tracking-wider uppercase text-sm border-l-2 border-emerald-400 pl-3">
-              Recursos
+            <h3 className="text-white font-bold text-sm mb-4 border-l-2 border-[#00A98F] pl-2 font-display">
+              Programas
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs text-gray-400">
               <li>
-                <button 
-                  onClick={() => { onNavigate('cursos'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-amber-400 transition"
-                >
-                  Ver Todos los Cursos
+                <button onClick={() => handleCategoryClick('vibe-coding')} className="hover:text-[#C8FF00] transition">
+                  Desarrollo Web
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => { onNavigate('foro'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-amber-400 transition"
-                >
-                  Comunidad de Aprendizaje
+                <button onClick={() => handleCategoryClick('vibe-coding')} className="hover:text-[#C8FF00] transition">
+                  Data & IA
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => { onNavigate('sobre-nosotros'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-amber-400 transition"
-                >
-                  Sobre la Asociación
+                <button onClick={() => handleCategoryClick('qa')} className="hover:text-[#C8FF00] transition">
+                  QA & Testing
                 </button>
               </li>
               <li>
-                <a 
-                  href="https://somoscoders.org/es" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-amber-400 transition flex items-center gap-1.5"
-                >
-                  <span>Bootcamps Oficiales</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                <button onClick={() => handleCategoryClick('ux')} className="hover:text-[#C8FF00] transition">
+                  Diseño UX/UI
+                </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Contact / Volunteer */}
-          <div>
-            <h3 className="text-white font-semibold text-base mb-4 tracking-wider uppercase text-sm border-l-2 border-blue-400 pl-3">
-              Contacto
+          {/* Columna 4: Newsletter & Redes */}
+          <div className="space-y-3">
+            <h3 className="text-white font-bold text-sm border-l-2 border-[#00A98F] pl-2 font-display">
+              Newsletter
             </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <a href="mailto:info@somoscoders.org" className="hover:text-white hover:underline truncate">
-                  info@somoscoders.org
-                </a>
-              </li>
-              <li className="text-xs text-gray-400 leading-relaxed pt-2">
-                ¿Quieres colaborar como mentor, donar computadoras o patrocinar estudiantes? ¡Escríbenos hoy mismo!
-              </li>
-              <li className="pt-2">
-                <a 
-                  href="https://github.com/somoscoders" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg px-3 py-1.5 text-xs transition"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub de la Comunidad</span>
-                </a>
-              </li>
-            </ul>
+            <p className="text-xs text-gray-400">Recibe noticias y convocatorias de nuevos programas.</p>
+            <div className="flex gap-2">
+              <input 
+                type="email" 
+                placeholder="tu@email.com" 
+                className="bg-gray-800 border border-gray-700 text-xs px-3 py-2 rounded-xl w-full text-white outline-none focus:border-[#00A98F]"
+              />
+              <button className="bg-[#00A98F] hover:bg-[#087A65] text-white text-xs font-bold px-3 py-2 rounded-xl">
+                Unirme
+              </button>
+            </div>
           </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>© 2026 SomosCoders. Todos los derechos reservados.</span>
-          </div>
-          <div className="flex items-center gap-6 mt-4 sm:mt-0 flex-wrap">
-            <button 
-              onClick={(e) => { 
-                e.preventDefault(); 
-                onNavigate('legal-legal');
-              }}
-              className="hover:text-gray-300 hover:underline bg-transparent border-none cursor-pointer outline-none p-0 text-left font-mono"
-            >
-              Aviso Legal
-            </button>
-            <button 
-              onClick={(e) => { 
-                e.preventDefault(); 
-                onNavigate('legal-privacidad');
-              }}
-              className="hover:text-gray-300 hover:underline bg-transparent border-none cursor-pointer outline-none p-0 text-left font-mono"
-            >
-              Privacidad y RGPD
-            </button>
-            <button 
-              onClick={(e) => { 
-                e.preventDefault(); 
-                onNavigate('legal-cookies');
-              }}
-              className="hover:text-amber-400 hover:underline bg-transparent border-none cursor-pointer outline-none p-0 text-left font-mono text-amber-400 font-extrabold"
-            >
-              Cookies (Configurar)
-            </button>
-            <button 
-              onClick={(e) => { 
-                e.preventDefault(); 
-                onNavigate('legal-accesibilidad');
-              }}
-              className="hover:text-gray-300 hover:underline bg-transparent border-none cursor-pointer outline-none p-0 text-left font-mono"
-            >
-              Accesibilidad WCAG AA
-            </button>
+        <div className="mt-12 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+          <p>© 2026 SomosCoders. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4">
+            <button onClick={() => onNavigate('legal-privacidad')} className="hover:text-gray-300">Privacidad</button>
+            <button onClick={() => onNavigate('legal-cookies')} className="hover:text-gray-300">Cookies</button>
+            <button onClick={() => onNavigate('legal-accesibilidad')} className="hover:text-gray-300">Accesibilidad</button>
           </div>
         </div>
       </div>

@@ -8,6 +8,9 @@ import { CoursePlayer } from './components/CoursePlayer';
 import { ForumView } from './components/ForumView';
 import { DashboardView } from './components/DashboardView';
 import { AboutView } from './components/AboutView';
+import { ColaboraView } from './components/ColaboraView';
+import { HistoriasView } from './components/HistoriasView';
+import { BlogView } from './components/BlogView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
 import { LoginModal } from './components/LoginModal';
@@ -29,7 +32,8 @@ export default function App() {
   // Auth & Student profile states
   const [user, setUser] = useState<{ name: string; email: string; picture: string } | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>('Edgar Costilla');
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('register');
+  const [userName, setUserName] = useState<string>('Estudiante');
 
   // Academic Enrollment progress database states (with initial active progress to feel premium on opening)
   const [enrollments, setEnrollments] = useState<EnrollmentState[]>([
@@ -131,7 +135,10 @@ export default function App() {
         userName={user ? user.name : userName}
         userEmail={user?.email}
         userPicture={user?.picture}
-        onOpenLogin={() => setIsLoginModalOpen(true)}
+        onOpenLogin={() => {
+          setAuthModalMode('register');
+          setIsLoginModalOpen(true);
+        }}
       />
 
       {/* Main Dynamic Workspace Router */}
@@ -159,6 +166,11 @@ export default function App() {
           <CourseLanding
             course={activeCourse}
             enrollment={activeEnrollment}
+            user={user}
+            onRequestAuth={() => {
+              setAuthModalMode('register');
+              setIsLoginModalOpen(true);
+            }}
             onNavigate={handleNavigate}
             onEnroll={handleEnrollInCourse}
             fontSizeMultiplier={fontSizeMultiplier}
@@ -177,7 +189,12 @@ export default function App() {
         {currentView === 'foro' && (
           <ForumView
             initialThreads={initialForumThreads}
-            userName={userName}
+            userName={user ? user.name : userName}
+            user={user}
+            onRequestAuth={() => {
+              setAuthModalMode('register');
+              setIsLoginModalOpen(true);
+            }}
           />
         )}
 
@@ -185,7 +202,7 @@ export default function App() {
           <DashboardView
             courses={coursesData}
             enrollments={enrollments}
-            userName={userName}
+            userName={user ? user.name : userName}
             onSetUserName={setUserName}
             onNavigate={handleNavigate}
             onSetCategoryFilter={setCategoryFilter}
@@ -194,6 +211,18 @@ export default function App() {
 
         {currentView === 'sobre-nosotros' && (
           <AboutView />
+        )}
+
+        {currentView === 'colabora' && (
+          <ColaboraView onNavigate={handleNavigate} />
+        )}
+
+        {currentView === 'historias' && (
+          <HistoriasView onNavigate={handleNavigate} />
+        )}
+
+        {currentView === 'blog' && (
+          <BlogView onNavigate={handleNavigate} />
         )}
 
         {currentView.startsWith('legal') && (
@@ -216,9 +245,10 @@ export default function App() {
       {/* GDPR Cookie Consent Panel */}
       <CookieConsent />
 
-      {/* Google Login Modal */}
+      {/* Auth / Register / Login Modal */}
       <LoginModal
         isOpen={isLoginModalOpen}
+        initialMode={authModalMode}
         onClose={() => setIsLoginModalOpen(false)}
         user={user}
         onLoginSuccess={(loggedInUser) => {

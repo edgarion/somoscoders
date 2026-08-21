@@ -1,22 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", sans-serif;
-  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
   
-  --color-brand-primary: #fbbf24; /* Yellow / Amber colors from SomosCoders */
-  --color-brand-primary-hover: #f59e0b;
-  --color-brand-black: #111827;
-  --color-brand-gray-light: #f3f4f6;
+  /* Paleta Oficial SomosCoders 2026 */
+  --color-sc-green: #00A98F;
+  --color-sc-green-dark: #087A65;
+  --color-sc-lime: #C8FF00;
+  --color-sc-dark: #0D1117;
+  --color-sc-cream: #F7F6F1;
+  --color-sc-gray-light: #E8E9E7;
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
-    color: var(--color-brand-black);
-    background-color: #fafafa;
+    color: #0D1117;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -24,40 +26,65 @@
   }
 }
 
-/* Custom styles for professional appearance */
-.course-card-shadow {
-  box-shadow: 0 4px 20px -2px rgba(17, 24, 39, 0.05), 0 2px 6px -1px rgba(17, 24, 39, 0.03);
+/* Clases de utilidad para el sistema de diseño 2026 */
+.bg-sc-green { background-color: #00A98F; }
+.text-sc-green { color: #00A98F; }
+.border-sc-green { border-color: #00A98F; }
+
+.bg-sc-green-dark { background-color: #087A65; }
+.text-sc-green-dark { color: #087A65; }
+
+.bg-sc-lime { background-color: #C8FF00; }
+.text-sc-lime { color: #C8FF00; }
+.border-sc-lime { border-color: #C8FF00; }
+
+.bg-sc-cream { background-color: #F7F6F1; }
+.bg-sc-dark { background-color: #0D1117; }
+.text-sc-dark { color: #0D1117; }
+
+/* Microinteracciones y Stickers */
+.sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1.5px solid #00A98F;
+  background-color: #F7F6F1;
+  color: #087A65;
+  box-shadow: 2px 2px 0px #00A98F;
 }
 
-.course-card-shadow:hover {
-  box-shadow: 0 12px 30px -4px rgba(17, 24, 39, 0.08), 0 4px 12px -2px rgba(17, 24, 39, 0.05);
+/* Animaciones flotantes sutiles para elementos superdeformer y pegatinas */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
 }
 
-/* Scrollbar styling */
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Scrollbar personalizado estilo editorial */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F7F6F1;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #00A98F;
   border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Animations */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s infinite;
 }

@@ -1,15 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Search, 
-  SlidersHorizontal, 
   BookOpen, 
   Clock, 
-  Tag, 
   Award, 
-  TrendingUp, 
-  CheckCircle,
-  HelpCircle,
-  RefreshCw
+  ArrowRight,
+  Sparkles,
+  Filter,
+  CheckCircle2
 } from 'lucide-react';
 import { Course, CourseCategory } from '../types';
 
@@ -30,45 +28,27 @@ export const CoursesView: React.FC<CoursesViewProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [levelFilter, setLevelFilter] = useState<string>('Todos');
-  const [durationFilter, setDurationFilter] = useState<string>('Todos');
 
-  // Categories helper list
   const categoryTabs: { label: string; value: CourseCategory | undefined }[] = [
     { label: 'Todos', value: undefined },
-    { label: 'UX Design', value: 'ux' },
-    { label: 'Vibe Coding', value: 'vibe-coding' },
-    { label: 'QA Testing', value: 'qa' },
-    { label: 'Testing', value: 'testing' }
+    { label: 'Desarrollo Web', value: 'vibe-coding' },
+    { label: 'Data & IA', value: 'vibe-coding' },
+    { label: 'QA & Testing', value: 'qa' },
+    { label: 'Diseño UX/UI', value: 'ux' }
   ];
 
-  // Filtering Logic
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
-      // 1. Search filter
       const matchesSearch = 
         course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.description.toLowerCase().includes(searchQuery.toLowerCase());
       
-      // 2. Category filter
       const matchesCategory = categoryFilter ? course.category === categoryFilter : true;
-
-      // 3. Level filter
       const matchesLevel = levelFilter !== 'Todos' ? course.level === levelFilter : true;
 
-      // 4. Duration filter
-      let matchesDuration = true;
-      if (durationFilter !== 'Todos') {
-        const hours = parseInt(course.duration);
-        if (durationFilter === 'Corto') {
-          matchesDuration = hours <= 10;
-        } else if (durationFilter === 'Largo') {
-          matchesDuration = hours > 10;
-        }
-      }
-
-      return matchesSearch && matchesCategory && matchesLevel && matchesDuration;
+      return matchesSearch && matchesCategory && matchesLevel;
     });
-  }, [courses, searchQuery, categoryFilter, levelFilter, durationFilter]);
+  }, [courses, searchQuery, categoryFilter, levelFilter]);
 
   const handleCourseClick = (slug: string) => {
     onSetSelectedCourseSlug(slug);
@@ -76,213 +56,115 @@ export const CoursesView: React.FC<CoursesViewProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const clearFilters = () => {
-    setSearchQuery('');
-    onSetCategoryFilter(undefined);
-    setLevelFilter('Todos');
-    setDurationFilter('Todos');
-  };
-
   return (
-    <div className="space-y-10">
-      {/* Search and Title Section */}
-      <section className="text-center md:text-left space-y-4 max-w-4xl">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-          Todos los Cursos
-        </h1>
-        <p className="text-gray-500 max-w-2xl text-base">
-          Explora nuestro catálogo abierto y gratuito de programas especializados en tecnología. Aprende a tu propio ritmo con las ayudas interactivas instaladas.
-        </p>
+    <div className="space-y-10 font-sans text-[#0D1117]">
+      {/* Header Sección Programas con Personaje de Diversidad */}
+      <section className="bg-[#F7F6F1] rounded-3xl p-6 sm:p-10 border border-gray-200/80 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="lg:col-span-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#00A98F]/40 text-[#087A65] text-xs font-semibold">
+            <span className="text-[#00A98F]">✳</span>
+            <span>Catálogo Abierto & Gratuito 2026</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-[#0D1117]">
+            Programas y <span className="text-[#00A98F]">Cursos.</span>
+          </h1>
+          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Formación práctica de alta calidad diseñada con la comunidad. Aprende Desarrollo Web, Inteligencia Artificial, QA Testing y Diseño UX/UI sin barreras económicas ni de acceso.
+          </p>
+        </div>
+        <div className="lg:col-span-4 flex justify-center">
+          <img 
+            src="/images/char_boy_magnifier_qa.png" 
+            alt="Explora los cursos de SomosCoders" 
+            className="w-36 h-auto object-contain drop-shadow-md hover:scale-105 transition" 
+          />
+        </div>
       </section>
 
-      {/* Main filter interface */}
-      <section className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        
-        {/* Left Side: Filter Sidebar Panel */}
-        <aside className="lg:col-span-1 bg-white p-6 rounded-2xl border border-gray-100 h-fit space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-            <span className="font-bold text-gray-800 flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-amber-500" />
-              <span>Filtros</span>
-            </span>
-            <button 
-              onClick={clearFilters}
-              className="text-xs text-gray-400 hover:text-amber-500 font-medium transition flex items-center gap-1"
+      {/* Barra de Filtros y Búsqueda */}
+      <section className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between bg-[#F7F6F1] p-4 rounded-3xl border border-gray-200/80">
+        {/* Pestañas de categorías */}
+        <div className="flex flex-wrap gap-2">
+          {categoryTabs.map((tab, idx) => (
+            <button
+              key={idx}
+              onClick={() => onSetCategoryFilter(tab.value)}
+              className={`px-4 py-2 rounded-full text-xs font-bold font-sans transition ${
+                categoryFilter === tab.value
+                  ? 'bg-[#00A98F] text-white shadow-sm'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+              }`}
             >
-              <RefreshCw className="w-3 h-3" />
-              <span>Limpiar</span>
+              {tab.label}
             </button>
-          </div>
-
-          {/* Level Filter */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-bold text-gray-700">Nivel de Dificultad</h3>
-            <div className="flex flex-col gap-2">
-              {['Todos', 'Principiante', 'Intermedio', 'Avanzado'].map((level) => (
-                <label 
-                  key={level} 
-                  className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
-                >
-                  <input 
-                    type="radio" 
-                    name="level" 
-                    checked={levelFilter === level}
-                    onChange={() => setLevelFilter(level)}
-                    className="w-4 h-4 text-amber-500 focus:ring-amber-400 border-gray-300 rounded"
-                  />
-                  <span>{level}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Duration Filter */}
-          <div className="space-y-3 pt-4 border-t border-gray-100">
-            <h3 className="text-sm font-bold text-gray-700">Duración del Curso</h3>
-            <div className="flex flex-col gap-2">
-              {[
-                { label: 'Cualquier duración', value: 'Todos' },
-                { label: 'Corto (≤ 10 horas)', value: 'Corto' },
-                { label: 'Largo (&gt; 10 horas)', value: 'Largo' }
-              ].map((dur) => (
-                <label 
-                  key={dur.value} 
-                  className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
-                >
-                  <input 
-                    type="radio" 
-                    name="duration" 
-                    checked={durationFilter === dur.value}
-                    onChange={() => setDurationFilter(dur.value)}
-                    className="w-4 h-4 text-amber-500 focus:ring-amber-400 border-gray-300 rounded"
-                  />
-                  <span dangerouslySetInnerHTML={{ __html: dur.label }} />
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-            <h4 className="text-xs font-bold text-amber-900 uppercase tracking-widest mb-1.5 font-mono">
-              Inscripción Abierta
-            </h4>
-            <p className="text-xs text-amber-800 leading-relaxed font-sans">
-              No hay plazos límite para iniciar o terminar los módulos. Puedes ingresar con tu cuenta simulada de SomosCoders Academy.
-            </p>
-          </div>
-        </aside>
-
-        {/* Right Side: Search and Courses Grid */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Top Search inputs and Quick tags */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1 relative bg-white border border-gray-200 rounded-xl p-1 shadow-sm focus-within:border-amber-400 transition-all flex items-center pr-3">
-              <input 
-                type="text" 
-                placeholder="Buscar por palabra clave..." 
-                className="w-full text-sm py-2 px-3 text-gray-700 bg-transparent outline-none"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <Search className="w-5 h-5 text-gray-400 shrink-0" />
-            </div>
-          </div>
-
-          {/* Quick Categories Navigation tabs */}
-          <div className="flex flex-wrap gap-1.5 pb-2">
-            {categoryTabs.map((tab) => (
-              <button
-                key={tab.label}
-                onClick={() => onSetCategoryFilter(tab.value)}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition ${
-                  categoryFilter === tab.value
-                    ? 'bg-amber-400 text-gray-950 font-bold shadow-sm'
-                    : 'bg-white text-gray-600 hover:text-gray-900 border border-gray-200'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Results statement */}
-          <div className="text-xs text-gray-400 font-mono flex items-center justify-between">
-            <span>Mostrando {filteredCourses.length} de {courses.length} cursos en total</span>
-          </div>
-
-          {/* Courses grid */}
-          {filteredCourses.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCourses.map((course) => {
-                let catColor = 'bg-amber-100 text-amber-900';
-                if (course.category === 'vibe-coding') catColor = 'bg-purple-100 text-purple-900';
-                if (course.category === 'qa') catColor = 'bg-emerald-100 text-emerald-900';
-                if (course.category === 'testing') catColor = 'bg-indigo-100 text-indigo-900';
-
-                return (
-                  <div 
-                    key={course.id}
-                    className="bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col justify-between course-card-shadow transition-all duration-300"
-                  >
-                    <div className="p-5 space-y-4">
-                      {/* Top badges */}
-                      <div className="flex items-center justify-between">
-                        <span className={`text-[10px] font-bold font-mono tracking-wider uppercase px-2.5 py-1 rounded-full ${catColor}`}>
-                          {course.category}
-                        </span>
-                        <span className="text-[10px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">
-                          {course.level}
-                        </span>
-                      </div>
-
-                      {/* Course Title */}
-                      <h3 className="text-lg font-bold text-gray-900 leading-snug line-clamp-2">
-                        {course.title}
-                      </h3>
-
-                      {/* Pitch */}
-                      <p className="text-xs text-gray-500 leading-relaxed font-sans line-clamp-3">
-                        {course.description}
-                      </p>
-                    </div>
-
-                    {/* Stats bar */}
-                    <div className="px-5 pb-5 pt-4 border-t border-gray-50 space-y-4">
-                      <div className="flex items-center justify-between text-xs text-gray-500">
-                        <div className="flex items-center gap-1">
-                          <BookOpen className="w-3.5 h-3.5 text-gray-400" />
-                          <span>{course.lessonsCount} Lecciones</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-gray-400" />
-                          <span>{course.duration}</span>
-                        </div>
-                      </div>
-
-                      {/* Action */}
-                      <button
-                        onClick={() => handleCourseClick(course.slug)}
-                        className="w-full text-center bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 px-4 rounded-xl text-xs transition cursor-pointer"
-                      >
-                        Estudiar Gratis
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center py-16 bg-white rounded-2xl border border-gray-100 space-y-4">
-              <p className="text-gray-400 text-sm">No encontramos ningún Curso coincidente con los filtros seleccionados.</p>
-              <button 
-                onClick={clearFilters}
-                className="bg-gray-150 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-4 py-2 rounded-lg transition"
-              >
-                Restaurar Filtros
-              </button>
-            </div>
-          )}
+          ))}
         </div>
+
+        {/* Buscador */}
+        <div className="relative min-w-[260px]">
+          <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-3" />
+          <input 
+            type="text" 
+            placeholder="Buscar programa..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-full text-xs outline-none focus:border-[#00A98F] transition"
+          />
+        </div>
+      </section>
+
+      {/* Grid de Cursos */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredCourses.map((course) => (
+          <div 
+            key={course.id}
+            onClick={() => handleCourseClick(course.slug)}
+            className="bg-white rounded-3xl p-6 border-2 border-gray-100 hover:border-[#00A98F] shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+          >
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-[11px] font-bold font-mono px-3 py-1 rounded-full bg-[#F7F6F1] text-[#087A65] border border-[#00A98F]/30 uppercase">
+                  {course.category}
+                </span>
+                <span className="text-xs font-semibold text-gray-500 flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-[#00A98F]" />
+                  {course.duration}
+                </span>
+              </div>
+
+              <h3 className="text-xl font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition leading-snug">
+                {course.title}
+              </h3>
+
+              <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                {course.description}
+              </p>
+
+              {/* Instructor */}
+              <div className="flex items-center gap-2.5 pt-2 border-t border-gray-100">
+                <img 
+                  src={course.instructor.avatar} 
+                  alt={course.instructor.name} 
+                  className="w-8 h-8 rounded-full object-cover border border-amber-300"
+                />
+                <div className="text-left">
+                  <p className="text-xs font-bold text-[#0D1117]">{course.instructor.name}</p>
+                  <p className="text-[10px] text-gray-400">{course.instructor.role}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 flex items-center justify-between border-t border-gray-100 mt-4">
+              <span className="text-xs font-bold text-[#00A98F] flex items-center gap-1">
+                <span>Acceso 100% Gratis</span>
+                <CheckCircle2 className="w-3.5 h-3.5" />
+              </span>
+              <div className="w-9 h-9 rounded-full bg-[#F7F6F1] group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );
