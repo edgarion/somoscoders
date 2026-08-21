@@ -1,0 +1,6 @@
+{
+  "name": "SomosCoders Academy",
+  "description": "Plataforma de e-learning inclusiva de SomosCoders. Cursos gratis e interactivos de UX Design, Vibe Coding, QA y Testing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
