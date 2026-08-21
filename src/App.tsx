@@ -135,7 +135,7 @@ export default function App() {
       />
 
       {/* Main Dynamic Workspace Router */}
-      <main id="app-workspace" className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+      <main id="app-workspace" className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 pb-24 md:pb-10 w-full">
         {currentView === 'home' && (
           <HomeView
             courses={coursesData}

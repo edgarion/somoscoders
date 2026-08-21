@@ -132,24 +132,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     Buscar
                   </button>
                 </form>
-              </div>
-
+              
               {/* CTAs */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4 w-full">
                 <button
                   onClick={() => { onSetCategoryFilter(undefined); onNavigate('cursos'); }}
-                  className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-gray-950 font-bold px-6 py-3.5 rounded-xl transition shadow-sm hover:shadow-md cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold px-7 py-3.5 rounded-xl text-base transition shadow-md hover:shadow-lg focus:ring-4 focus:ring-amber-200"
                 >
                   <span>Explorar Cursos</span>
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => onNavigate('sobre-nosotros')}
-                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold px-6 py-3.5 rounded-xl border border-gray-200 transition"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-6 py-3.5 rounded-xl text-base border-2 border-gray-200 transition focus:ring-2 focus:ring-gray-300"
                 >
-                  <span>Conocer SomosCoders</span>
+                  <HeartHandshake className="w-5 h-5 text-amber-500" />
+                  <span>Nuestro Compromiso</span>
                 </button>
-              </div>
+              </div> </div>
             </div>
 
             {/* Hero Right Graph representation (Vector aesthetic) */}

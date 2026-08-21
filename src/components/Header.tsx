@@ -200,35 +200,43 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile nav indicator bar */}
-      <div className="md:hidden flex items-center justify-around border-t border-gray-100 py-2 bg-gray-50 text-xs text-gray-500">
+      {/* Mobile Bottom App Bar (Sticky Dock for iOS / Android) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-gray-200/80 px-2 py-1.5 shadow-lg flex items-center justify-around">
+        <button 
+          onClick={() => onNavigate('home')} 
+          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition ${
+            currentView === 'home' ? 'text-amber-600 font-bold bg-amber-50' : 'text-gray-500 hover:text-gray-900'
+          }`}
+        >
+          <Sparkles className="w-5 h-5" />
+          <span className="text-[10px]">Inicio</span>
+        </button>
         <button 
           onClick={() => onNavigate('cursos')} 
-          className={`flex flex-col items-center gap-1 px-3 ${currentView === 'cursos' ? 'text-amber-600 font-bold' : ''}`}
+          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition ${
+            currentView === 'cursos' || currentView.startsWith('curso-') ? 'text-amber-600 font-bold bg-amber-50' : 'text-gray-500 hover:text-gray-900'
+          }`}
         >
-          <BookOpen className="w-4 h-4" />
-          <span>Cursos</span>
+          <BookOpen className="w-5 h-5" />
+          <span className="text-[10px]">Cursos</span>
         </button>
         <button 
           onClick={() => onNavigate('foro')} 
-          className={`flex flex-col items-center gap-1 px-3 ${currentView === 'foro' ? 'text-emerald-600 font-bold' : ''}`}
+          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition ${
+            currentView === 'foro' ? 'text-emerald-600 font-bold bg-emerald-50' : 'text-gray-500 hover:text-gray-900'
+          }`}
         >
-          <MessageSquare className="w-4 h-4" />
-          <span>Foro</span>
+          <MessageSquare className="w-5 h-5" />
+          <span className="text-[10px]">Comunidad</span>
         </button>
         <button 
           onClick={() => onNavigate('dashboard')} 
-          className={`flex flex-col items-center gap-1 px-3 ${currentView === 'dashboard' ? 'text-blue-600 font-bold' : ''}`}
+          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition ${
+            currentView === 'dashboard' ? 'text-blue-600 font-bold bg-blue-50' : 'text-gray-500 hover:text-gray-900'
+          }`}
         >
-          <GraduationCap className="w-4 h-4" />
-          <span>Progreso</span>
-        </button>
-        <button 
-          onClick={() => onNavigate('sobre-nosotros')} 
-          className={`flex flex-col items-center gap-1 px-3 ${currentView === 'sobre-nosotros' ? 'text-indigo-600 font-bold' : ''}`}
-        >
-          <HelpCircle className="w-4 h-4" />
-          <span>Nosotros</span>
+          <GraduationCap className="w-5 h-5" />
+          <span className="text-[10px]">Mi Progreso</span>
         </button>
       </div>
     </header>
