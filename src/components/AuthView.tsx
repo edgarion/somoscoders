@@ -99,9 +99,11 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
         <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-32 h-32 bg-[#00A98F] rounded-full opacity-10 blur-2xl"></div>
 
         <div className="text-center relative z-10">
-          <div className="mx-auto w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center mb-4 shadow-md">
-            <Sparkles className="w-6 h-6 text-[#C8FF00]" />
-          </div>
+          <img 
+            src="/images/auth-dog.jpg" 
+            alt="Mascota Somoscoders" 
+            className="mx-auto w-32 h-32 object-cover rounded-full mb-4 shadow-xl border-4 border-white"
+          />
           <h2 className="text-3xl font-extrabold text-gray-900">
             {mode === 'register' ? t('auth.title.register') : t('auth.title.login')}
           </h2>

@@ -191,8 +191,7 @@ export default function App() {
             enrollment={activeEnrollment}
             user={user}
             onRequestAuth={() => {
-              setAuthModalMode('register');
-              setIsLoginModalOpen(true);
+              handleNavigate('auth');
             }}
             onNavigate={handleNavigate}
             onEnroll={handleEnrollInCourse}
@@ -215,8 +214,7 @@ export default function App() {
             userName={user ? user.name : userName}
             user={user}
             onRequestAuth={() => {
-              setAuthModalMode('register');
-              setIsLoginModalOpen(true);
+              handleNavigate('auth');
             }}
           />
         )}
