@@ -130,7 +130,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSetCategoryFilter 
 
         </div>
 
-        <div className="mt-12 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+        <div className="mt-8 pt-8 border-t border-gray-800 flex flex-col items-center">
+          <p className="text-xs text-gray-500 mb-4 font-bold tracking-wider uppercase">Con el apoyo de</p>
+          <div className="flex items-center gap-8 opacity-70 hover:opacity-100 transition-opacity">
+            {/* Vercel for Nonprofits */}
+            <a href="https://vercel.com/nonprofits" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <svg viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"/></svg>
+              <span className="text-sm font-bold text-white tracking-wide">Vercel <span className="font-normal text-gray-400">for Nonprofits</span></span>
+            </a>
+            
+            {/* Google for Nonprofits */}
+            <a href="https://www.google.com/nonprofits/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 grayscale opacity-80" />
+              <span className="text-sm font-bold text-white tracking-wide">Google <span className="font-normal text-gray-400">for Nonprofits</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
           <p>© 2026 SomosCoders. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
             <button onClick={() => onNavigate('legal-privacidad')} className="hover:text-gray-300">Privacidad</button>
