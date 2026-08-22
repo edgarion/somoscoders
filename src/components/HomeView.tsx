@@ -283,7 +283,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_girl_laptop.png"
                   alt="Desarrollo Web"
-                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[70%] h-[70%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -318,7 +318,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_whiteboard.png"
                   alt="Lógica y Algoritmos"
-                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[70%] h-[70%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -353,7 +353,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_sitting_laptop.png"
                   alt="QA y Prácticas"
-                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[70%] h-[70%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -388,7 +388,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_girl_rocket.png"
                   alt="Proyectos y Despegue Laboral"
-                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[70%] h-[70%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
