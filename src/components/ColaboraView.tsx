@@ -14,7 +14,11 @@ import {
   Globe,
   ExternalLink,
   Code2,
-  Video
+  Video,
+  Server,
+  Terminal,
+  Cpu,
+  Layers
 } from 'lucide-react';
 
 interface ColaboraViewProps {
@@ -35,64 +39,99 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
       role: 'Comunidad & Eventos de Código Limpio',
       desc: 'Colaboramos activamente en charlas, open spaces y mentorías en buenas prácticas de software, testing y artesanía de código.',
       badge: 'Alianza Comunitaria',
-      logoText: 'SoftwareCrafters BCN',
-      color: '#00A98F'
+      logoName: 'SoftwareCrafters',
+      subText: 'BARCELONA',
+      accentColor: '#00A98F',
+      category: 'Comunidad Tech',
+      icon: Terminal
     },
     {
       name: 'Lifull Connect',
       role: 'Partner Tecnológico & Empleabilidad',
       desc: 'Empresa global que impulsa el talento de SomosCoders facilitando inserción laboral, retos técnicos y sesiones de orientación.',
       badge: 'Empresa Aliada',
-      logoText: 'LIFULL CONNECT',
-      color: '#FF6B00'
+      logoName: 'LIFULL',
+      subText: 'CONNECT',
+      accentColor: '#FF6B00',
+      category: 'Portal Global & Tech',
+      icon: Globe
     },
     {
       name: 'Thoughtworks',
       role: 'Excelencia en Ingeniería & Mentoría',
       desc: 'Consultora tecnológica líder que apoya nuestros bootcamps con ingenieros senior voluntarios y talleres de arquitectura.',
       badge: 'Tech Excellence',
-      logoText: 'Thoughtworks',
-      color: '#0D1117'
+      logoName: 'Thoughtworks',
+      subText: '/ / GLOBAL TECH CONSULTING',
+      accentColor: '#C8FF00',
+      category: 'Consultoría Software',
+      icon: Cpu
+    },
+    {
+      name: 'Arsys',
+      role: 'Infraestructura Cloud & Servidores',
+      desc: 'Compañía proveedora de servicios cloud y alojamiento web que respalda la infraestructura tecnológica y despliegues de SomosCoders.',
+      badge: 'Cloud & Hosting',
+      logoName: 'arsys',
+      subText: 'CLOUD SOLUTIONS',
+      accentColor: '#00A98F',
+      category: 'Hosting & Cloud',
+      icon: Server
     },
     {
       name: 'CodelyTV',
       role: 'Formación & Buenas Prácticas',
       desc: 'Referente en educación de arquitectura de software, DDD y desarrollo profesional que respalda nuestra metodología.',
       badge: 'Partner Educativo',
-      logoText: 'CodelyTV',
-      color: '#00A98F'
+      logoName: 'Codely',
+      subText: 'TV / PRO ED',
+      accentColor: '#00A98F',
+      category: 'Educación IT',
+      icon: Code2
     },
     {
       name: 'Fundación Empujar (Argentina)',
       role: 'Inclusión Social & Puente al Empleo',
       desc: 'Red latinoamericana aliada en el programa #EmplearParaIgualar, formando a jóvenes de contextos vulnerables en tecnología.',
       badge: 'Impacto Internacional',
-      logoText: 'Fundación EMPUJAR',
-      color: '#087A65'
+      logoName: 'EMPUJAR',
+      subText: 'FUNDACIÓN SOCIAL',
+      accentColor: '#C8FF00',
+      category: 'Impacto Social',
+      icon: Users
     },
     {
       name: 'Fundació SURT',
       role: 'Inclusión de Mujeres & Proyecto FemQA',
       desc: 'Entidad de acción social aliada en el programa formativo FemQA junto a Basetis y SomosCoders, capacitando a mujeres en situación de vulnerabilidad en Quality Assurance y testing.',
       badge: 'Acción Social & Género',
-      logoText: 'Fundació SURT',
-      color: '#087A65'
+      logoName: 'SURT',
+      subText: 'FUNDACIÓ DE DONES',
+      accentColor: '#087A65',
+      category: 'Tercer Sector',
+      icon: Heart
     },
     {
       name: 'Basetis',
       role: 'EmpowerHack Fem & FemQA Testing',
       desc: 'Empresa tecnológica impulsora del programa social FemQA y del hackathon EmpowerHack Fem junto a SomosCoders para cerrar la brecha de género en IT.',
       badge: 'Diversidad & Género',
-      logoText: 'BASETIS',
-      color: '#00A98F'
+      logoName: 'basetis',
+      subText: 'DIGITAL EXPERIENCES',
+      accentColor: '#00A98F',
+      category: 'Consultoría Digital',
+      icon: Layers
     },
     {
       name: 'Fundació Intermèdia',
       role: 'Programa Singulars & Ocupació Juvenil',
       desc: 'Alianza pública-social para el despliegue del programa formativo Singulars para la inserción sociolaboral de jóvenes.',
       badge: 'Inserción Juvenil',
-      logoText: 'Fundació Intermèdia',
-      color: '#087A65'
+      logoName: 'INTERMÈDIA',
+      subText: 'FUNDACIÓ SOCIAL',
+      accentColor: '#087A65',
+      category: 'Garantía Juvenil',
+      icon: Briefcase
     }
   ];
 
@@ -158,7 +197,7 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. LOGOS DE EMPRESAS Y COMUNIDADES COLABORADORAS (Software Crafters BCN, Lifull Connect, Thoughtworks, CodelyTV, Fundación Empujar, Basetis, Fundació Intermèdia) */}
+      {/* 2. LOGOS DE EMPRESAS Y COMUNIDADES COLABORADORAS (Sin frase de 'alianza activa', con tarjetas de logo oficial estilizadas) */}
       <section className="space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 pb-2 border-b border-gray-100">
           <div>
@@ -171,37 +210,42 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {partners.map((partner, idx) => (
-            <div 
-              key={idx} 
-              className="bg-white p-6 rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-lg space-y-4 flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="bg-[#F7F6F1] text-[#087A65] text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full border border-[#00A98F]/30">
-                    {partner.badge}
-                  </span>
-                  <Building2 className="w-4 h-4 text-gray-400" />
+          {partners.map((partner, idx) => {
+            const IconComp = partner.icon;
+            return (
+              <div 
+                key={idx} 
+                className="bg-white p-6 rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl space-y-4 flex flex-col justify-between group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="bg-[#F7F6F1] text-[#087A65] text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full border border-[#00A98F]/30">
+                      {partner.badge}
+                    </span>
+                    <span className="text-[10px] text-gray-400 font-mono font-bold">{partner.category}</span>
+                  </div>
+
+                  {/* LOGO CORPORATIVO/COMUNITARIO OFICIAL ESTILIZADO */}
+                  <div className="bg-[#0D1117] text-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-inner group-hover:bg-[#161B22] transition border border-gray-800">
+                    <IconComp className="w-6 h-6 mb-1.5" style={{ color: partner.accentColor }} />
+                    <span className="font-extrabold font-display tracking-tight text-lg" style={{ color: partner.accentColor }}>
+                      {partner.logoName}
+                    </span>
+                    <span className="text-[9px] font-mono tracking-widest text-gray-400 uppercase mt-0.5">
+                      {partner.subText}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="font-bold font-display text-base text-[#0D1117]">{partner.name}</h3>
+                    <p className="text-xs text-[#00A98F] font-semibold mt-0.5">{partner.role}</p>
+                  </div>
+
+                  <p className="text-xs text-gray-600 leading-relaxed font-sans">{partner.desc}</p>
                 </div>
-
-                {/* Badge/Logo estilizado del colaborador */}
-                <div className="bg-[#0D1117] text-white p-4 rounded-2xl flex items-center justify-center text-center shadow-xs">
-                  <span className="font-extrabold font-display tracking-tight text-sm text-[#C8FF00]">
-                    {partner.logoText}
-                  </span>
-                </div>
-
-                <h3 className="font-bold font-display text-base text-[#0D1117]">{partner.name}</h3>
-                <p className="text-xs text-[#00A98F] font-semibold">{partner.role}</p>
-                <p className="text-xs text-gray-600 leading-relaxed font-sans">{partner.desc}</p>
               </div>
-
-              <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-500">
-                <span>Alianza Activa</span>
-                <Sparkles className="w-3.5 h-3.5 text-[#00A98F]" />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -330,7 +374,7 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
                   >
                     <option value="mentor">Mentor/a Técnico Voluntario (1h/sem)</option>
                     <option value="empresa">Empresa: Contratar talento formado</option>
-                    <option value="donacion">Empresa: Patrocinio o donación de hardware</option>
+                    <option value="donacion">Empresa: Patrocinio o donación de hardware / Cloud</option>
                     <option value="talleres">Impartir Masterclass / Taller especializado</option>
                   </select>
                 </div>

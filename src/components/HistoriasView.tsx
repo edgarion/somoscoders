@@ -59,25 +59,6 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
     }
   ];
 
-  const youtubeContent = [
-    {
-      title: 'Charla en Software Crafters Barcelona: Inclusión, Comunidad y Código',
-      speaker: 'Abraham Vallez & Equipo SomosCoders',
-      duration: '42 min',
-      url: 'https://www.youtube.com/@somoscoders8996',
-      badge: 'Software Crafters BCN',
-      desc: 'Ponencia sobre cómo democratizar el aprendizaje técnico y tender puentes de empleabilidad para colectivos diversos.'
-    },
-    {
-      title: 'Graduación y Demo Day: Proyectos con Impacto Social',
-      speaker: 'Estudiantes & Mentores SomosCoders',
-      duration: '28 min',
-      url: 'https://www.youtube.com/@somoscoders8996',
-      badge: 'Demo Day',
-      desc: 'Presentación en vivo de las aplicaciones web y soluciones accesibles creadas por los alumnos del bootcamp.'
-    }
-  ];
-
   return (
     <div className="space-y-16 font-sans text-[#0D1117]">
       
@@ -211,16 +192,16 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 3. Sección YouTube Oficial de SomosCoders */}
+      {/* 3. Sección de Vídeo Oficial de SomosCoders (Con reproductor embebido de YouTube) */}
       <section className="bg-[#0D1117] text-white rounded-3xl p-8 sm:p-12 border-2 border-gray-800 space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-mono font-bold">
               <Video className="w-4 h-4 text-red-500" />
-              <span>Canal Oficial de YouTube</span>
+              <span>Vídeo Destacado de SomosCoders</span>
             </div>
             <h2 className="text-3xl font-extrabold font-display leading-tight">
-              Charlas, Masterclasses y Eventos en Vídeo
+              Conoce el Proyecto y Nuestras Charlas
             </h2>
           </div>
           <a 
@@ -234,22 +215,33 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {youtubeContent.map((vid, i) => (
-            <div key={i} className="bg-gray-900 p-6 rounded-3xl border border-gray-800 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#00A98F]/20 text-[#00A98F]">
-                  {vid.badge}
-                </span>
-                <h3 className="font-bold text-lg font-display text-white">{vid.title}</h3>
-                <p className="text-xs text-gray-400 font-sans leading-relaxed">{vid.desc}</p>
-              </div>
-              <div className="pt-3 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
-                <span>{vid.speaker}</span>
-                <span className="font-mono text-[#C8FF00]">{vid.duration}</span>
-              </div>
+        {/* Reproductor Embebido de YouTube */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 rounded-3xl overflow-hidden shadow-2xl border-2 border-gray-700 bg-black aspect-video">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/ly74gt_97ek"
+              title="SomosCoders en YouTube"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="lg:col-span-4 space-y-4">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#00A98F]/20 text-[#C8FF00]">
+              Evento & Ponencia
+            </span>
+            <h3 className="text-xl font-bold font-display text-white leading-snug">
+              Transformando Realidades a través de la Educación y el Código
+            </h3>
+            <p className="text-xs text-gray-300 leading-relaxed font-sans">
+              Descubre cómo nació la iniciativa SomosCoders, la experiencia de nuestros alumnos durante los bootcamps intensivos y el impacto de las alianzas con empresas del sector tech.
+            </p>
+            <div className="pt-2 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400 font-mono">
+              <span>SomosCoders Oficial</span>
+              <span className="text-[#C8FF00] font-bold">YouTube</span>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
