@@ -123,15 +123,15 @@ export default function App() {
 
   // Safe navigation view switcher
   const handleNavigate = (view: string) => {
-    // Rutas protegidas: Requieren sesión iniciada
-    const protectedViews = ['cursos', 'foro', 'dashboard'];
-    const isProtected = protectedViews.includes(view) || view.startsWith('curso-') || view.startsWith('player-');
+    // Rutas protegidas temporálmente deshabilitadas a petición del usuario
+    // const protectedViews = ['cursos', 'foro', 'dashboard'];
+    // const isProtected = protectedViews.includes(view) || view.startsWith('curso-') || view.startsWith('player-');
     
-    if (isProtected && !user) {
-      setAuthModalMode('register');
-      setIsLoginModalOpen(true);
-      return;
-    }
+    // if (isProtected && !user) {
+    //   setAuthModalMode('register');
+    //   setIsLoginModalOpen(true);
+    //   return;
+    // }
 
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
