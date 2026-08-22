@@ -611,7 +611,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Martin%20Villalba%20Developer'
     },
 
-    // --- REFERENTES CIENTÍFICOS & TECNOLÓGICOS HOMENAJEADOS ---
+    // --- REFERENTES & EXPERTOS DESTACADOS ---
     { 
       name: 'Juan José Montiel', 
       type: 'referentes',
@@ -619,30 +619,6 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       detail: 'Referente internacional en accesibilidad universal (a11y), desarrollo inclusivo y eliminación de barreras digitales.',
       skills: ['Accessibility (a11y)', 'Inclusive Design', 'Microsoft Tech', 'Assistive Technologies'],
       linkedin: 'https://www.linkedin.com/in/juanjomontiel/'
-    },
-    { 
-      name: 'Barbara Liskov', 
-      type: 'referentes',
-      role: 'Premio Turing & Pionera de la Computación', 
-      detail: 'Creadora del Principio de Sustitución de Liskov (L en SOLID), pilar fundamental del diseño de software orientado a objetos.',
-      skills: ['Liskov Substitution Principle', 'SOLID', 'Type Theory', 'Computer Science'],
-      linkedin: 'https://en.wikipedia.org/wiki/Barbara_Liskov'
-    },
-    { 
-      name: 'Jeannette Marie Wing', 
-      type: 'referentes',
-      role: 'Pionera del Pensamiento Computacional & Catedrática', 
-      detail: 'Referente mundial en la divulgación del pensamiento computacional como habilidad universal para todas las personas.',
-      skills: ['Computational Thinking', 'Formal Methods', 'CS Education', 'Data Science'],
-      linkedin: 'https://en.wikipedia.org/wiki/Jeannette_Wing'
-    },
-    { 
-      name: 'Rebecca Parsons', 
-      type: 'referentes',
-      role: 'CTO Emérita de Thoughtworks & Diversidad Tech', 
-      detail: 'Líder en arquitectura de software evolutiva, excelencia en ingeniería y fomento de mujeres y colectivos diversos en STEM.',
-      skills: ['Evolutionary Architecture', 'Tech Leadership', 'Diversity in Tech', 'Software Strategy'],
-      linkedin: 'https://www.linkedin.com/in/rebeccaparsons/'
     }
   ];
 
@@ -856,10 +832,10 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <div className="flex flex-wrap gap-2">
               {[
-                { id: 'todos', label: 'Todos (+70)' },
+                { id: 'todos', label: 'Todos (+65)' },
                 { id: 'mentores', label: 'Mentores & Líderes (17)' },
                 { id: 'alumni', label: 'Alumni Graduados (50+)' },
-                { id: 'referentes', label: 'Pioneros & Referentes (4)' }
+                { id: 'referentes', label: 'Accesibilidad & Tech' }
               ].map((tab) => (
                 <button
                   key={tab.id}
