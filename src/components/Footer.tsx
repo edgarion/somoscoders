@@ -132,7 +132,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSetCategoryFilter 
 
         <div className="mt-8 pt-8 border-t border-gray-800 flex flex-col items-center">
           <p className="text-xs text-gray-500 mb-4 font-bold tracking-wider uppercase">Con el apoyo de</p>
-          <div className="flex items-center gap-8 opacity-70 hover:opacity-100 transition-opacity">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 opacity-70 hover:opacity-100 transition-opacity">
+            {/* ACCIÓ Generalitat */}
+            <a href="https://www.accio.gencat.cat" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center">
+              <span className="text-sm font-bold text-white tracking-wide">ACCIÓ</span>
+              <span className="text-[9px] text-gray-400 uppercase tracking-widest">Generalitat de Catalunya</span>
+            </a>
+
+            {/* Barcelona Activa */}
+            <a href="https://www.barcelonactiva.cat" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5">
+              <div className="w-4 h-4 bg-red-600 rounded-sm"></div>
+              <span className="text-sm font-bold text-white tracking-tight">Barcelona <span className="font-normal text-gray-300">Activa</span></span>
+            </a>
+
             {/* Vercel for Nonprofits */}
             <a href="https://vercel.com/nonprofits" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
               <svg viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"/></svg>
