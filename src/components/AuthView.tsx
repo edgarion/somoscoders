@@ -42,6 +42,10 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
     }
 
     if (mode === 'register') {
+      if (role === 'mentor' && !email.toLowerCase().endsWith('@somoscoders.org')) {
+        auth.setError('Para registrarte como mentor necesitas usar tu correo corporativo @somoscoders.org');
+        return;
+      }
       const result = await auth.register(fullName, email, password, undefined, 'local', lastName, role);
       if (!result.success || !result.user) return;
 
@@ -72,9 +76,14 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
         });
         const googleUser = await res.json();
         
-        if (googleUser && googleUser.email) {
-          const userName = googleUser.name || googleUser.email.split('@')[0];
-          const userPicture = googleUser.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(googleUser.email)}`;
+          if (googleUser && googleUser.email) {
+            if (role === 'mentor' && mode === 'register' && !googleUser.email.toLowerCase().endsWith('@somoscoders.org')) {
+              auth.setError('Para registrarte como mentor necesitas usar tu correo corporativo @somoscoders.org');
+              return;
+            }
+            
+            const userName = googleUser.name || googleUser.email.split('@')[0];
+            const userPicture = googleUser.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(googleUser.email)}`;
 
           const result = await auth.register(userName, googleUser.email, undefined, userPicture, 'google', undefined, role);
 

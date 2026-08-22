@@ -6,6 +6,8 @@ export interface Lesson {
   duration: string;
   content: string; // Markdown or rich HTML explanation
   exerciseType: 'quiz' | 'code' | 'reading';
+  videoUrl?: string; // Enlace a YouTube
+  pdfUrl?: string; // Enlace al PDF
   quizQuestion?: {
     question: string;
     options: string[];

@@ -52,6 +52,7 @@ export default function App() {
   }, []);
 
   // Academic Enrollment progress database states (with initial active progress to feel premium on opening)
+  const [courses, setCourses] = useState(coursesData);
   const [enrollments, setEnrollments] = useState<EnrollmentState[]>([
     {
       courseId: 'fundamentos-ux',
@@ -101,11 +102,11 @@ export default function App() {
   };
 
   const handleUpdateCompletedLessons = (courseId: string, completedLessonIds: string[]) => {
+    const course = courses.find((c) => c.id === courseId);
+    const totalLessons = course ? course.lessons.length : 1;
     setEnrollments((prev) =>
       prev.map((e) => {
         if (e.courseId === courseId) {
-          const course = coursesData.find((c) => c.id === courseId);
-          const totalLessons = course ? course.lessons.length : 0;
           const isDoneNow = completedLessonIds.length === totalLessons;
 
           return {
@@ -137,7 +138,7 @@ export default function App() {
   };
 
   // Find targeted course details based on active slug
-  const activeCourse = coursesData.find((c) => c.slug === selectedCourseSlug) || coursesData[0];
+  const activeCourse = courses.find((c) => c.slug === selectedCourseSlug) || courses[0];
   const activeEnrollment = enrollments.find((e) => e.courseId === activeCourse.id);
 
   return (
@@ -168,7 +169,7 @@ export default function App() {
       <main id="app-workspace" className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 pb-24 md:pb-10 w-full">
         {currentView === 'home' && (
           <HomeView
-            courses={coursesData}
+            courses={courses}
             onNavigate={handleNavigate}
             onSetSelectedCourseSlug={setSelectedCourseSlug}
             onSetCategoryFilter={setCategoryFilter}
@@ -177,7 +178,7 @@ export default function App() {
 
         {currentView === 'cursos' && (
           <CoursesView
-            courses={coursesData}
+            courses={courses}
             onNavigate={handleNavigate}
             onSetSelectedCourseSlug={setSelectedCourseSlug}
             categoryFilter={categoryFilter}
@@ -251,7 +252,11 @@ export default function App() {
         )}
 
         {currentView === 'admin' && (
-          <AdminView onNavigate={handleNavigate} userEmail={user?.email} />
+          <AdminView 
+            onNavigate={handleNavigate} 
+            userEmail={user?.email} 
+            onAddCourse={(newCourse) => setCourses(prev => [...prev, newCourse])}
+          />
         )}
 
         {currentView.startsWith('legal') && (
