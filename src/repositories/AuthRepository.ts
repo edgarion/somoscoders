@@ -46,12 +46,13 @@ export class AuthRepository {
     return {
       ...data,
       lastName: data.last_name,
+      registeredAt: data.registered_at,
     };
   }
 
   async addUser(user: RegisteredUser): Promise<void> {
-    const { lastName, ...rest } = user;
-    const dbUser = { ...rest, last_name: lastName };
+    const { lastName, registeredAt, ...rest } = user;
+    const dbUser = { ...rest, last_name: lastName, registered_at: registeredAt };
     const { error } = await supabase.from('alumnos').insert([dbUser]);
     if (error) {
       console.error('Error adding user to Supabase:', error);

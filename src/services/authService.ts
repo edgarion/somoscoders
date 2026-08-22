@@ -44,7 +44,7 @@ export class AuthService {
     }
 
     const newUser: RegisteredUser = {
-      id: `usr_${Date.now()}`,
+      id: crypto.randomUUID(),
       name: fullName,
       lastName: lastName,
       email: cleanEmail,
