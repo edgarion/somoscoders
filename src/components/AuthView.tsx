@@ -20,6 +20,10 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [verificationStep, setVerificationStep] = useState(false);
+  const [pinCode, setPinCode] = useState('');
+  const [pendingUser, setPendingUser] = useState<any>(null);
 
   // Sincronizar mode
   useEffect(() => {
@@ -36,6 +40,11 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
       return;
     }
 
+    if (mode === 'register' && !acceptTerms) {
+      auth.setError('Debes aceptar los términos y condiciones para registrarte.');
+      return;
+    }
+
     if (password.length < 6) {
       auth.setError('La contraseña debe tener al menos 6 caracteres.');
       return;
@@ -49,12 +58,13 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
       const result = await auth.register(fullName, email, password, undefined, 'local', lastName, role);
       if (!result.success || !result.user) return;
 
-      onLoginSuccess({
+      setPendingUser({
         name: result.user.name,
         email: result.user.email,
         picture: result.user.picture || '',
         role: result.user.role
       });
+      setVerificationStep(true);
     } else {
       const result = await auth.login(email, password);
       if (!result.success || !result.user) return;
@@ -87,18 +97,86 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
 
           const result = await auth.register(userName, googleUser.email, undefined, userPicture, 'google', undefined, role);
 
-          onLoginSuccess({
-            name: result.user?.name || userName,
-            email: result.user?.email || googleUser.email,
-            picture: result.user?.picture || userPicture,
-            role: result.user?.role
-          });
+          if (mode === 'register') {
+            setPendingUser({
+              name: result.user?.name || userName,
+              email: result.user?.email || googleUser.email,
+              picture: result.user?.picture || userPicture,
+              role: result.user?.role
+            });
+            setVerificationStep(true);
+          } else {
+            onLoginSuccess({
+              name: result.user?.name || userName,
+              email: result.user?.email || googleUser.email,
+              picture: result.user?.picture || userPicture,
+              role: result.user?.role
+            });
+          }
         }
       } catch (err) {
         console.error('Google Auth Error:', err);
       }
     },
   });
+
+  const handleVerifyPin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pinCode === '1234' && pendingUser) {
+      onLoginSuccess(pendingUser);
+    } else {
+      auth.setError('Código PIN incorrecto. Usa 1234 para esta demo.');
+    }
+  };
+
+  if (verificationStep) {
+    return (
+      <div className="w-full max-w-md mx-auto relative group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-[#C8FF00] rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+        <div className="relative bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/50">
+          <div className="text-center relative z-10 space-y-4">
+            <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Mail className="w-10 h-10" />
+            </div>
+            <h2 className="text-3xl font-extrabold text-gray-900">Verifica tu correo</h2>
+            <p className="text-gray-600 text-sm">
+              Hemos enviado un correo a <strong className="text-gray-900">{pendingUser?.email}</strong> con el enlace de validación y una copia en PDF de los textos legales.
+            </p>
+            <p className="text-xs text-gray-500 bg-gray-50 p-3 rounded-xl border border-gray-100">
+              Para continuar en esta versión de demostración, por favor introduce el código de prueba <span className="font-bold text-emerald-600 font-mono text-sm">1234</span>.
+            </p>
+            
+            {auth.error && (
+              <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm border border-red-100 font-medium">
+                {auth.error}
+              </div>
+            )}
+
+            <form onSubmit={handleVerifyPin} className="space-y-6 pt-4">
+              <div className="space-y-2">
+                <input
+                  type="text"
+                  required
+                  value={pinCode}
+                  onChange={(e) => setPinCode(e.target.value)}
+                  placeholder="Introduce el código de 4 dígitos"
+                  className="w-full text-center tracking-widest font-mono text-2xl px-4 py-3 rounded-xl border-2 border-gray-100 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#00A98F]/20 focus:border-[#00A98F] outline-none transition-all placeholder:text-gray-300 placeholder:text-sm placeholder:tracking-normal"
+                  maxLength={4}
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full relative overflow-hidden bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2 group shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
+              >
+                <span>Confirmar Cuenta</span>
+                <CheckCircle2 className="w-4 h-4 text-[#C8FF00] group-hover:scale-110 transition-transform" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-[#F7F6F1] py-12 px-4 sm:px-6 lg:px-8">
