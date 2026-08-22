@@ -137,12 +137,12 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Sofia%20Carballo%20UX'
     },
     { 
-      name: 'Renato Paolo', 
+      name: 'Renato Paolo Espinoza Terrones', 
       type: 'mentor',
       role: 'Backend & Arquitectura de Datos', 
       detail: 'Tutorías en bases de datos, APIs REST y buenas prácticas de ingeniería en el lado servidor.',
       skills: ['Backend Development', 'Databases', 'API Design', 'Node.js/Python'],
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Renato%20Paolo%20Backend'
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Renato%20Paolo%20Espinoza%20Terrones'
     },
     { 
       name: 'Israel Obando', 
