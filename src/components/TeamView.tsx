@@ -72,6 +72,14 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       skills: ['Talent Development', 'Tech Community', 'Mentorship', 'Social Impact'],
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Matilde%20Fondon%20Infante'
     },
+    {
+      name: 'David Arturo Menéndez Fernández',
+      type: 'mentor',
+      role: 'Mentoría & Tecnología',
+      detail: 'Acompañamiento y apoyo técnico a la comunidad de desarrolladores en su crecimiento profesional.',
+      skills: ['Mentorship', 'Software Engineering', 'Community Support', 'Tech Leadership'],
+      linkedin: 'https://www.linkedin.com/in/davidarturomf/'
+    },
     { 
       name: 'José Torres', 
       type: 'mentor',
