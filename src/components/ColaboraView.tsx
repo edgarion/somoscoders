@@ -71,9 +71,17 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
       color: '#087A65'
     },
     {
+      name: 'Fundació SURT',
+      role: 'Inclusión de Mujeres & Proyecto FemQA',
+      desc: 'Entidad de acción social aliada en el programa formativo FemQA junto a Basetis y SomosCoders, capacitando a mujeres en situación de vulnerabilidad en Quality Assurance y testing.',
+      badge: 'Acción Social & Género',
+      logoText: 'Fundació SURT',
+      color: '#087A65'
+    },
+    {
       name: 'Basetis',
-      role: 'EmpowerHack Fem & Diversidad de Género',
-      desc: 'Aliados en el hackathon solidario EmpowerHack Fem para cerrar la brecha de género y abrir oportunidades a mujeres en IT.',
+      role: 'EmpowerHack Fem & FemQA Testing',
+      desc: 'Empresa tecnológica impulsora del programa social FemQA y del hackathon EmpowerHack Fem junto a SomosCoders para cerrar la brecha de género en IT.',
       badge: 'Diversidad & Género',
       logoText: 'BASETIS',
       color: '#00A98F'

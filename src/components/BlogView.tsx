@@ -27,14 +27,27 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
 
   const articles = [
     {
+      id: 'femqa-surt-basetis-somoscoders',
+      title: 'FemQA: Capacitación y Empleo en Software QA para Mujeres con Fundació SURT y Basetis',
+      excerpt: 'Conoce la iniciativa FemQA, el bootcamp de Quality Assurance impulsado por Basetis y SomosCoders en alianza con la Fundació SURT para empoderar y facilitar la inserción laboral de mujeres en situación de vulnerabilidad en el sector tecnológico.',
+      category: 'Inclusión & Género',
+      date: '18 Agosto 2026',
+      readTime: '6 min de lectura',
+      author: 'Fundació SURT & Basetis',
+      authorAvatar: '/images/avatars/avatar_girl_headphones.png',
+      image: '/images/char_girl_pointing_idea.png',
+      tag: 'FemQA',
+      link: 'https://femqa.basetis.com/es'
+    },
+    {
       id: 'empowerhack-fem-basetis',
       title: 'EmpowerHack Fem: Hackathon Solidario por la Inclusión de Mujeres en Tecnología',
       excerpt: 'Crónica del evento organizado junto a Basetis y SomosCoders para reducir la brecha de género y desarrollar herramientas tecnológicas para entidades del tercer sector.',
       category: 'Inclusión & Género',
       date: '14 Agosto 2026',
-      readTime: '6 min de lectura',
+      readTime: '5 min de lectura',
       author: 'Basetis & SomosCoders',
-      authorAvatar: '/images/avatars/avatar_girl_headphones.png',
+      authorAvatar: '/images/avatars/avatar_girl_ponytail.png',
       image: '/images/char_girl_pointing_idea.png',
       tag: 'EmpowerHack',
       link: 'https://blog.basetis.com/article_basic/empowerhack-fem/'
