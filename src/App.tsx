@@ -15,6 +15,7 @@ import { TeamView } from './components/TeamView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
 import { LoginModal } from './components/LoginModal';
+import { authService } from './services/authService';
 
 import { Course, CourseCategory, EnrollmentState } from './types';
 import { coursesData } from './data/coursesData';
@@ -35,6 +36,19 @@ export default function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('register');
   const [userName, setUserName] = useState<string>('Estudiante');
+
+  // Cargar sesión guardada de la base de datos local al iniciar la app
+  useEffect(() => {
+    const savedUser = authService.getCurrentSession();
+    if (savedUser) {
+      setUser({
+        name: savedUser.name,
+        email: savedUser.email,
+        picture: savedUser.picture
+      });
+      setUserName(savedUser.name);
+    }
+  }, []);
 
   // Academic Enrollment progress database states (with initial active progress to feel premium on opening)
   const [enrollments, setEnrollments] = useState<EnrollmentState[]>([
