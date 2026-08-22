@@ -73,6 +73,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSetCategoryFilter 
                   Colabora
                 </button>
               </li>
+              <li>
+                <button onClick={() => onNavigate('equipo')} className="hover:text-[#C8FF00] transition">
+                  Equipo
+                </button>
+              </li>
             </ul>
           </div>
 

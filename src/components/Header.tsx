@@ -127,6 +127,17 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Blog
           </button>
+
+          <button
+            onClick={() => onNavigate('equipo')}
+            className={`transition relative py-1 ${
+              currentView === 'equipo'
+                ? 'text-[#00A98F] font-bold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#00A98F]'
+                : 'hover:text-[#00A98F]'
+            }`}
+          >
+            Equipo
+          </button>
         </nav>
 
         {/* Action Buttons: ÚNETE + Menu Hamburguesa */}

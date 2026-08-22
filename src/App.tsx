@@ -11,6 +11,7 @@ import { AboutView } from './components/AboutView';
 import { ColaboraView } from './components/ColaboraView';
 import { HistoriasView } from './components/HistoriasView';
 import { BlogView } from './components/BlogView';
+import { TeamView } from './components/TeamView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
 import { LoginModal } from './components/LoginModal';
@@ -223,6 +224,10 @@ export default function App() {
 
         {currentView === 'blog' && (
           <BlogView onNavigate={handleNavigate} />
+        )}
+
+        {currentView === 'equipo' && (
+          <TeamView onNavigate={handleNavigate} />
         )}
 
         {currentView.startsWith('legal') && (
