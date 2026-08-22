@@ -83,10 +83,10 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
     { 
       name: 'David Cruz', 
       type: 'mentor',
-      role: 'Ingeniería de Software & Mentoría Técnica', 
+      role: 'Co-Fundador, Ingeniería de Software & Mentoría Técnica', 
       detail: 'Mentoría en desarrollo de software, testing de código y acompañamiento a estudiantes en retos reales.',
       skills: ['Software Engineering', 'Full Stack', 'Clean Code', 'Mentoría'],
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=David%20Cruz%20Software%20Engineer'
+      linkedin: 'https://www.linkedin.com/in/david-cruz-antolin/'
     },
     { 
       name: 'Sara Simon Willis', 
