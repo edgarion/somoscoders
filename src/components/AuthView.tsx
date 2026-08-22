@@ -12,7 +12,7 @@ interface AuthViewProps {
 export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', onLoginSuccess }) => {
   const auth = useAuthController();
   const { t } = useLanguage();
-  const [mode, setMode] = useState<'login' | 'register'>(initialMode);
+  const [mode, setMode] = useState<'login' | 'register' | 'forgot_password'>(initialMode);
   const [role, setRole] = useState<'alumno' | 'mentor'>('alumno');
 
   // Fields
@@ -34,6 +34,19 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     auth.clearMessages();
+
+    if (mode === 'forgot_password') {
+      if (!email.trim()) {
+        auth.setError('Por favor, introduce tu correo electrónico.');
+        return;
+      }
+      // Simulación de recuperación de contraseña
+      const result = await auth.recoverPassword(email);
+      if (result.success) {
+        setVerificationStep(true);
+      }
+      return;
+    }
 
     if (mode === 'register' && (!fullName.trim() || !lastName.trim())) {
       auth.setError('Por favor introduce tu nombre y apellido.');
@@ -138,9 +151,17 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
             <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Mail className="w-10 h-10" />
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900">Verifica tu correo</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900">
+              {mode === 'forgot_password' ? 'Recuperar contraseña' : 'Verifica tu correo'}
+            </h2>
             <p className="text-gray-600 text-sm">
-              Hemos enviado un correo a <strong className="text-gray-900">{pendingUser?.email}</strong> con el enlace de validación y una copia en PDF de los textos legales.
+              {mode === 'forgot_password' 
+                ? `Hemos enviado un correo a ` 
+                : `Hemos enviado un correo a `}
+              <strong className="text-gray-900">{pendingUser?.email || email}</strong> 
+              {mode === 'forgot_password' 
+                ? ` con los pasos para restablecer tu contraseña.` 
+                : ` con el enlace de validación y una copia en PDF de los textos legales.`}
             </p>
             <p className="text-xs text-gray-500 bg-gray-50 p-3 rounded-xl border border-gray-100">
               Para continuar en esta versión de demostración, por favor introduce el código de prueba <span className="font-bold text-emerald-600 font-mono text-sm">1234</span>.
@@ -152,7 +173,20 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
               </div>
             )}
 
-            <form onSubmit={handleVerifyPin} className="space-y-6 pt-4">
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (pinCode === '1234') {
+                if (mode === 'forgot_password') {
+                  auth.setSuccessMsg('Contraseña cambiada correctamente. Ahora puedes iniciar sesión.');
+                  setVerificationStep(false);
+                  setMode('login');
+                } else if (pendingUser) {
+                  onLoginSuccess(pendingUser);
+                }
+              } else {
+                auth.setError('Código PIN incorrecto. Usa 1234 para esta demo.');
+              }
+            }} className="space-y-6 pt-4">
               <div className="space-y-2">
                 <input
                   type="text"
@@ -192,10 +226,10 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
             className="mx-auto w-32 h-32 object-contain rounded-full bg-white mb-4 shadow-xl border-4 border-white"
           />
           <h2 className="text-3xl font-extrabold text-gray-900">
-            {mode === 'register' ? t('auth.title.register') : t('auth.title.login')}
+            {mode === 'register' ? t('auth.title.register') : mode === 'login' ? t('auth.title.login') : 'Recuperar'}
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            {mode === 'register' ? t('auth.subtitle.register') : t('auth.subtitle.login')}
+            {mode === 'register' ? t('auth.subtitle.register') : mode === 'login' ? t('auth.subtitle.login') : 'Restablece tu contraseña para acceder.'}
           </p>
         </div>
 
@@ -232,9 +266,34 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
-          {mode === 'register' && (
+          {mode === 'forgot_password' ? (
+            <div>
+              <label className="block text-xs font-bold text-gray-700 mb-1">{t('auth.label.email')}</label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                <input
+                  type="email"
+                  placeholder={t('auth.placeholder.email')}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                  required
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => setMode('login')}
+                className="mt-3 text-xs text-gray-500 hover:text-gray-700 font-bold transition flex items-center justify-center w-full"
+              >
+                <ArrowLeft className="w-3 h-3 mr-1" />
+                Volver a iniciar sesión
+              </button>
+            </div>
+          ) : (
             <>
-              <div className="mb-2">
+              {mode === 'register' && (
+                <>
+                  <div className="mb-2">
                 <label className="block text-sm font-bold text-gray-700 mb-2">{t('auth.role.question')}</label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
@@ -322,6 +381,18 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
                 required
               />
             </div>
+            
+            {mode === 'login' && (
+              <div className="flex justify-end mt-2">
+                <button
+                  type="button"
+                  onClick={() => setMode('forgot_password')}
+                  className="text-[11px] font-bold text-[#00A98F] hover:text-[#087A65] transition"
+                >
+                  ¿Has olvidado tu contraseña?
+                </button>
+              </div>
+            )}
           </div>
 
           {mode === 'register' && (
@@ -340,40 +411,46 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
               </label>
             </div>
           )}
+          </>
+          )}
 
           <button
             type="submit"
             disabled={auth.isLoading}
-            className="w-full flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-gray-800 text-white py-3 rounded-xl text-sm font-bold transition disabled:opacity-70 shadow-lg hover:shadow-xl"
+            className="w-full flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-gray-800 text-white py-3 rounded-xl text-sm font-bold transition disabled:opacity-70 shadow-lg hover:shadow-xl mt-2"
           >
             {auth.isLoading ? (
               <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
               <>
-                <span>{mode === 'register' ? t('auth.btn.register') : t('auth.btn.login')}</span>
+                <span>{mode === 'register' ? t('auth.btn.register') : mode === 'login' ? t('auth.btn.login') : 'Recuperar Contraseña'}</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
         </form>
 
-        <div className="relative mt-6 z-10">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
-          </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="px-2 bg-white text-gray-500">{t('auth.or')}</span>
-          </div>
-        </div>
+        {mode !== 'forgot_password' && (
+          <>
+            <div className="relative mt-6 z-10">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-xs">
+                <span className="px-2 bg-white text-gray-500">{t('auth.or')}</span>
+              </div>
+            </div>
 
-        <button
-          type="button"
-          onClick={() => loginWithGoogle()}
-          className="w-full relative z-10 flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 transition"
-        >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-          <span>{mode === 'register' ? t('auth.google.register') : t('auth.google.login')}</span>
-        </button>
+            <button
+              type="button"
+              onClick={() => loginWithGoogle()}
+              className="w-full relative z-10 flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 transition"
+            >
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+              <span>{mode === 'register' ? t('auth.google.register') : t('auth.google.login')}</span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

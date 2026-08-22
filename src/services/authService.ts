@@ -49,7 +49,7 @@ export class AuthService {
       lastName: lastName,
       email: cleanEmail,
       password: provider === 'local' ? password : undefined,
-      picture: pictureUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
+      picture: pictureUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(cleanEmail)}`,
       provider,
       registeredAt: new Date().toISOString(),
       role: role

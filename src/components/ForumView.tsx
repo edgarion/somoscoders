@@ -119,7 +119,7 @@ export const ForumView: React.FC<ForumViewProps> = ({
     const newComment: ForumComment = {
       id: `comment-${Date.now()}`,
       authorName: user.name || userName,
-      authorAvatar: user.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
+      authorAvatar: user?.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user?.email || userName)}`,
       content: ProfanityService.censorText(newCommentContent),
       createdAt: 'hace unos instantes',
       likes: 0,
@@ -157,7 +157,7 @@ export const ForumView: React.FC<ForumViewProps> = ({
       title: newPostTitle,
       category: newPostCategory as CourseCategory | 'general',
       authorName: user.name || userName,
-      authorAvatar: user.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
+      authorAvatar: user?.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user?.email || userName)}`,
       content: ProfanityService.censorText(newPostContent),
       createdAt: 'hace unos instantes',
       likes: 0,
