@@ -123,11 +123,11 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap gap-4 pt-2 text-xs font-bold text-gray-700">
             <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-gray-200 shadow-xs">
               <CheckCircle className="w-4 h-4 text-[#00A98F]" />
-              <span>+300 Mentores Voluntarios</span>
+              <span>+50 Mentores Voluntarios</span>
             </div>
             <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-gray-200 shadow-xs">
               <CheckCircle className="w-4 h-4 text-[#00A98F]" />
-              <span>+150 Empresas Contratantes</span>
+              <span>+25 Empresas Contratantes</span>
             </div>
           </div>
         </div>

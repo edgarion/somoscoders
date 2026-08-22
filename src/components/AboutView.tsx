@@ -49,20 +49,20 @@ export const AboutView: React.FC = () => {
       {/* Core statistics cards */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
         <div className="bg-[#F7F6F1] p-6 rounded-3xl border border-gray-200/80 text-center space-y-2">
-          <span className="text-3xl sm:text-4xl font-extrabold text-[#00A98F] font-display block">+2.500</span>
-          <span className="text-xs font-bold font-mono text-gray-500 uppercase tracking-wider block">Personas formadas</span>
+          <span className="text-3xl sm:text-4xl font-extrabold text-[#00A98F] font-display block">150</span>
+          <span className="text-xs font-bold font-mono text-gray-500 uppercase tracking-wider block">Alumnos graduados</span>
         </div>
         <div className="bg-[#F7F6F1] p-6 rounded-3xl border border-gray-200/80 text-center space-y-2">
           <span className="text-3xl sm:text-4xl font-extrabold text-[#087A65] font-display block">65%</span>
           <span className="text-xs font-bold font-mono text-gray-500 uppercase tracking-wider block">Inserción laboral</span>
         </div>
         <div className="bg-[#F7F6F1] p-6 rounded-3xl border border-gray-200/80 text-center space-y-2">
-          <span className="text-3xl sm:text-4xl font-extrabold text-[#00A98F] font-display block">+150</span>
+          <span className="text-3xl sm:text-4xl font-extrabold text-[#00A98F] font-display block">25</span>
           <span className="text-xs font-bold font-mono text-gray-500 uppercase tracking-wider block">Empresas aliadas</span>
         </div>
         <div className="bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] text-center space-y-2 shadow-[3px_3px_0px_#0D1117]">
-          <span className="text-3xl sm:text-4xl font-extrabold text-[#0D1117] font-display block">+300</span>
-          <span className="text-xs font-bold font-mono text-[#087A65] uppercase tracking-wider block">Personas voluntarias</span>
+          <span className="text-3xl sm:text-4xl font-extrabold text-[#0D1117] font-display block">50</span>
+          <span className="text-xs font-bold font-mono text-[#087A65] uppercase tracking-wider block">Mentores voluntarios</span>
         </div>
       </section>
 

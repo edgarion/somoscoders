@@ -111,7 +111,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_dog_mascot.png" alt="Mascota SomosCoders" />
                 </div>
                 <span className="text-xs font-semibold text-gray-700">
-                  +2.500 personas ya forman parte
+                  +150 alumnos graduados
                 </span>
               </div>
             </div>
@@ -183,8 +183,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
               <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
                 <Users className="w-5 h-5 text-[#00A98F]" />
-                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+2.500</p>
-                <p className="text-xs text-gray-500 font-medium">Personas formadas</p>
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">150</p>
+                <p className="text-xs text-gray-500 font-medium">Alumnos graduados</p>
               </div>
 
               <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
@@ -195,14 +195,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
                 <Building2 className="w-5 h-5 text-[#00A98F]" />
-                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+150</p>
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">25</p>
                 <p className="text-xs text-gray-500 font-medium">Empresas aliadas</p>
               </div>
 
               <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs space-y-1 relative overflow-hidden">
                 <HeartHandshake className="w-5 h-5 text-[#00A98F]" />
-                <p className="text-2xl font-extrabold font-display text-[#0D1117]">+300</p>
-                <p className="text-xs text-gray-500 font-medium">Personas voluntarias</p>
+                <p className="text-2xl font-extrabold font-display text-[#0D1117]">50</p>
+                <p className="text-xs text-gray-500 font-medium">Mentores voluntarios</p>
               </div>
             </div>
           </div>
