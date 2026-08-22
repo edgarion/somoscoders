@@ -136,8 +136,8 @@ export default function App() {
         userName={user ? user.name : userName}
         userEmail={user?.email}
         userPicture={user?.picture}
-        onOpenLogin={() => {
-          setAuthModalMode('register');
+        onOpenLogin={(mode?: 'login' | 'register') => {
+          setAuthModalMode(mode || 'register');
           setIsLoginModalOpen(true);
         }}
       />
