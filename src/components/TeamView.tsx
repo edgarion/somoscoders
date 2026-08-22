@@ -78,7 +78,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       role: 'Agile Management & Resolución de Conflictos', 
       detail: 'Facilitación de dinámicas ágiles, mediación de equipos y metodologías Scrum aplicadas al desarrollo.',
       skills: ['Agile Management', 'Resolución de Conflictos', 'Scrum', 'Team Coaching'],
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Jose%20Torres%20Agile%20Management'
+      linkedin: 'https://www.linkedin.com/in/torresredondo/'
     },
     { 
       name: 'David Cruz', 
@@ -626,7 +626,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       role: 'Senior Software Engineer en Microsoft & Líder en Accesibilidad', 
       detail: 'Referente internacional en accesibilidad universal (a11y), desarrollo inclusivo y eliminación de barreras digitales.',
       skills: ['Accessibility (a11y)', 'Inclusive Design', 'Microsoft Tech', 'Assistive Technologies'],
-      linkedin: 'https://www.linkedin.com/in/juanjomontiel/'
+      linkedin: 'https://www.linkedin.com/in/jjmontiel/'
     }
   ];
 
