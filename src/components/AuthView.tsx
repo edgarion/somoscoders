@@ -324,6 +324,23 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
             </div>
           </div>
 
+          {mode === 'register' && (
+            <div className="flex items-start gap-3 p-3 bg-gray-50/50 rounded-xl border border-gray-100 mt-2">
+              <div className="flex items-center h-5">
+                <input
+                  id="terms"
+                  type="checkbox"
+                  checked={acceptTerms}
+                  onChange={(e) => setAcceptTerms(e.target.checked)}
+                  className="w-4 h-4 text-[#00A98F] bg-white border-gray-300 rounded focus:ring-[#00A98F] focus:ring-2 cursor-pointer"
+                />
+              </div>
+              <label htmlFor="terms" className="text-[11px] text-gray-500 leading-relaxed cursor-pointer select-none">
+                He leído y acepto los <a href="#" className="text-[#00A98F] font-semibold hover:underline">Términos de Servicio</a> y la <a href="#" className="text-[#00A98F] font-semibold hover:underline">Política de Privacidad</a> de SomosCoders, y autorizo el tratamiento de mis datos.
+              </label>
+            </div>
+          )}
+
           <button
             type="submit"
             disabled={auth.isLoading}
