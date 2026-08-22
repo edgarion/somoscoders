@@ -166,7 +166,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       role: 'Ingeniería de Software & Algoritmos', 
       detail: 'Refuerzo de lógica computacional, estructura de datos y arquitectura de sistemas distribuidos.',
       skills: ['Algorithms', 'Data Structures', 'Software Design', 'Mentoría'],
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Jose%20Carlos%20Gil%20Software'
+      linkedin: 'https://www.linkedin.com/in/josecgil/'
     },
     { 
       name: 'Javier Olano', 
