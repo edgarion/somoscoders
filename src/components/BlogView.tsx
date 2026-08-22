@@ -330,6 +330,65 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* 5. GALERÍA DE EVENTOS */}
+      <section className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-gray-100 space-y-8">
+        <div className="space-y-2 text-center max-w-2xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00A98F]/10 text-[#00A98F] text-xs font-mono font-bold">
+            <Sparkles className="w-4 h-4" />
+            <span>En Acción</span>
+          </div>
+          <h2 className="text-3xl font-extrabold font-display leading-tight text-[#0D1117]">
+            Galería de Eventos
+          </h2>
+          <p className="text-gray-600 text-sm">
+            Algunos de los momentos más destacados en nuestros hackathons, mesas redondas y eventos comunitarios.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2 row-span-2 relative group overflow-hidden rounded-2xl aspect-[4/3] lg:aspect-auto">
+            <img 
+              src="/images/events/event1.jpg" 
+              alt="Evento SomosCoders Mesa Redonda" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          </div>
+          <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
+            <img 
+              src="/images/events/event2.jpg" 
+              alt="Charla Tranquilidad" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          </div>
+          <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
+            <img 
+              src="/images/events/event3.jpg" 
+              alt="Tech needs women in Society" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          </div>
+          <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
+            <img 
+              src="/images/events/event4.jpg" 
+              alt="Reunión Fundación Empujar" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          </div>
+          <div className="lg:col-span-2 relative group overflow-hidden rounded-2xl aspect-[4/3] lg:aspect-[8/3]">
+            <img 
+              src="/images/events/event5.jpg" 
+              alt="Panel Sin Juniors No Hay Seniors" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
