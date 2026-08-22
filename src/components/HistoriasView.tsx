@@ -86,7 +86,7 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
         <img 
           src="/images/stickers/sticker_cross_grid.png" 
           alt="Grid fondo" 
-          className="absolute top-4 right-6 w-20 h-auto opacity-20 pointer-events-none" 
+          className="absolute top-4 right-6 w-30 h-auto opacity-25 pointer-events-none" 
         />
 
         <div className="lg:col-span-8 space-y-5 relative z-10">
@@ -124,10 +124,11 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
               alt="Graduado de SomosCoders" 
               className="w-40 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
             />
+            {/* Overlay Bocadillo Terminal (+50% -> w-12) */}
             <img 
               src="/images/stickers/sticker_speech_terminal.png" 
               alt="Terminal" 
-              className="absolute -top-3 -right-3 w-8 h-auto drop-shadow-md" 
+              className="absolute -top-4 -right-4 w-12 h-auto drop-shadow-md z-20" 
             />
           </div>
         </div>

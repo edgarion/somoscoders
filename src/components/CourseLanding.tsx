@@ -263,16 +263,16 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({
             </p>
           </div>
 
-          {/* Certificate Award Info con Overlay de Libros y Planta */}
+          {/* Certificate Award Info con Overlay de Libros y Planta (+50%) */}
           <div className="bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] space-y-3 text-center text-[#0D1117] shadow-[4px_4px_0px_#0D1117] relative overflow-hidden">
-            {/* Overlay: Pila de libros con planta */}
+            {/* Overlay: Pila de libros con planta (+50% -> w-24) */}
             <img 
               src="/images/stickers/sticker_books_plant.png" 
               alt="Libros de estudio" 
-              className="absolute -top-3 -right-3 w-16 h-auto opacity-40 pointer-events-none" 
+              className="absolute -top-3 -right-3 w-24 h-auto opacity-45 pointer-events-none z-10" 
             />
 
-            <div className="relative z-10 space-y-3">
+            <div className="relative z-20 space-y-3">
               <div className="mx-auto w-10 h-10 bg-[#0D1117] text-[#C8FF00] rounded-xl flex items-center justify-center">
                 <Award className="w-5 h-5" />
               </div>

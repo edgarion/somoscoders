@@ -210,18 +210,18 @@ export const ForumView: React.FC<ForumViewProps> = ({
       {/* Main Forum View Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Side: Category filter tabs + stats bar con Overlays de Café y Libros */}
+        {/* Left Side: Category filter tabs + stats bar con Overlays de Café y Libros (+50%) */}
         <aside className="lg:col-span-3 space-y-4">
           <div className="bg-[#F7F6F1] rounded-3xl border border-gray-200/80 p-5 space-y-4 relative overflow-hidden">
-            {/* Overlay: Vaso de Café SomosCoders en la esquina de la cafetería/general */}
+            {/* Overlay: Vaso de Café SomosCoders (+50% -> w-18) */}
             <img 
               src="/images/stickers/sticker_coffee_cup.png" 
               alt="Café SomosCoders" 
-              className="absolute -top-2 -right-2 w-12 h-auto opacity-80 pointer-events-none drop-shadow-md" 
+              className="absolute -top-3 -right-3 w-18 h-auto opacity-85 pointer-events-none drop-shadow-md z-10" 
             />
 
-            <h3 className="text-xs font-bold font-mono tracking-wider text-gray-500 uppercase">Filtrar por Tema</h3>
-            <div className="flex flex-col gap-1.5 relative z-10">
+            <h3 className="text-xs font-bold font-mono tracking-wider text-gray-500 uppercase relative z-20">Filtrar por Tema</h3>
+            <div className="flex flex-col gap-1.5 relative z-20">
               {[
                 { key: 'todos', label: 'Todo el foro' },
                 { key: 'general', label: 'General / Café ☕' },
@@ -247,14 +247,14 @@ export const ForumView: React.FC<ForumViewProps> = ({
           </div>
 
           <div className="bg-[#C8FF00] p-5 rounded-3xl border-2 border-[#0D1117] text-[#0D1117] space-y-2.5 shadow-[3px_3px_0px_#0D1117] relative overflow-hidden">
-            {/* Overlay: Libros y planta en caja de comunidad */}
+            {/* Overlay: Libros y planta (+50% -> w-24) */}
             <img 
               src="/images/stickers/sticker_books_plant.png" 
               alt="Libros y planta" 
-              className="absolute -bottom-2 -right-2 w-16 h-auto opacity-40 pointer-events-none" 
+              className="absolute -bottom-3 -right-3 w-24 h-auto opacity-45 pointer-events-none z-10" 
             />
 
-            <div className="relative z-10 space-y-2">
+            <div className="relative z-20 space-y-2">
               <span className="font-bold text-xs flex items-center gap-1.5 font-display">
                 <ShieldCheck className="w-4 h-4 text-[#087A65]" />
                 <span>Espacio Inclusivo y Seguro</span>

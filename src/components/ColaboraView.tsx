@@ -111,7 +111,7 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
         <img 
           src="/images/stickers/sticker_cross_grid.png" 
           alt="Grid decorativo" 
-          className="absolute top-4 right-6 w-20 h-auto opacity-20 pointer-events-none" 
+          className="absolute top-4 right-6 w-30 h-auto opacity-25 pointer-events-none" 
         />
 
         <div className="lg:col-span-8 space-y-5 relative z-10">
@@ -148,11 +148,11 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
               alt="Colabora con SomosCoders" 
               className="w-40 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
             />
-            {/* Overlay Huella Mascota */}
+            {/* Overlay Huella Mascota (+50% -> w-9 h-9) */}
             <img 
               src="/images/stickers/sticker_paw_logo.png" 
               alt="Huella" 
-              className="absolute -bottom-2 -left-2 w-6 h-6 drop-shadow-md" 
+              className="absolute -bottom-3 -left-3 w-9 h-9 drop-shadow-md z-20" 
             />
           </div>
         </div>

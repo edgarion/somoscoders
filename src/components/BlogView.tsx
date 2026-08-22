@@ -137,7 +137,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
         <img 
           src="/images/stickers/sticker_cross_grid.png" 
           alt="Grid fondo" 
-          className="absolute top-4 right-6 w-20 h-auto opacity-20 pointer-events-none" 
+          className="absolute top-4 right-6 w-30 h-auto opacity-25 pointer-events-none" 
         />
 
         <div className="lg:col-span-8 space-y-5 relative z-10">
