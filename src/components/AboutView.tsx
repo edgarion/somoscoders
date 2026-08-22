@@ -20,12 +20,36 @@ export const AboutView: React.FC = () => {
   const [volunteerEmail, setVolunteerEmail] = useState('');
   const [volunteerRole, setVolunteerRole] = useState('mentor');
   const [volunteerMessage, setVolunteerMessage] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRegisterVolunteer = (e: React.FormEvent) => {
+  const handleRegisterVolunteer = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (volunteerName.trim() && volunteerEmail.trim()) {
+    if (!volunteerName.trim() || !volunteerEmail.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      await fetch('https://formsubmit.co/ajax/edgar.costilla@somoscoders.org', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `Nueva Propuesta de Voluntariado: ${volunteerName} (${volunteerRole})`,
+          _template: 'table',
+          _captcha: 'false',
+          nombre_o_empresa: volunteerName,
+          email: volunteerEmail,
+          modalidad: volunteerRole,
+          mensaje: volunteerMessage || 'Sin mensaje'
+        })
+      });
       setFormSubmitted(true);
+    } catch (err) {
+      console.error('Error al enviar formulario:', err);
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
