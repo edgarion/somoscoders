@@ -14,7 +14,8 @@ import {
   ExternalLink,
   MessageSquare,
   ShieldCheck,
-  Star
+  Star,
+  BookOpen
 } from 'lucide-react';
 
 interface TeamViewProps {
@@ -22,64 +23,60 @@ interface TeamViewProps {
 }
 
 export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
-  // Miembros principales del equipo impulsor y técnico
-  const coreTeam = [
-    {
+  // Cuadro 1: Lorena Criado y Jacobo Pedrosa
+  const teamBox1 = {
+    member1: {
       name: 'Lorena Criado',
       role: 'Coordinación, Estrategia & Diversidad',
       contribution: 'Impulsa la mentoría comunitaria, la inclusión de mujeres en el sector tecnológico y la coordinación de programas y bootcamps accesibles en SomosCoders.',
-      badge: 'Equipo Núcleo',
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lorena%20Criado%20SomosCoders',
-      accent: '#00A98F',
-      specialty: 'Diversidad & Coordinación Pedagógica'
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lorena%20Criado%20SomosCoders'
     },
-    {
-      name: 'Lucas Salvatori',
-      role: 'Ingeniería de Software & Mentoría Técnica',
-      contribution: 'Diseño de itinerarios formativos en desarrollo web moderno, arquitectura de aplicaciones y acompañamiento directo a los alumnos en retos de código.',
-      badge: 'Equipo Técnico',
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lucas%20Salvatori%20SomosCoders',
-      accent: '#C8FF00',
-      specialty: 'Full Stack & Arquitectura Web'
-    },
-    {
-      name: 'Edgar Costilla',
-      role: 'Liderazgo de Producto & Desarrollo Plataforma',
-      contribution: 'Desarrollo de la experiencia de usuario accesible, arquitectura digital y despliegue del ecosistema de aprendizaje interactivo de SomosCoders.',
-      badge: 'Equipo Núcleo',
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Edgar%20Costilla%20SomosCoders',
-      accent: '#00A98F',
-      specialty: 'Producto, UI/UX & Plataforma'
-    },
-    {
+    member2: {
       name: 'Jacobo Pedrosa',
       role: 'Especialista en IA, Testing & Mentoría Senior',
       contribution: 'Impartición de masterclasses, mentorías avanzadas en buenas prácticas de ingeniería, testing automatizado y adopción de IA con impacto social.',
-      badge: 'Mentoría Senior',
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Jacobo%20Pedrosa%20SomosCoders',
-      accent: '#087A65',
-      specialty: 'Inteligencia Artificial & Calidad'
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Jacobo%20Pedrosa%20SomosCoders'
     }
-  ];
+  };
 
-  // Listado de personas, colaboradores y mentores que han pasado por somoscoders.org
+  // Cuadro 2: Lucas Salvatori y Edgar Costilla (el chico de canas es Edgar Costilla)
+  const teamBox2 = {
+    member1: {
+      name: 'Lucas Salvatori',
+      role: 'Ingeniería de Software & Mentoría Técnica',
+      contribution: 'Diseño de itinerarios formativos en desarrollo web moderno, arquitectura de aplicaciones y acompañamiento directo a los alumnos en retos de código.',
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lucas%20Salvatori%20SomosCoders'
+    },
+    member2: {
+      name: 'Edgar Costilla',
+      role: 'Liderazgo de Producto, UI/UX & Plataforma',
+      contribution: 'Desarrollo de la experiencia de usuario accesible, arquitectura digital y despliegue del ecosistema de aprendizaje interactivo de SomosCoders.',
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Edgar%20Costilla%20SomosCoders'
+    }
+  };
+
+  // Muro de Agradecimientos completo con todos los mentores, fundadores y referentes indicados
   const contributorsList = [
-    { name: 'Abraham Vallez', role: 'Fundador & Divulgador Tech', org: 'Software Crafters BCN / SomosCoders' },
-    { name: 'Mili Torres', role: 'Alumni & QA Tester', org: 'Graduada Bootcamp & Fundación Empujar' },
-    { name: 'Fátima Benítez', role: 'Alumni Frontend', org: 'Reconversión Laboral' },
-    { name: 'Alejandro Morales', role: 'Alumni QA Automation', org: 'Inclusión & Accesibilidad Digital' },
-    { name: 'Martín Soler', role: 'Mentor de JavaScript y React', org: 'Comunidad Voluntaria' },
-    { name: 'Elena Gómez', role: 'Mentora de Diseño UX/UI', org: 'Voluntariado Social' },
-    { name: 'Carlos Mendoza', role: 'Tutor de Backend & Node.js', org: 'Software Craftsmanship' },
-    { name: 'Nuria Valls', role: 'Coordinadora de Inserción', org: 'Alianzas Tercer Sector' },
-    { name: 'Sebastián Ramos', role: 'Mentor de Algoritmos & Git', org: 'Comunidad Open Source' },
-    { name: 'Lucía Fernández', role: 'Docente de Fundamentos Web', org: 'Voluntaria Docente' },
-    { name: 'Diego Romero', role: 'Facilitador de Retos Técnicos', org: 'Comunidad IT' },
-    { name: 'Paula Giménez', role: 'Mentora de Calidad & QA', org: 'FemQA / Basetis' },
-    { name: 'Andrés Morales', role: 'Tutor de Accesibilidad Web (a11y)', org: 'Inclusión Digital' },
-    { name: 'Camila Navarro', role: 'Coordinadora de Empleabilidad', org: 'Fundación Empujar' },
-    { name: 'Javier Domínguez', role: 'Mentor de Cloud & DevOps', org: 'Comunidad Arsys / Tech' },
-    { name: 'Mariana Silva', role: 'Mentora de Python & Data', org: 'Voluntaria Tech' }
+    { name: 'David Cruz', role: 'Mentor & Ingeniero de Software', detail: 'Mentoría técnica y acompañamiento en desarrollo' },
+    { name: 'Rosa Pali', role: 'Mentora & Coordinación', detail: 'Apoyo a estudiantes y fomento de la diversidad' },
+    { name: 'Gabriel Botana', role: 'Mentor de Software & Arquitectura', detail: 'Buenas prácticas y tutoría de proyectos' },
+    { name: 'Karolina Ostrowska', role: 'Mentora Tech & QA', detail: 'Calidad de software y testing inclusivo' },
+    { name: 'Diego Córdoba', role: 'Mentor & Desarrollador Web', detail: 'Formación frontend y retos interactivos' },
+    { name: 'Eudald Arraz', role: 'Mentor & Craftsmanship', detail: 'Artesanía de código y testing guiado' },
+    { name: 'Sofía Carballo', role: 'Mentora de Frontend & UI', detail: 'Diseño accesible y desarrollo web moderno' },
+    { name: 'Renato Paolo', role: 'Mentor de Backend & Sistemas', detail: 'Lógica de datos y tutorías 1 a 1' },
+    { name: 'Israel Obando', role: 'Mentor & Desarrollador Full Stack', detail: 'Acompañamiento en bootcamps técnicos' },
+    { name: 'José Torres', role: 'Mentor de Programación', detail: 'Fundamentos de código y resolución de dudas' },
+    { name: 'José Carlos Gil', role: 'Mentor de Software & Algoritmos', detail: 'Arquitectura limpia y mentoría continua' },
+    { name: 'Javier Olano', role: 'Mentor & Ingeniero Cloud', detail: 'Despliegues, DevOps e infraestructura' },
+    { name: 'Ángel Martínez', role: 'Mentor de Desarrollo & Calidad', detail: 'Testing automatizado y revisión de código' },
+    { name: 'Mateo Vásquez', role: 'Mentor de Desarrollo Web', detail: 'Tutorías prácticas y preparación laboral' },
+    { name: 'Joan Carazo', role: 'Mentor & Software Craftsman', detail: 'Cultura de código limpio y testing' },
+    { name: 'Juan José Montiel', role: 'Referente en Accesibilidad Digital (a11y) & Microsoft', detail: 'Inspiración y mentoría en tecnología universal sin barreras' },
+    { name: 'Barbara Liskov', role: 'Pionera de la Computación (Principio Liskov - SOLID)', detail: 'Referente teórica y homenaje por sus aportes fundamentales al software' },
+    { name: 'Jeannette Marie Wing', role: 'Pionera del Pensamiento Computacional', detail: 'Inspiración metodológica para enseñar a razonar con código' },
+    { name: 'Rebecca Parsons', role: 'CTO Emérita de Thoughtworks & Diversidad Tech', detail: 'Referente en liderazgo técnico inclusivo y arquitectura evolutiva' },
+    { name: 'Abraham Vallez', role: 'Fundador & Divulgador Tech', detail: 'Impulsor de la comunidad y ponente en Software Crafters BCN' }
   ];
 
   return (
@@ -132,7 +129,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. Ilustraciones del Equipo y Perfiles Clave */}
+      {/* 2. Ilustraciones del Equipo y Perfiles Clave (Sin etiquetas, descripciones agrupadas) */}
       <section className="space-y-10">
         <div className="text-left space-y-2 pb-2 border-b border-gray-100 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
           <div>
@@ -153,14 +150,15 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
           </a>
         </div>
 
-        {/* Grid con las 2 Ilustraciones Oficiales del Equipo */}
+        {/* Grid con los 2 Cuadros Principales */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Card Ilustración 1: Lorena Criado y Lucas Salvatori */}
-          <div className="bg-white rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-6">
+          
+          {/* CUADRO 1: Lorena Criado y Jacobo Pedrosa */}
+          <div className="bg-white rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-6 flex flex-col justify-between">
             <div className="rounded-2xl overflow-hidden bg-[#F7F6F1] border border-gray-200/80 p-2 flex items-center justify-center">
               <img 
                 src="/images/team_lorena_lucas.jpg" 
-                alt="Lorena Criado y Lucas Salvatori - SomosCoders" 
+                alt="Lorena Criado y Jacobo Pedrosa - SomosCoders" 
                 className="w-full h-auto object-cover rounded-xl drop-shadow-sm hover:scale-[1.02] transition duration-300" 
               />
             </div>
@@ -169,11 +167,9 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
               {/* Lorena Criado */}
               <div className="space-y-2.5 border-t-2 sm:border-t-0 sm:border-r-2 border-gray-100 sm:pr-4 pt-4 sm:pt-0">
                 <div className="flex items-center justify-between">
-                  <span className="bg-[#00A98F]/10 text-[#087A65] text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full">
-                    {coreTeam[0].badge}
-                  </span>
+                  <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{teamBox1.member1.name}</h3>
                   <a 
-                    href={coreTeam[0].linkedin} 
+                    href={teamBox1.member1.linkedin} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
@@ -182,74 +178,16 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
                     <Linkedin className="w-4 h-4" />
                   </a>
                 </div>
-                <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{coreTeam[0].name}</h3>
-                <p className="text-xs text-[#00A98F] font-bold">{coreTeam[0].role}</p>
-                <p className="text-xs text-gray-600 leading-relaxed font-sans">{coreTeam[0].contribution}</p>
-              </div>
-
-              {/* Lucas Salvatori */}
-              <div className="space-y-2.5 pt-4 sm:pt-0">
-                <div className="flex items-center justify-between">
-                  <span className="bg-[#C8FF00]/40 text-[#0D1117] text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full">
-                    {coreTeam[1].badge}
-                  </span>
-                  <a 
-                    href={coreTeam[1].linkedin} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
-                    title="LinkedIn Lucas Salvatori"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                </div>
-                <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{coreTeam[1].name}</h3>
-                <p className="text-xs text-[#00A98F] font-bold">{coreTeam[1].role}</p>
-                <p className="text-xs text-gray-600 leading-relaxed font-sans">{coreTeam[1].contribution}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Card Ilustración 2: Edgar Costilla y Jacobo Pedrosa */}
-          <div className="bg-white rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-6">
-            <div className="rounded-2xl overflow-hidden bg-[#F7F6F1] border border-gray-200/80 p-2 flex items-center justify-center">
-              <img 
-                src="/images/team_edgar_jacobo.jpg" 
-                alt="Edgar Costilla y Jacobo Pedrosa - SomosCoders" 
-                className="w-full h-auto object-cover rounded-xl drop-shadow-sm hover:scale-[1.02] transition duration-300" 
-              />
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
-              {/* Edgar Costilla */}
-              <div className="space-y-2.5 border-t-2 sm:border-t-0 sm:border-r-2 border-gray-100 sm:pr-4 pt-4 sm:pt-0">
-                <div className="flex items-center justify-between">
-                  <span className="bg-[#00A98F]/10 text-[#087A65] text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full">
-                    {coreTeam[2].badge}
-                  </span>
-                  <a 
-                    href={coreTeam[2].linkedin} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
-                    title="LinkedIn Edgar Costilla"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                </div>
-                <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{coreTeam[2].name}</h3>
-                <p className="text-xs text-[#00A98F] font-bold">{coreTeam[2].role}</p>
-                <p className="text-xs text-gray-600 leading-relaxed font-sans">{coreTeam[2].contribution}</p>
+                <p className="text-xs text-[#00A98F] font-bold">{teamBox1.member1.role}</p>
+                <p className="text-xs text-gray-600 leading-relaxed font-sans">{teamBox1.member1.contribution}</p>
               </div>
 
               {/* Jacobo Pedrosa */}
               <div className="space-y-2.5 pt-4 sm:pt-0">
                 <div className="flex items-center justify-between">
-                  <span className="bg-purple-100 text-purple-800 text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full">
-                    {coreTeam[3].badge}
-                  </span>
+                  <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{teamBox1.member2.name}</h3>
                   <a 
-                    href={coreTeam[3].linkedin} 
+                    href={teamBox1.member2.linkedin} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
@@ -258,16 +196,65 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
                     <Linkedin className="w-4 h-4" />
                   </a>
                 </div>
-                <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{coreTeam[3].name}</h3>
-                <p className="text-xs text-[#00A98F] font-bold">{coreTeam[3].role}</p>
-                <p className="text-xs text-gray-600 leading-relaxed font-sans">{coreTeam[3].contribution}</p>
+                <p className="text-xs text-[#00A98F] font-bold">{teamBox1.member2.role}</p>
+                <p className="text-xs text-gray-600 leading-relaxed font-sans">{teamBox1.member2.contribution}</p>
               </div>
             </div>
           </div>
+
+          {/* CUADRO 2: Lucas Salvatori y Edgar Costilla (el chico de canas es Edgar Costilla) */}
+          <div className="bg-white rounded-3xl border-2 border-gray-100 hover:border-[#00A98F] p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-6 flex flex-col justify-between">
+            <div className="rounded-2xl overflow-hidden bg-[#F7F6F1] border border-gray-200/80 p-2 flex items-center justify-center">
+              <img 
+                src="/images/team_edgar_jacobo.jpg" 
+                alt="Lucas Salvatori y Edgar Costilla - SomosCoders" 
+                className="w-full h-auto object-cover rounded-xl drop-shadow-sm hover:scale-[1.02] transition duration-300" 
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              {/* Lucas Salvatori */}
+              <div className="space-y-2.5 border-t-2 sm:border-t-0 sm:border-r-2 border-gray-100 sm:pr-4 pt-4 sm:pt-0">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{teamBox2.member1.name}</h3>
+                  <a 
+                    href={teamBox2.member1.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
+                    title="LinkedIn Lucas Salvatori"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </div>
+                <p className="text-xs text-[#00A98F] font-bold">{teamBox2.member1.role}</p>
+                <p className="text-xs text-gray-600 leading-relaxed font-sans">{teamBox2.member1.contribution}</p>
+              </div>
+
+              {/* Edgar Costilla (el chico de canas) */}
+              <div className="space-y-2.5 pt-4 sm:pt-0">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-extrabold font-display text-lg text-[#0D1117]">{teamBox2.member2.name}</h3>
+                  <a 
+                    href={teamBox2.member2.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#00A98F] hover:text-[#087A65] p-1 rounded-lg hover:bg-gray-100 transition"
+                    title="LinkedIn Edgar Costilla"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </div>
+                <p className="text-xs text-[#00A98F] font-bold">{teamBox2.member2.role}</p>
+                <p className="text-xs text-gray-600 leading-relaxed font-sans">{teamBox2.member2.contribution}</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 3. Muro de Agradecimiento a Todas las Personas que han pasado por somoscoders.org */}
+      {/* 3. Muro de Agradecimiento a Mentores, Fundadores y Referentes de somoscoders.org */}
       <section className="bg-[#0D1117] text-white rounded-3xl p-8 sm:p-12 border-2 border-gray-800 space-y-8 relative overflow-hidden shadow-2xl">
         {/* Overlay Grid */}
         <img 
@@ -279,19 +266,19 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
         <div className="space-y-4 max-w-3xl relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C8FF00]/10 text-[#C8FF00] text-xs font-mono font-bold">
             <Heart className="w-4 h-4 fill-[#C8FF00]" />
-            <span>Comunidad & Gratitud Eterna</span>
+            <span>Muro de Gratitud & Referentes</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display leading-tight">
-            Agradecimiento a quienes hacen posible <span className="text-[#C8FF00]">SomosCoders.org</span>
+            Agradecimiento a quienes inspiran e impulsan <span className="text-[#C8FF00]">SomosCoders.org</span>
           </h2>
 
           <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-sans">
-            A cada mentor voluntario, estudiante, empresa aliada y colaborador que ha dedicado su tiempo, sus ganas y su conocimiento a la comunidad: <span className="text-white font-bold">este proyecto existe y crece gracias a todos vosotros.</span>
+            A cada mentor, voluntario, fundador y referente científico del mundo del software que ha guiado nuestros pasos: <span className="text-white font-bold">vuestro legado y generosidad hacen posible esta comunidad.</span>
           </p>
         </div>
 
-        {/* Listado / Muro de Personas y Mentores */}
+        {/* Listado / Muro de Personas, Mentores y Referentes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10 pt-2">
           {contributorsList.map((person, idx) => (
             <div 
@@ -299,11 +286,11 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
               className="bg-gray-900/90 border border-gray-800 p-4 rounded-2xl space-y-1.5 hover:border-[#00A98F] transition hover:bg-gray-800/80"
             >
               <div className="flex items-center gap-2">
-                <Star className="w-3.5 h-3.5 text-[#C8FF00] fill-[#C8FF00]" />
-                <h4 className="font-bold text-sm text-white font-display">{person.name}</h4>
+                <Star className="w-3.5 h-3.5 text-[#C8FF00] fill-[#C8FF00] shrink-0" />
+                <h4 className="font-bold text-sm text-white font-display leading-tight">{person.name}</h4>
               </div>
-              <p className="text-xs text-[#00A98F] font-medium">{person.role}</p>
-              <p className="text-[10px] text-gray-400 font-mono">{person.org}</p>
+              <p className="text-xs text-[#00A98F] font-semibold">{person.role}</p>
+              <p className="text-[11px] text-gray-400 font-sans leading-relaxed">{person.detail}</p>
             </div>
           ))}
         </div>
