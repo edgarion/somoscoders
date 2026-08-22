@@ -81,12 +81,12 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=David%20Cruz%20Software%20Engineer'
     },
     { 
-      name: 'Rosa Pali', 
+      name: 'Sara Simon Willis', 
       type: 'mentor',
-      role: 'Mentora & Coordinación Comunitaria', 
-      detail: 'Acompañamiento personal a alumnas y alumnos, dinamización de grupos y fomento de la diversidad.',
-      skills: ['Coordinación', 'Inclusión Social', 'Diversidad', 'Gestión de Talento'],
-      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Rosa%20Pali%20Tech'
+      role: 'Senior Software Engineer & Mentora Tech', 
+      detail: 'Mentoría técnica avanzada en ingeniería de software, arquitectura de sistemas y acompañamiento a estudiantes en retos complejos.',
+      skills: ['Software Engineering', 'System Architecture', 'Clean Code', 'Mentoría Técnica'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Sara%20Simon%20Willis%20Software'
     },
     { 
       name: 'Gabriel Botana', 
