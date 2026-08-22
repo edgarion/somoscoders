@@ -21,6 +21,7 @@ export const AboutView: React.FC = () => {
   const [volunteerRole, setVolunteerRole] = useState('mentor');
   const [volunteerMessage, setVolunteerMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleRegisterVolunteer = async (e: React.FormEvent) => {
     e.preventDefault();

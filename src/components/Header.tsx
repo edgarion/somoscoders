@@ -112,17 +112,39 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative" ref={dropdownRef}>
             {userEmail ? (
               // Usuario con sesión iniciada
-              <button
-                onClick={() => onOpenLogin('login')}
-                className="flex items-center gap-2 bg-[#F7F6F1] hover:bg-gray-200/80 border border-gray-200 px-4 py-2 rounded-full text-xs font-bold text-[#0D1117] transition cursor-pointer"
-              >
-                {userPicture ? (
-                  <img src={userPicture} alt={userName} className="w-5 h-5 rounded-full object-cover" />
-                ) : (
-                  <User className="w-4 h-4 text-[#00A98F]" />
+              <div className="flex items-center gap-2">
+                {userEmail === 'edgar.costilla@somoscoders.org' && (
+                  <button
+                    onClick={() => onNavigate('admin')}
+                    className="hidden sm:flex items-center gap-1.5 bg-[#C8FF00] hover:bg-amber-300 text-[#0D1117] border border-[#0D1117] px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer"
+                  >
+                    <span>Admin</span>
+                  </button>
                 )}
-                <span className="max-w-[100px] truncate">{userName}</span>
-              </button>
+                <button
+                  onClick={() => onOpenLogin('login')}
+                  className="flex items-center gap-2 bg-[#F7F6F1] hover:bg-gray-200/80 border border-gray-200 px-4 py-2 rounded-full text-xs font-bold text-[#0D1117] transition cursor-pointer"
+                >
+                  {userPicture ? (
+                    <img src={userPicture} alt={userName} className="w-5 h-5 rounded-full object-cover" />
+                  ) : (
+                    <User className="w-4 h-4 text-[#00A98F]" />
+                  )}
+                  <span className="max-w-[100px] truncate">{userName}</span>
+                </button>
+                <button
+                  onClick={() => {
+                    import('../services/authService').then(({ authService }) => {
+                      authService.logout();
+                      window.location.reload();
+                    });
+                  }}
+                  className="hidden sm:flex items-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-2 rounded-full text-xs font-bold transition cursor-pointer"
+                  title="Cerrar sesión"
+                >
+                  Cerrar
+                </button>
+              </div>
             ) : (
               // Botón ÚNETE con opciones Registrarse / Iniciar Sesión
               <div className="relative">
@@ -215,28 +237,58 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </nav>
 
-          {/* Botones de Registro / Login en Mobile */}
+          {/* Botones de Registro / Login / Perfil en Mobile */}
           <div className="pt-3 border-t border-gray-100 grid grid-cols-2 gap-2">
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenLogin('register');
-              }}
-              className="w-full py-2.5 px-3 bg-[#00A98F] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm"
-            >
-              <UserPlus className="w-3.5 h-3.5" />
-              <span>Registrarse</span>
-            </button>
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenLogin('login');
-              }}
-              className="w-full py-2.5 px-3 bg-gray-100 hover:bg-gray-200 text-[#0D1117] font-bold rounded-xl text-xs flex items-center justify-center gap-1.5"
-            >
-              <LogIn className="w-3.5 h-3.5" />
-              <span>Iniciar Sesión</span>
-            </button>
+            {userEmail ? (
+              <>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onOpenLogin('login'); // Abre el modal en modo perfil
+                  }}
+                  className="w-full py-2.5 px-3 bg-[#00A98F] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                >
+                  <User className="w-3.5 h-3.5" />
+                  <span>Mi Perfil</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    import('../services/authService').then(({ authService }) => {
+                      authService.logout();
+                      window.location.reload();
+                    });
+                  }}
+                  className="w-full py-2.5 px-3 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Cerrar Sesión</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onOpenLogin('register');
+                  }}
+                  className="w-full py-2.5 px-3 bg-[#00A98F] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                >
+                  <UserPlus className="w-3.5 h-3.5" />
+                  <span>Registrarse</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onOpenLogin('login');
+                  }}
+                  className="w-full py-2.5 px-3 bg-gray-100 hover:bg-gray-200 text-[#0D1117] font-bold rounded-xl text-xs flex items-center justify-center gap-1.5"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  <span>Iniciar Sesión</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

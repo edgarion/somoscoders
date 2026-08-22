@@ -13,6 +13,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { ForumThread, ForumComment, CourseCategory } from '../types';
+import { ProfanityService } from '../services/ProfanityService';
 
 interface ForumViewProps {
   initialThreads: ForumThread[];
@@ -119,7 +120,7 @@ export const ForumView: React.FC<ForumViewProps> = ({
       id: `comment-${Date.now()}`,
       authorName: user.name || userName,
       authorAvatar: user.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
-      content: newCommentContent,
+      content: ProfanityService.censorText(newCommentContent),
       createdAt: 'hace unos instantes',
       likes: 0,
       isLikedByUser: false
@@ -157,7 +158,7 @@ export const ForumView: React.FC<ForumViewProps> = ({
       category: newPostCategory as CourseCategory | 'general',
       authorName: user.name || userName,
       authorAvatar: user.picture || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100',
-      content: newPostContent,
+      content: ProfanityService.censorText(newPostContent),
       createdAt: 'hace unos instantes',
       likes: 0,
       isLikedByUser: false,

@@ -12,6 +12,7 @@ import { ColaboraView } from './components/ColaboraView';
 import { HistoriasView } from './components/HistoriasView';
 import { BlogView } from './components/BlogView';
 import { TeamView } from './components/TeamView';
+import { AdminView } from './components/AdminView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
 import { LoginModal } from './components/LoginModal';
@@ -32,7 +33,7 @@ export default function App() {
   const [highContrast, setHighContrast] = useState<boolean>(false);
 
   // Auth & Student profile states
-  const [user, setUser] = useState<{ name: string; email: string; picture: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; picture: string; role?: string } | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('register');
   const [userName, setUserName] = useState<string>('Estudiante');
@@ -44,7 +45,8 @@ export default function App() {
       setUser({
         name: savedUser.name,
         email: savedUser.email,
-        picture: savedUser.picture
+        picture: savedUser.picture || '',
+        role: savedUser.role
       });
       setUserName(savedUser.name);
     }
@@ -121,6 +123,16 @@ export default function App() {
 
   // Safe navigation view switcher
   const handleNavigate = (view: string) => {
+    // Rutas protegidas: Requieren sesión iniciada
+    const protectedViews = ['cursos', 'foro', 'dashboard'];
+    const isProtected = protectedViews.includes(view) || view.startsWith('curso-') || view.startsWith('player-');
+    
+    if (isProtected && !user) {
+      setAuthModalMode('register');
+      setIsLoginModalOpen(true);
+      return;
+    }
+
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -244,6 +256,10 @@ export default function App() {
           <TeamView onNavigate={handleNavigate} />
         )}
 
+        {currentView === 'admin' && (
+          <AdminView onNavigate={handleNavigate} userEmail={user?.email} />
+        )}
+
         {currentView.startsWith('legal') && (
           <LegalView 
             initialTab={
@@ -273,6 +289,12 @@ export default function App() {
         onLoginSuccess={(loggedInUser) => {
           setUser(loggedInUser);
           setUserName(loggedInUser.name);
+          
+          if (loggedInUser.role === 'mentor') {
+            handleNavigate('admin');
+          } else {
+            handleNavigate('cursos');
+          }
         }}
         onLogout={() => {
           setUser(null);

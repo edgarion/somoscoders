@@ -74,3 +74,15 @@ export interface ForumThread {
   replies: ForumComment[];
   tags: string[];
 }
+
+export interface RegisteredUser {
+  id: string;
+  name: string;
+  lastName?: string;
+  email: string;
+  password?: string; // Optional for OAuth users
+  picture?: string;
+  provider: 'local' | 'google';
+  registeredAt: string;
+  role?: 'alumno' | 'mentor';
+}

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { LogOut, CheckCircle2, ShieldCheck, AlertCircle, Mail, Lock, User, ArrowRight, UserPlus, LogIn, Sparkles } from 'lucide-react';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-import { authService, RegisteredUser } from '../services/authService';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useAuthController } from '../controllers/useAuthController';
 
 interface UserProfile {
   name: string;
   email: string;
   picture: string;
+  role?: 'alumno' | 'mentor';
 }
 
 interface LoginModalProps {
@@ -28,22 +29,23 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onLoginSuccess,
   onLogout,
 }) => {
+  // Controller
+  const auth = useAuthController();
+
   const [mode, setMode] = useState<AuthMode>(initialMode);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [authSuccessMsg, setAuthSuccessMsg] = useState<string | null>(null);
+  const [role, setRole] = useState<'alumno' | 'mentor'>('alumno');
 
   // Form inputs for traditional Auth
   const [fullName, setFullName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   // Sync mode when modal opens or initialMode changes
   useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
-      setAuthError(null);
-      setAuthSuccessMsg(null);
+      auth.clearMessages();
     }
   }, [isOpen, initialMode]);
 
@@ -51,71 +53,59 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   const resetForm = () => {
     setFullName('');
+    setLastName('');
     setEmail('');
     setPassword('');
-    setAuthError(null);
-    setAuthSuccessMsg(null);
+    setRole('alumno');
+    auth.clearMessages();
   };
 
-  // Envío tradicional del Formulario de Registro o Login conectando a authService
-  const handleTraditionalSubmit = (e: React.FormEvent) => {
+
+
+  const handleTraditionalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setAuthError(null);
-    setAuthSuccessMsg(null);
+    auth.clearMessages();
 
     if (!email.trim() || !password.trim()) {
-      setAuthError('Por favor completa todos los campos requeridos.');
+      auth.setError('Por favor completa todos los campos requeridos.');
       return;
     }
 
-    if (mode === 'register' && !fullName.trim()) {
-      setAuthError('Por favor introduce tu nombre completo.');
+    if (mode === 'register' && (!fullName.trim() || !lastName.trim())) {
+      auth.setError('Por favor introduce tu nombre y apellido.');
       return;
     }
 
     if (password.length < 6) {
-      setAuthError('La contraseña debe tener al menos 6 caracteres.');
+      auth.setError('La contraseña debe tener al menos 6 caracteres.');
       return;
     }
 
-    setIsLoading(true);
+    if (mode === 'register') {
+      const result = await auth.register(fullName, email, password, undefined, 'local', lastName, role);
+      if (!result.success || !result.user) return;
 
-    setTimeout(() => {
-      if (mode === 'register') {
-        const result = authService.registerUser(fullName, email, password, undefined, 'local');
-        if (!result.success || !result.user) {
-          setAuthError(result.error || 'No se pudo completar el registro.');
-          setIsLoading(false);
-          return;
-        }
+      onLoginSuccess({
+        name: result.user.name,
+        email: result.user.email,
+        picture: result.user.picture || '',
+        role: result.user.role
+      });
+      resetForm();
+      setTimeout(() => onClose(), 600);
+    } else {
+      const result = await auth.login(email, password);
+      if (!result.success || !result.user) return;
 
-        setAuthSuccessMsg('¡Cuenta creada con éxito! Bienvenido a SomosCoders.');
-        onLoginSuccess({
-          name: result.user.name,
-          email: result.user.email,
-          picture: result.user.picture
-        });
-        resetForm();
-        setTimeout(() => onClose(), 600);
-      } else {
-        const result = authService.loginUser(email, password);
-        if (!result.success || !result.user) {
-          setAuthError(result.error || 'Credenciales inválidas.');
-          setIsLoading(false);
-          return;
-        }
-
-        setAuthSuccessMsg('¡Sesión iniciada correctamente!');
-        onLoginSuccess({
-          name: result.user.name,
-          email: result.user.email,
-          picture: result.user.picture
-        });
-        resetForm();
-        setTimeout(() => onClose(), 600);
-      }
-      setIsLoading(false);
-    }, 250);
+      onLoginSuccess({
+        name: result.user.name,
+        email: result.user.email,
+        picture: result.user.picture || '',
+        role: result.user.role
+      });
+      resetForm();
+      setTimeout(() => onClose(), 600);
+    }
   };
 
   // Google OAuth Popup Trigger
@@ -136,32 +126,34 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           const userPicture = googleUser.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(googleUser.email)}`;
 
           // Almacenar en base de datos local
-          const result = authService.registerUser(userName, googleUser.email, undefined, userPicture, 'google');
+          const result = await auth.register(userName, googleUser.email, undefined, userPicture, 'google', undefined, role);
 
           onLoginSuccess({
             name: result.user?.name || userName,
             email: result.user?.email || googleUser.email,
             picture: result.user?.picture || userPicture,
+            role: result.user?.role
           });
           resetForm();
           onClose();
         }
       } catch (err) {
         console.error('Error fetching Google UserInfo:', err);
-        setAuthError('No se pudo verificar tu cuenta con Google. Inténtalo nuevamente.');
+        auth.setError('Error al obtener datos de Google.');
       } finally {
-        setIsLoading(false);
+        auth.setIsLoading(false);
       }
     },
-    onError: () => {
-      setAuthError('La conexión con Google fue cancelada o no está configurada.');
+    onError: (error) => {
+      console.error('Google Login Error:', error);
+      auth.setError('La autenticación con Google fue cancelada o falló.');
     },
   });
 
   // Google One-Tap / Credential Success Handler
   const handleGoogleCredentialSuccess = async (credentialResponse: any) => {
     try {
-      setAuthError(null);
+      auth.clearMessages();
       if (credentialResponse.credential) {
         const base64Url = credentialResponse.credential.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -177,19 +169,20 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         const userPicture = payload.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(payload.email)}`;
 
         // Almacenar en base de datos local
-        const result = authService.registerUser(userName, payload.email, undefined, userPicture, 'google');
+        const result = await auth.register(userName, payload.email, undefined, userPicture, 'google', undefined, role);
 
         onLoginSuccess({
           name: result.user?.name || userName,
           email: result.user?.email || payload.email,
           picture: result.user?.picture || userPicture,
+          role: result.user?.role
         });
         resetForm();
         onClose();
       }
     } catch (e) {
       console.error('Error decoding Google JWT:', e);
-      setAuthError('Error al validar las credenciales de Google.');
+      auth.setError('Error al validar las credenciales de Google.');
     }
   };
 
@@ -247,7 +240,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
               </div>
               <button
                 onClick={() => {
-                  authService.logout();
+                  auth.logout();
                   onLogout();
                   onClose();
                 }}
@@ -266,8 +259,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   type="button"
                   onClick={() => {
                     setMode('register');
-                    setAuthError(null);
-                    setAuthSuccessMsg(null);
+                    auth.clearMessages();
                   }}
                   className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-1.5 ${
                     mode === 'register'
@@ -282,8 +274,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   type="button"
                   onClick={() => {
                     setMode('login');
-                    setAuthError(null);
-                    setAuthSuccessMsg(null);
+                    auth.clearMessages();
                   }}
                   className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-1.5 ${
                     mode === 'login'
@@ -296,39 +287,87 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 </button>
               </div>
 
-              {authError && (
-                <div className="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-2.5 rounded-xl text-xs flex items-center gap-2">
+              {auth.error && (
+                <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-xs flex items-center gap-2 mb-4">
                   <AlertCircle className="w-4 h-4 shrink-0" />
-                  <span>{authError}</span>
+                  <p>{auth.error}</p>
                 </div>
               )}
 
-              {authSuccessMsg && (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-2.5 rounded-xl text-xs flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>{authSuccessMsg}</span>
+              {auth.successMsg && (
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl text-xs flex items-center gap-2 mb-4">
+                  <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <p>{auth.successMsg}</p>
                 </div>
               )}
 
               {/* Formulario Tradicional (Nombre, Email, Contraseña) */}
               <form onSubmit={handleTraditionalSubmit} className="space-y-3.5 text-left">
                 {mode === 'register' && (
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Nombre Completo *
-                    </label>
-                    <div className="relative">
-                      <User className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
-                      <input
-                        type="text"
-                        placeholder="Ej. Ana García"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
-                        required={mode === 'register'}
-                      />
+                  <>
+                    {/* Role Selector */}
+                    <div className="mb-4">
+                      <label className="block text-xs font-bold text-gray-700 mb-2">¿Cómo quieres participar?</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setRole('alumno')}
+                          className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all ${
+                            role === 'alumno'
+                              ? 'bg-[#00A98F] border-[#00A98F] text-white'
+                              : 'bg-white border-gray-200 text-gray-500 hover:border-[#00A98F]/50'
+                          }`}
+                        >
+                          Soy Alumno
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setRole('mentor')}
+                          className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all ${
+                            role === 'mentor'
+                              ? 'bg-[#00A98F] border-[#00A98F] text-white'
+                              : 'bg-white border-gray-200 text-gray-500 hover:border-[#00A98F]/50'
+                          }`}
+                        >
+                          Soy Mentor
+                        </button>
+                      </div>
                     </div>
-                  </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-1">
+                          Nombre *
+                        </label>
+                        <div className="relative">
+                          <User className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                          <input
+                            type="text"
+                            placeholder="Ej. Ana"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                            required={mode === 'register'}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-1">
+                          Apellido *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder="Ej. García"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            className="w-full px-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
+                            required={mode === 'register'}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </>
                 )}
 
                 <div>
@@ -367,11 +406,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
                 <button
                   type="submit"
-                  disabled={isLoading}
-                  className="w-full py-3 px-4 bg-[#00A98F] hover:bg-[#087A65] disabled:opacity-50 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 text-xs font-sans shadow-sm mt-2 cursor-pointer"
+                  disabled={auth.isLoading}
+                  className={`w-full py-3 px-4 bg-[#00A98F] hover:bg-[#087A65] text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 ${
+                    auth.isLoading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'
+                  }`}
                 >
-                  {isLoading ? (
-                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  {auth.isLoading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
                       <span>{mode === 'register' ? 'Crear Cuenta y Guardar' : 'Iniciar Sesión'}</span>
