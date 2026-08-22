@@ -31,7 +31,6 @@ interface HeaderProps {
   userName: string;
   userEmail?: string;
   userPicture?: string;
-  onOpenLogin: (mode?: 'login' | 'register') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -44,7 +43,6 @@ export const Header: React.FC<HeaderProps> = ({
   userName,
   userEmail,
   userPicture,
-  onOpenLogin,
 }) => {
   const [isJoinDropdownOpen, setIsJoinDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -122,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </button>
                 )}
                 <button
-                  onClick={() => onOpenLogin('login')}
+                  onClick={() => onNavigate('auth')}
                   className="flex items-center gap-2 bg-[#F7F6F1] hover:bg-gray-200/80 border border-gray-200 px-4 py-2 rounded-full text-xs font-bold text-[#0D1117] transition cursor-pointer"
                 >
                   {userPicture ? (
@@ -244,7 +242,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    onOpenLogin('login'); // Abre el modal en modo perfil
+                    onNavigate('auth');
                   }}
                   className="w-full py-2.5 px-3 bg-[#00A98F] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm"
                 >
@@ -267,24 +265,24 @@ export const Header: React.FC<HeaderProps> = ({
               </>
             ) : (
               <>
-                <button
+                <button 
                   onClick={() => {
+                    onNavigate('auth');
                     setIsMobileMenuOpen(false);
-                    onOpenLogin('register');
                   }}
-                  className="w-full py-2.5 px-3 bg-[#00A98F] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full mt-4 flex items-center justify-center gap-2 bg-[#00A98F] hover:bg-[#008f79] text-white px-5 py-3 rounded-xl text-sm font-bold transition shadow-md"
                 >
-                  <UserPlus className="w-3.5 h-3.5" />
-                  <span>Registrarse</span>
+                  <Sparkles className="w-4 h-4" />
+                  <span>Únete Ahora</span>
                 </button>
-                <button
+                <button 
                   onClick={() => {
+                    onNavigate('auth');
                     setIsMobileMenuOpen(false);
-                    onOpenLogin('login');
                   }}
-                  className="w-full py-2.5 px-3 bg-gray-100 hover:bg-gray-200 text-[#0D1117] font-bold rounded-xl text-xs flex items-center justify-center gap-1.5"
+                  className="w-full mt-2 flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-5 py-3 rounded-xl text-sm font-bold transition"
                 >
-                  <LogIn className="w-3.5 h-3.5" />
+                  <LogIn className="w-4 h-4" />
                   <span>Iniciar Sesión</span>
                 </button>
               </>

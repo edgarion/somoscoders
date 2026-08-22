@@ -15,7 +15,7 @@ import { TeamView } from './components/TeamView';
 import { AdminView } from './components/AdminView';
 import { CookieConsent } from './components/CookieConsent';
 import { LegalView } from './components/LegalView';
-import { LoginModal } from './components/LoginModal';
+import { AuthView } from './components/AuthView';
 import { authService } from './services/authService';
 
 import { Course, CourseCategory, EnrollmentState } from './types';
@@ -34,8 +34,6 @@ export default function App() {
 
   // Auth & Student profile states
   const [user, setUser] = useState<{ name: string; email: string; picture: string; role?: string } | null>(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('register');
   const [userName, setUserName] = useState<string>('Estudiante');
 
   // Cargar sesión guardada de la base de datos local al iniciar la app
@@ -162,10 +160,6 @@ export default function App() {
         userName={user ? user.name : userName}
         userEmail={user?.email}
         userPicture={user?.picture}
-        onOpenLogin={(mode?: 'login' | 'register') => {
-          setAuthModalMode(mode || 'register');
-          setIsLoginModalOpen(true);
-        }}
       />
 
       {/* Main Dynamic Workspace Router */}
@@ -269,6 +263,20 @@ export default function App() {
             } 
           />
         )}
+        {currentView === 'auth' && (
+          <AuthView
+            initialMode="register"
+            onLoginSuccess={(loggedInUser) => {
+              setUser(loggedInUser);
+              setUserName(loggedInUser.name);
+              if (loggedInUser.role === 'mentor') {
+                handleNavigate('admin');
+              } else {
+                handleNavigate('cursos');
+              }
+            }}
+          />
+        )}
       </main>
 
       {/* Platform Footer */}
@@ -280,26 +288,6 @@ export default function App() {
       {/* GDPR Cookie Consent Panel */}
       <CookieConsent />
 
-      {/* Auth / Register / Login Modal */}
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        initialMode={authModalMode}
-        onClose={() => setIsLoginModalOpen(false)}
-        user={user}
-        onLoginSuccess={(loggedInUser) => {
-          setUser(loggedInUser);
-          setUserName(loggedInUser.name);
-          
-          if (loggedInUser.role === 'mentor') {
-            handleNavigate('admin');
-          } else {
-            handleNavigate('cursos');
-          }
-        }}
-        onLogout={() => {
-          setUser(null);
-        }}
-      />
     </div>
   );
 }
