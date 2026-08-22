@@ -110,7 +110,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       role: 'Arquitectura de Software & Full Stack', 
       detail: 'Asesoría en arquitectura web escalable, patrones de diseño y tutorías de código limpio.',
       skills: ['Software Architecture', 'Full Stack', 'JavaScript/TypeScript', 'Code Review'],
-      linkedin: 'https://www.linkedin.com/in/gabriel-botana-/'
+      linkedin: 'https://www.linkedin.com/in/gabriel-botana-da-costa/'
     },
     { 
       name: 'Karolina Ostrowska', 
