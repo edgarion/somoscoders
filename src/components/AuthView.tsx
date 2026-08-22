@@ -100,9 +100,9 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
 
         <div className="text-center relative z-10">
           <img 
-            src="/images/auth-dog.jpg" 
+            src="/images/auth-dog.png" 
             alt="Mascota Somoscoders" 
-            className="mx-auto w-32 h-32 object-cover rounded-full mb-4 shadow-xl border-4 border-white"
+            className="mx-auto w-32 h-32 object-contain rounded-full bg-white mb-4 shadow-xl border-4 border-white"
           />
           <h2 className="text-3xl font-extrabold text-gray-900">
             {mode === 'register' ? t('auth.title.register') : t('auth.title.login')}
