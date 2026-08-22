@@ -21,6 +21,7 @@ import { authService } from './services/authService';
 import { Course, CourseCategory, EnrollmentState } from './types';
 import { coursesData } from './data/coursesData';
 import { initialForumThreads } from './data/forumData';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 export default function App() {
   // Navigation states
@@ -140,15 +141,16 @@ export default function App() {
   const activeEnrollment = enrollments.find((e) => e.courseId === activeCourse.id);
 
   return (
-    <div 
-      id="app-root-wrapper"
-      className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
-        highContrast 
-          ? 'bg-slate-950 text-white selection:bg-amber-400 selection:text-slate-950' 
-          : 'bg-slate-50/50 text-gray-800'
-      }`}
-      style={{ fontSize: `${fontSizeMultiplier}em` }}
-    >
+    <LanguageProvider>
+      <div 
+        id="app-root-wrapper"
+        className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
+          highContrast 
+            ? 'bg-slate-950 text-white selection:bg-amber-400 selection:text-slate-950' 
+            : 'bg-slate-50/50 text-gray-800'
+        }`}
+        style={{ fontSize: `${fontSizeMultiplier}em` }}
+      >
       {/* Platform Header */}
       <Header
         currentView={currentView}
@@ -287,7 +289,7 @@ export default function App() {
 
       {/* GDPR Cookie Consent Panel */}
       <CookieConsent />
-
     </div>
+    </LanguageProvider>
   );
 }

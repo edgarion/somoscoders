@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useAuthController } from '../controllers/useAuthController';
+import { useLanguage } from '../contexts/LanguageContext';
 import { Mail, Lock, User, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
 interface AuthViewProps {
@@ -10,6 +11,7 @@ interface AuthViewProps {
 
 export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', onLoginSuccess }) => {
   const auth = useAuthController();
+  const { t } = useLanguage();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [role, setRole] = useState<'alumno' | 'mentor'>('alumno');
 
@@ -101,10 +103,10 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
             <Sparkles className="w-6 h-6 text-[#C8FF00]" />
           </div>
           <h2 className="text-3xl font-extrabold text-gray-900">
-            {mode === 'register' ? 'Crea tu cuenta' : 'Bienvenido de nuevo'}
+            {mode === 'register' ? t('auth.title.register') : t('auth.title.login')}
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            {mode === 'register' ? 'Únete a la comunidad de aprendizaje' : 'Accede a tus cursos y progreso'}
+            {mode === 'register' ? t('auth.subtitle.register') : t('auth.subtitle.login')}
           </p>
         </div>
 
@@ -128,7 +130,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
               mode === 'register' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            Registrarse
+            {t('auth.tab.register')}
           </button>
           <button
             onClick={() => setMode('login')}
@@ -136,7 +138,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
               mode === 'login' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            Iniciar Sesión
+            {t('auth.tab.login')}
           </button>
         </div>
 
@@ -144,7 +146,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
           {mode === 'register' && (
             <>
               <div className="mb-2">
-                <label className="block text-sm font-bold text-gray-700 mb-2">¿Cómo quieres participar?</label>
+                <label className="block text-sm font-bold text-gray-700 mb-2">{t('auth.role.question')}</label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
@@ -155,7 +157,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
                         : 'bg-white border-gray-200 text-gray-500 hover:border-[#00A98F]/50'
                     }`}
                   >
-                    Soy Alumno
+                    {t('auth.role.student')}
                   </button>
                   <button
                     type="button"
@@ -166,19 +168,19 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
                         : 'bg-white border-gray-200 text-gray-500 hover:border-[#00A98F]/50'
                     }`}
                   >
-                    Soy Mentor
+                    {t('auth.role.mentor')}
                   </button>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Nombre</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">{t('auth.label.name')}</label>
                   <div className="relative">
                     <User className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
                     <input
                       type="text"
-                      placeholder="Ej. Ana"
+                      placeholder={t('auth.placeholder.name')}
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
@@ -187,11 +189,11 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Apellido</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">{t('auth.label.lastname')}</label>
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="Ej. García"
+                      placeholder={t('auth.placeholder.lastname')}
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       className="w-full px-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
@@ -204,12 +206,12 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
           )}
 
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Correo Electrónico</label>
+            <label className="block text-xs font-bold text-gray-700 mb-1">{t('auth.label.email')}</label>
             <div className="relative">
               <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
               <input
                 type="email"
-                placeholder="tu@email.com"
+                placeholder={t('auth.placeholder.email')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
@@ -219,12 +221,12 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Contraseña</label>
+            <label className="block text-xs font-bold text-gray-700 mb-1">{t('auth.label.password')}</label>
             <div className="relative">
               <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
               <input
                 type="password"
-                placeholder="Mínimo 6 caracteres"
+                placeholder={t('auth.placeholder.password')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full pl-9 pr-3 py-2.5 bg-[#F7F6F1] border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:border-[#00A98F] transition"
@@ -242,7 +244,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
               <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
               <>
-                <span>{mode === 'register' ? 'Crear Cuenta y Entrar' : 'Iniciar Sesión'}</span>
+                <span>{mode === 'register' ? t('auth.btn.register') : t('auth.btn.login')}</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -254,7 +256,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
             <div className="w-full border-t border-gray-200"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-2 bg-white text-gray-500">O continúa con</span>
+            <span className="px-2 bg-white text-gray-500">{t('auth.or')}</span>
           </div>
         </div>
 
@@ -264,7 +266,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ initialMode = 'register', on
           className="w-full relative z-10 flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 transition"
         >
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-          <span>{mode === 'register' ? 'Registrarse con Google' : 'Entrar con Google'}</span>
+          <span>{mode === 'register' ? t('auth.google.register') : t('auth.google.login')}</span>
         </button>
       </div>
     </div>

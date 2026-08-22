@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { Logo } from './Logo';
 import { 
   Sparkles, 
@@ -47,6 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [isJoinDropdownOpen, setIsJoinDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { language, setLanguage, t } = useLanguage();
 
   // Cerrar dropdown al hacer click fuera
   useEffect(() => {
@@ -60,14 +62,14 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Inicio' },
-    { id: 'sobre-nosotros', label: 'Quiénes somos' },
-    { id: 'cursos', label: 'Programas' },
-    { id: 'foro', label: 'Comunidad' },
-    { id: 'colabora', label: 'Colabora' },
-    { id: 'historias', label: 'Historias' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'equipo', label: 'Equipo' }
+    { id: 'home', label: t('nav.home') },
+    { id: 'sobre-nosotros', label: t('nav.about') },
+    { id: 'cursos', label: t('nav.courses') },
+    { id: 'foro', label: t('nav.forum') },
+    { id: 'colabora', label: t('nav.colaborate') },
+    { id: 'historias', label: t('nav.stories') },
+    { id: 'blog', label: t('nav.blog') },
+    { id: 'equipo', label: t('nav.team') }
   ];
 
   return (
@@ -105,6 +107,15 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
+
+          {/* Language Toggle */}
+          <button
+            onClick={() => setLanguage(language === 'es' ? 'ca' : 'es')}
+            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-100 transition"
+            title="Cambiar idioma"
+          >
+            {language.toUpperCase()}
+          </button>
           
           {/* Dropdown interactivo: ÚNETE (Registrarse / Iniciar Sesión) */}
           <div className="relative" ref={dropdownRef}>
@@ -140,18 +151,19 @@ export const Header: React.FC<HeaderProps> = ({
                   className="hidden sm:flex items-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-2 rounded-full text-xs font-bold transition cursor-pointer"
                   title="Cerrar sesión"
                 >
-                  Cerrar
+                  {t('header.logout')}
                 </button>
               </div>
             ) : (
               // Botón ÚNETE con opciones Registrarse / Iniciar Sesión
               <div className="relative">
                 <button 
-                  onClick={() => setIsJoinDropdownOpen((prev) => !prev)}
-                  className="bg-[#00A98F] hover:bg-[#087A65] text-white font-bold px-5 py-2.5 rounded-full text-xs font-sans tracking-wider uppercase transition shadow-sm hover:shadow-md cursor-pointer flex items-center gap-1.5 group"
+                  onClick={() => setIsJoinDropdownOpen(!isJoinDropdownOpen)}
+                  className="flex items-center gap-1.5 bg-[#00A98F] hover:bg-[#008f79] text-white px-5 py-2.5 rounded-full text-xs font-bold transition cursor-pointer shadow-md hover:shadow-lg"
                 >
-                  <span>ÚNETE</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isJoinDropdownOpen ? 'rotate-180' : ''}`} />
+                  <Sparkles className="w-4 h-4" />
+                  <span>{t('header.join')}</span>
+                  <ChevronDown className={`w-3 h-3 transition-transform ${isJoinDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Menú Desplegable de Autenticación */}
@@ -174,7 +186,7 @@ export const Header: React.FC<HeaderProps> = ({
                           <UserPlus className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-bold leading-tight">Registrarse</p>
+                          <p className="font-bold leading-tight">{t('header.register')}</p>
                           <p className="text-[10px] text-gray-500 font-normal">Crear cuenta gratis</p>
                         </div>
                       </button>
@@ -190,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
                           <LogIn className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-bold leading-tight">Iniciar Sesión</p>
+                          <p className="font-bold leading-tight">{t('header.login')}</p>
                           <p className="text-[10px] text-gray-500 font-normal">Acceder a mis cursos</p>
                         </div>
                       </button>
@@ -201,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Menú Hamburguesa (VISIBLE ÚNICAMENTE EN MÓVIL lg:hidden) */}
+          {/* Menú Hamburguesa */}
           <button
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             className="lg:hidden p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 transition cursor-pointer"
@@ -213,7 +225,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Menú Móvil Desplegable (SOLO EN MOBILE lg:hidden) */}
+      {/* Menú Móvil Desplegable */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-gray-200 px-6 py-5 space-y-4 shadow-xl animate-fadeIn">
           <nav className="flex flex-col space-y-2">
@@ -236,7 +248,7 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Botones de Registro / Login / Perfil en Mobile */}
-          <div className="pt-3 border-t border-gray-100 grid grid-cols-2 gap-2">
+          <div className="pt-3 border-t border-gray-100 grid grid-cols-1 gap-2">
             {userEmail ? (
               <>
                 <button
@@ -260,7 +272,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full py-2.5 px-3 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5"
                 >
                   <LogOut className="w-3.5 h-3.5" />
-                  <span>Cerrar Sesión</span>
+                  <span>{t('header.logout')}</span>
                 </button>
               </>
             ) : (
@@ -273,7 +285,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full mt-4 flex items-center justify-center gap-2 bg-[#00A98F] hover:bg-[#008f79] text-white px-5 py-3 rounded-xl text-sm font-bold transition shadow-md"
                 >
                   <Sparkles className="w-4 h-4" />
-                  <span>Únete Ahora</span>
+                  <span>{t('header.join')}</span>
                 </button>
                 <button 
                   onClick={() => {
@@ -283,7 +295,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full mt-2 flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-5 py-3 rounded-xl text-sm font-bold transition"
                 >
                   <LogIn className="w-4 h-4" />
-                  <span>Iniciar Sesión</span>
+                  <span>{t('header.login')}</span>
                 </button>
               </>
             )}

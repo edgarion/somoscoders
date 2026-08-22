@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface LogoProps {
   className?: string;
@@ -7,6 +8,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', isLight = false }) => {
+  const { language } = useLanguage();
   const getSizes = () => {
     switch (size) {
       case 'sm':
@@ -87,10 +89,10 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', isLight
       {/* Wordmark Tipográfico con Branding de Identidad: SOMOS (kerning expandido) + CODERS (Grotesk ultra-bold) */}
       <div className="flex flex-col text-left justify-center leading-none">
         <span className={`font-mono uppercase ${dims.somosSize} ${somosColor} transition-colors`}>
-          somos
+          {language === 'ca' ? 'som' : 'somos'}
         </span>
         <span className={`font-display lowercase ${dims.codersSize} text-inherit -mt-0.5`}>
-          coders<span className="text-[#00A98F]">.</span>
+          coders<span className="text-[#00A98F]">{(language === 'ca') ? '.cat' : '.'}</span>
         </span>
       </div>
     </div>
