@@ -197,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <button
                         onClick={() => {
                           setIsJoinDropdownOpen(false);
-                          onOpenLogin('register');
+                          onNavigate('auth');
                         }}
                         className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left text-[#0D1117] hover:bg-[#F7F6F1] hover:text-[#00A98F] transition cursor-pointer"
                       >
@@ -213,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <button
                         onClick={() => {
                           setIsJoinDropdownOpen(false);
-                          onOpenLogin('login');
+                          onNavigate('auth');
                         }}
                         className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left text-[#0D1117] hover:bg-[#F7F6F1] hover:text-[#087A65] transition cursor-pointer"
                       >
