@@ -291,41 +291,6 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       )}
 
-      {/* Barra flotante inferior para acceso rápido en móvil */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-gray-200 px-2 py-2 shadow-xl flex items-center justify-around">
-        <button 
-          onClick={() => onNavigate('home')} 
-          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl cursor-pointer ${
-            currentView === 'home' ? 'text-[#00A98F] font-bold bg-[#F7F6F1]' : 'text-gray-500'
-          }`}
-        >
-          <span className="text-xs">Inicio</span>
-        </button>
-        <button 
-          onClick={() => onNavigate('cursos')} 
-          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl cursor-pointer ${
-            currentView === 'cursos' ? 'text-[#00A98F] font-bold bg-[#F7F6F1]' : 'text-gray-500'
-          }`}
-        >
-          <span className="text-xs">Programas</span>
-        </button>
-        <button 
-          onClick={() => onNavigate('foro')} 
-          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl cursor-pointer ${
-            currentView === 'foro' ? 'text-[#00A98F] font-bold bg-[#F7F6F1]' : 'text-gray-500'
-          }`}
-        >
-          <span className="text-xs">Comunidad</span>
-        </button>
-        <button 
-          onClick={() => onNavigate('dashboard')} 
-          className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl cursor-pointer ${
-            currentView === 'dashboard' ? 'text-[#00A98F] font-bold bg-[#F7F6F1]' : 'text-gray-500'
-          }`}
-        >
-          <span className="text-xs">Progreso</span>
-        </button>
-      </div>
     </header>
   );
 };
