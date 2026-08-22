@@ -65,6 +65,14 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
   const contributorsList = [
     // --- MENTORES & LIDERAZGO ---
     { 
+      name: 'Matilde Fondon Infante', 
+      type: 'referentes',
+      role: 'Alianzas & Desarrollo de Talento', 
+      detail: 'Apoyo estratégico en la creación de puentes entre el talento tecnológico emergente y el sector profesional.',
+      skills: ['Talent Development', 'Tech Community', 'Mentorship', 'Social Impact'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Matilde%20Fondon%20Infante'
+    },
+    { 
       name: 'José Torres', 
       type: 'mentor',
       role: 'Agile Management & Resolución de Conflictos', 

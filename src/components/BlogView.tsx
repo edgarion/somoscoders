@@ -348,7 +348,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 row-span-2 relative group overflow-hidden rounded-2xl aspect-[4/3] lg:aspect-auto">
             <img 
-              src="/images/events/event1.jpg" 
+              src="/images/events/media_1787421755965.png" 
               alt="Evento SomosCoders Mesa Redonda" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
@@ -356,7 +356,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
           </div>
           <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
             <img 
-              src="/images/events/event2.jpg" 
+              src="/images/events/media_1787421607628.png" 
               alt="Charla Tranquilidad" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
@@ -364,7 +364,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
           </div>
           <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
             <img 
-              src="/images/events/event3.jpg" 
+              src="/images/events/media_1787421550033.jpg" 
               alt="Tech needs women in Society" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
@@ -372,7 +372,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
           </div>
           <div className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
             <img 
-              src="/images/events/event4.jpg" 
+              src="/images/events/media_1787421499267.jpg" 
               alt="Reunión Fundación Empujar" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
@@ -380,7 +380,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
           </div>
           <div className="lg:col-span-2 relative group overflow-hidden rounded-2xl aspect-[4/3] lg:aspect-[8/3]">
             <img 
-              src="/images/events/event5.jpg" 
+              src="/images/events/media_1787421473619.jpg" 
               alt="Panel Sin Juniors No Hay Seniors" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
