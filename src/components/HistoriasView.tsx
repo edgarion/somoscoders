@@ -122,12 +122,12 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
             <img 
               src="/images/char_boy_coder_braces.png" 
               alt="Graduado de SomosCoders" 
-              className="w-48 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
+              className="w-40 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
             />
             <img 
               src="/images/stickers/sticker_speech_terminal.png" 
               alt="Terminal" 
-              className="absolute -top-3 -right-3 w-9 h-auto drop-shadow-md" 
+              className="absolute -top-3 -right-3 w-8 h-auto drop-shadow-md" 
             />
           </div>
         </div>
@@ -279,7 +279,7 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
           <img 
             src="/images/char_boy_celebrating_win.png" 
             alt="Celebra tu éxito con SomosCoders" 
-            className="w-36 h-auto object-contain drop-shadow-xl" 
+            className="w-30 h-auto object-contain drop-shadow-xl" 
           />
         </div>
       </section>

@@ -161,7 +161,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
           <img 
             src="/images/char_boy_celebrating_win.png" 
             alt="Blog SomosCoders" 
-            className="w-44 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
+            className="w-36 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
           />
         </div>
       </section>

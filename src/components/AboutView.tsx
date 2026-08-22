@@ -91,18 +91,18 @@ export const AboutView: React.FC = () => {
         </div>
 
         <div className="lg:col-span-6 flex items-center justify-center gap-4">
-          <div className="bg-white p-4 rounded-3xl shadow-xl border-4 border-white flex items-center justify-center">
+          <div className="bg-white p-3 rounded-3xl shadow-xl border-4 border-white flex items-center justify-center">
             <img 
               src="/images/char_dog_crown_happy.png" 
               alt="Mascota Oficial de SomosCoders" 
-              className="w-44 h-auto object-contain hover:scale-105 transition"
+              className="w-36 h-auto object-contain hover:scale-105 transition"
             />
           </div>
-          <div className="bg-white p-4 rounded-3xl shadow-xl border-4 border-white flex items-center justify-center">
+          <div className="bg-white p-3 rounded-3xl shadow-xl border-4 border-white flex items-center justify-center">
             <img 
               src="/images/char_boy_backpack_peace.png" 
               alt="Estudiante con Mochila SomosCoders" 
-              className="w-36 h-auto object-contain hover:scale-105 transition"
+              className="w-30 h-auto object-contain hover:scale-105 transition"
             />
           </div>
         </div>

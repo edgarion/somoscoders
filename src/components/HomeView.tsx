@@ -51,7 +51,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <img 
                 src="/images/stickers/sticker_cross_grid.png" 
                 alt="Grid decorativo" 
-                className="absolute -top-6 -left-6 w-16 h-auto opacity-30 pointer-events-none hidden sm:block" 
+                className="absolute -top-6 -left-6 w-14 h-auto opacity-30 pointer-events-none hidden sm:block" 
               />
 
               {/* Badge: TECNOLOGÍA CON IMPACTO SOCIAL */}
@@ -71,7 +71,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <img 
                       src="/images/stickers/sticker_lime_brush.png" 
                       alt="Subrayado lima" 
-                      className="absolute -bottom-2 -left-2 w-full h-4 object-contain opacity-70 pointer-events-none -z-10" 
+                      className="absolute -bottom-2 -left-2 w-full h-3.5 object-contain opacity-70 pointer-events-none -z-10" 
                     />
                   </span>
                 </h1>
@@ -104,11 +104,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
               {/* Avatares oficiales SomosCoders y prueba social */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
                 <div className="flex -space-x-2">
-                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_headphones.png" alt="Comunidad SomosCoders" />
-                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_beanie.png" alt="Comunidad SomosCoders" />
-                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_ponytail.png" alt="Comunidad SomosCoders" />
-                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_curly.png" alt="Comunidad SomosCoders" />
-                  <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_dog_mascot.png" alt="Mascota SomosCoders" />
+                  <img className="w-8.5 h-8.5 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_headphones.png" alt="Comunidad SomosCoders" />
+                  <img className="w-8.5 h-8.5 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_beanie.png" alt="Comunidad SomosCoders" />
+                  <img className="w-8.5 h-8.5 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_girl_ponytail.png" alt="Comunidad SomosCoders" />
+                  <img className="w-8.5 h-8.5 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_boy_curly.png" alt="Comunidad SomosCoders" />
+                  <img className="w-8.5 h-8.5 rounded-full border-2 border-white object-cover shadow-xs" src="/images/avatars/avatar_dog_mascot.png" alt="Mascota SomosCoders" />
                 </div>
                 <span className="text-xs font-semibold text-gray-700">
                   +150 alumnos graduados
@@ -116,9 +116,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
 
-            {/* Derecha: Hero Ilustración Principal con Globo Animado "Programar y aprender sin barreras" */}
+            {/* Derecha: Hero Ilustración Principal con Globo Animado (Reducida un 15% adicional) */}
             <div className="lg:col-span-6 relative flex justify-center items-center">
-              <div className="relative w-full max-w-lg lg:max-w-none flex justify-center">
+              <div className="relative w-full max-w-md lg:max-w-none flex justify-center">
                 
                 {/* Globo de texto animado sobre la ilustración */}
                 <div className="absolute -top-6 left-2 sm:left-6 z-20 bg-white border-2 border-[#0D1117] rounded-3xl px-4 py-2.5 shadow-[4px_4px_0px_#0D1117] animate-float hover:scale-105 transition-transform duration-300">
@@ -135,7 +135,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/hero_main_characters.png"
                   alt="SomosCoders - Programar y aprender sin barreras"
-                  className="w-[90%] max-w-[460px] h-auto object-contain max-h-[450px] drop-shadow-2xl hover:scale-[1.01] transition duration-300 mx-auto"
+                  className="w-[78%] max-w-[390px] h-auto object-contain max-h-[385px] drop-shadow-2xl hover:scale-[1.01] transition duration-300 mx-auto"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <img 
           src="/images/stickers/sticker_cross_grid.png" 
           alt="Grid fondo" 
-          className="absolute top-4 right-6 w-20 h-auto opacity-20 pointer-events-none" 
+          className="absolute top-4 right-6 w-16 h-auto opacity-20 pointer-events-none" 
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -162,13 +162,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_sitting_laptop.png" 
                   alt="Estudiante SomosCoders" 
-                  className="w-20 h-20 object-contain rounded-2xl bg-white p-1 border border-gray-200 shadow-xs shrink-0" 
+                  className="w-16 h-16 object-contain rounded-2xl bg-white p-1 border border-gray-200 shadow-xs shrink-0" 
                 />
                 {/* Overlay: Huella de mascota con terminal sobre el avatar */}
                 <img 
                   src="/images/stickers/sticker_paw_logo.png" 
                   alt="Huella coder" 
-                  className="absolute -bottom-2 -right-2 w-7 h-7 object-contain drop-shadow-md" 
+                  className="absolute -bottom-2 -right-2 w-6 h-6 object-contain drop-shadow-md" 
                 />
               </div>
               <div>
@@ -208,12 +208,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           {/* Bloque Destacado Verde Lima con Overlays */}
-          <div className="lg:col-span-4 bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] text-[#0D1117] relative flex flex-col justify-between min-h-[220px] shadow-[4px_4px_0px_#0D1117] overflow-hidden">
+          <div className="lg:col-span-4 bg-[#C8FF00] p-6 rounded-3xl border-2 border-[#0D1117] text-[#0D1117] relative flex flex-col justify-between min-h-[200px] shadow-[4px_4px_0px_#0D1117] overflow-hidden">
             {/* Overlay: Bocadillo de terminal en esquina superior derecha de la caja */}
             <img 
               src="/images/stickers/sticker_speech_terminal.png" 
               alt="Terminal overlay" 
-              className="absolute -top-2 -right-2 w-12 h-auto opacity-20 pointer-events-none" 
+              className="absolute -top-2 -right-2 w-10 h-auto opacity-20 pointer-events-none" 
             />
 
             <div className="flex items-start justify-between gap-3 relative z-10">
@@ -226,15 +226,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <img 
                 src="/images/char_girl_rocket.png" 
                 alt="Impulsa tu futuro SomosCoders" 
-                className="w-20 h-20 object-contain shrink-0 drop-shadow-md" 
+                className="w-16 h-16 object-contain shrink-0 drop-shadow-md" 
               />
             </div>
             <div className="flex justify-end pt-4 relative z-10">
               <button 
                 onClick={() => onNavigate('sobre-nosotros')}
-                className="w-10 h-10 rounded-full bg-[#0D1117] text-white flex items-center justify-center hover:scale-105 transition cursor-pointer"
+                className="w-9 h-9 rounded-full bg-[#0D1117] text-white flex items-center justify-center hover:scale-105 transition cursor-pointer"
               >
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -242,7 +242,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 3. PROGRAMAS (Cards con Overlays estilizados) */}
+      {/* 3. PROGRAMAS (Cards con Overlays estilizados y tamaño balanceado) */}
       <section id="programas-section" className="space-y-8 pt-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
           <div>
@@ -262,16 +262,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
         {/* Grid de 4 tarjetas con stickers overlay */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Desarrollo Web con Overlay de Tablet Terminal */}
+          {/* Card 1: Desarrollo Web */}
           <div 
             onClick={() => handleCategorySelect('vibe-coding')}
             className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
           >
-            {/* Overlay: Tablet Terminal en esquina */}
             <img 
               src="/images/stickers/sticker_tablet_terminal.png" 
               alt="Tablet terminal overlay" 
-              className="absolute -top-3 -right-3 w-10 h-auto opacity-30 group-hover:opacity-80 transition duration-300 pointer-events-none" 
+              className="absolute -top-3 -right-3 w-8 h-auto opacity-30 group-hover:opacity-80 transition duration-300 pointer-events-none" 
             />
 
             <div className="space-y-3">
@@ -284,7 +283,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_girl_laptop.png"
                   alt="Desarrollo Web"
-                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -292,13 +291,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
                 Aprender a programar
               </span>
-              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
-                <ArrowRight className="w-4 h-4" />
+              <div className="w-7 h-7 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-3.5 h-3.5" />
               </div>
             </div>
           </div>
 
-          {/* Card 2: Lógica & Arquitectura con Overlay de Cuadrícula */}
+          {/* Card 2: Lógica & Arquitectura */}
           <div 
             onClick={() => handleCategorySelect('vibe-coding')}
             className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
@@ -306,7 +305,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <img 
               src="/images/stickers/sticker_cross_grid.png" 
               alt="Grid overlay" 
-              className="absolute -top-2 -right-2 w-12 h-auto opacity-25 group-hover:opacity-60 transition duration-300 pointer-events-none" 
+              className="absolute -top-2 -right-2 w-10 h-auto opacity-25 group-hover:opacity-60 transition duration-300 pointer-events-none" 
             />
 
             <div className="space-y-3">
@@ -319,7 +318,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_whiteboard.png"
                   alt="Lógica y Algoritmos"
-                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -327,13 +326,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
                 Lógica & Arquitectura
               </span>
-              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
-                <ArrowRight className="w-4 h-4" />
+              <div className="w-7 h-7 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-3.5 h-3.5" />
               </div>
             </div>
           </div>
 
-          {/* Card 3: QA & Testing con Huella de Mascota Overlay */}
+          {/* Card 3: QA & Testing */}
           <div 
             onClick={() => handleCategorySelect('qa')}
             className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
@@ -341,7 +340,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <img 
               src="/images/stickers/sticker_paw_logo.png" 
               alt="Huella overlay" 
-              className="absolute -top-2 -right-2 w-8 h-8 opacity-30 group-hover:opacity-90 transition duration-300 pointer-events-none" 
+              className="absolute -top-2 -right-2 w-7 h-7 opacity-30 group-hover:opacity-90 transition duration-300 pointer-events-none" 
             />
 
             <div className="space-y-3">
@@ -354,7 +353,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_sitting_laptop.png"
                   alt="QA y Prácticas"
-                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -362,13 +361,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
                 Calidad & Testing
               </span>
-              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
-                <ArrowRight className="w-4 h-4" />
+              <div className="w-7 h-7 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-3.5 h-3.5" />
               </div>
             </div>
           </div>
 
-          {/* Card 4: Despegue Profesional con Bocadillo Terminal Overlay */}
+          {/* Card 4: Despegue Profesional */}
           <div 
             onClick={() => handleCategorySelect('ux')}
             className="bg-[#F7F6F1] hover:bg-white rounded-3xl p-5 border border-gray-200/80 hover:border-[#00A98F] transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer group flex flex-col justify-between relative overflow-hidden"
@@ -376,7 +375,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <img 
               src="/images/stickers/sticker_speech_terminal.png" 
               alt="Bocadillo overlay" 
-              className="absolute -top-2 -right-2 w-10 h-auto opacity-25 group-hover:opacity-75 transition duration-300 pointer-events-none" 
+              className="absolute -top-2 -right-2 w-8 h-auto opacity-25 group-hover:opacity-75 transition duration-300 pointer-events-none" 
             />
 
             <div className="space-y-3">
@@ -389,7 +388,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <img 
                   src="/images/char_girl_rocket.png"
                   alt="Proyectos y Despegue Laboral"
-                  className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+                  className="w-[85%] h-[85%] object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
             </div>
@@ -397,8 +396,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="text-sm font-bold font-display text-[#0D1117] group-hover:text-[#00A98F] transition">
                 Despegue Profesional
               </span>
-              <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
-                <ArrowRight className="w-4 h-4" />
+              <div className="w-7 h-7 rounded-full bg-white group-hover:bg-[#00A98F] text-gray-700 group-hover:text-white flex items-center justify-center transition border border-gray-200">
+                <ArrowRight className="w-3.5 h-3.5" />
               </div>
             </div>
           </div>
@@ -411,7 +410,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <img 
           src="/images/stickers/sticker_lime_brush.png" 
           alt="Brush overlay" 
-          className="absolute -top-8 -left-8 w-40 h-auto opacity-25 pointer-events-none" 
+          className="absolute -top-8 -left-8 w-32 h-auto opacity-25 pointer-events-none" 
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -451,7 +450,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           <div className="lg:col-span-6 flex justify-center relative">
-            <div className="bg-white p-4 rounded-3xl border-4 border-white shadow-xl max-w-md relative">
+            <div className="bg-white p-3.5 rounded-3xl border-4 border-white shadow-xl max-w-sm relative">
               <img 
                 src="/images/char_team_highfive.png" 
                 alt="Comunidad SomosCoders"
@@ -461,7 +460,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <img 
                 src="/images/stickers/sticker_paw_logo.png" 
                 alt="Huella coder" 
-                className="absolute -top-3 -right-3 w-9 h-9 object-contain drop-shadow-lg" 
+                className="absolute -top-3 -right-3 w-8 h-8 object-contain drop-shadow-lg" 
               />
             </div>
           </div>
@@ -474,7 +473,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <img 
           src="/images/stickers/sticker_cross_grid.png" 
           alt="Grid decorativo" 
-          className="absolute -bottom-6 -left-6 w-28 h-auto opacity-10 pointer-events-none" 
+          className="absolute -bottom-6 -left-6 w-24 h-auto opacity-10 pointer-events-none" 
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -502,13 +501,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <img 
               src="/images/char_whiteboard.png" 
               alt="Colaboración y Formación de Talento" 
-              className="w-48 h-auto object-contain drop-shadow-2xl" 
+              className="w-40 h-auto object-contain drop-shadow-2xl" 
             />
             {/* Overlay: Bocadillo terminal en esquina del dibujo */}
             <img 
               src="/images/stickers/sticker_speech_terminal.png" 
               alt="Terminal sticker" 
-              className="absolute top-0 right-4 w-10 h-auto drop-shadow-md" 
+              className="absolute top-0 right-4 w-8 h-auto drop-shadow-md" 
             />
           </div>
         </div>

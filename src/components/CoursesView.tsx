@@ -76,7 +76,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({
           <img 
             src="/images/char_boy_magnifier_qa.png" 
             alt="Explora los cursos de SomosCoders" 
-            className="w-36 h-auto object-contain drop-shadow-md hover:scale-105 transition" 
+            className="w-30 h-auto object-contain drop-shadow-md hover:scale-105 transition" 
           />
         </div>
       </section>

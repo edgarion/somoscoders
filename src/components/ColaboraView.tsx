@@ -138,13 +138,13 @@ export const ColaboraView: React.FC<ColaboraViewProps> = ({ onNavigate }) => {
             <img 
               src="/images/char_girl_pointing_idea.png" 
               alt="Colabora con SomosCoders" 
-              className="w-48 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
+              className="w-40 h-auto object-contain drop-shadow-xl hover:scale-105 transition duration-300" 
             />
             {/* Overlay Huella Mascota */}
             <img 
               src="/images/stickers/sticker_paw_logo.png" 
               alt="Huella" 
-              className="absolute -bottom-2 -left-2 w-7 h-7 drop-shadow-md" 
+              className="absolute -bottom-2 -left-2 w-6 h-6 drop-shadow-md" 
             />
           </div>
         </div>
