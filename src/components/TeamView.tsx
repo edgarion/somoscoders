@@ -89,6 +89,14 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Sara%20Simon%20Willis%20Software'
     },
     { 
+      name: 'Jennifer García', 
+      type: 'mentor',
+      role: 'Mentora de Desarrollo Web & Inclusión Digital', 
+      detail: 'Acompañamiento a estudiantes en tecnologías frontend, diseño accesible y tutorías de código personalizadas.',
+      skills: ['Web Development', 'Frontend', 'Accesibilidad', 'Mentoría Inclusiva'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Jennifer%20Garcia%20Software%20Developer'
+    },
+    { 
       name: 'Gabriel Botana', 
       type: 'mentor',
       role: 'Arquitectura de Software & Full Stack', 
