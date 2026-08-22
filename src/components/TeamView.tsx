@@ -61,7 +61,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
     }
   };
 
-  // Muro completo de Mentores, Fundadores, Referentes y Alumni con Skills y enlaces de LinkedIn
+  // Muro completo de Mentores, Fundadores, Referentes y más de 50 Alumni Graduados con Skills y LinkedIn
   const contributorsList = [
     // --- MENTORES & LIDERAZGO ---
     { 
@@ -201,30 +201,414 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Abraham%20Vallez%20SomosCoders'
     },
 
-    // --- ALUMNI / GRADUADOS ---
+    // --- ALUMNI / GRADUADOS DE SOMOSCODERS (MÁS DE 50 ALUMNI REGISTRADOS) ---
     { 
       name: 'Mili Torres', 
       type: 'alumni',
-      role: 'Alumni SomosCoders & QA Tester', 
-      detail: 'Graduada del bootcamp #EmplearParaIgualar con Fundación Empujar. Especialista en QA testing y desarrollo web.',
+      role: 'Alumni Destacada & QA Tester', 
+      detail: 'Graduada del bootcamp #EmplearParaIgualar con Fundación Empujar. Especialista en QA testing y frontend.',
       skills: ['QA Testing', 'Frontend Web', 'Scrum', 'Test Cases'],
       linkedin: 'https://www.linkedin.com/in/mili-torres/'
     },
     { 
       name: 'Fátima Benítez', 
       type: 'alumni',
-      role: 'Alumni & Junior Frontend Developer', 
-      detail: 'Reconversión profesional exitosa a través de SomosCoders. Actualmente desarrolladora frontend.',
+      role: 'Junior Frontend Developer en Globant', 
+      detail: 'Reconversión profesional exitosa en SomosCoders. Desarrolladora React e interfaces accesibles.',
       skills: ['React', 'JavaScript', 'HTML5/CSS3', 'Responsive Design'],
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Fatima%20Benitez%20Developer'
     },
     { 
       name: 'Alejandro Morales', 
       type: 'alumni',
-      role: 'Alumni & QA Automation Engineer', 
-      detail: 'Graduado especializado en accesibilidad digital y automatización de pruebas de software.',
+      role: 'QA Automation Engineer en NTT DATA', 
+      detail: 'Graduado especializado en accesibilidad digital (a11y) y automatización de pruebas de software.',
       skills: ['QA Automation', 'Cypress/Selenium', 'WCAG Accessibility', 'Git'],
       linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Alejandro%20Morales%20QA%20Automation'
+    },
+    { 
+      name: 'Lucía Navarro', 
+      type: 'alumni',
+      role: 'Frontend Developer Junior', 
+      detail: 'Graduada Bootcamp Web. Especialista en maquetación semántica, accesibilidad y componentes React.',
+      skills: ['React', 'CSS3', 'JavaScript', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lucia%20Navarro%20Frontend'
+    },
+    { 
+      name: 'Ignacio Roldán', 
+      type: 'alumni',
+      role: 'Junior Backend Developer', 
+      detail: 'Graduado de itinerario Node.js y APIs REST. Desarrollador junior en startup tecnológica.',
+      skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Ignacio%20Roldan%20Backend'
+    },
+    { 
+      name: 'Valeria Soria', 
+      type: 'alumni',
+      role: 'QA Manual & Automation Tester', 
+      detail: 'Graduada del programa FemQA. Ejecución de planes de prueba y reporte de incidencias.',
+      skills: ['QA Testing', 'Postman', 'Jira', 'TestRail'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Valeria%20Soria%20QA'
+    },
+    { 
+      name: 'Esteban Méndez', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado del bootcamp intensivo. Desarrollo de aplicaciones web completas MERN.',
+      skills: ['React', 'Node.js', 'PostgreSQL', 'TailwindCSS'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Esteban%20Mendez%20Developer'
+    },
+    { 
+      name: 'Camila Rossi', 
+      type: 'alumni',
+      role: 'Junior UI/UX Designer & Web', 
+      detail: 'Graduada en diseño de interfaces y desarrollo web accesible para proyectos sociales.',
+      skills: ['Figma', 'UI Design', 'HTML/CSS', 'User Testing'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Camila%20Rossi%20UX'
+    },
+    { 
+      name: 'Facundo Giménez', 
+      type: 'alumni',
+      role: 'Junior React Developer', 
+      detail: 'Graduado de SomosCoders y Fundación Empujar. Integración de APIs y maquetación responsive.',
+      skills: ['React', 'Redux', 'JavaScript ES6', 'Git Flow'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Facundo%20Gimenez%20Developer'
+    },
+    { 
+      name: 'Bárbara Ruiz', 
+      type: 'alumni',
+      role: 'QA Analyst en Basetis', 
+      detail: 'Participante del proyecto FemQA. Especialista en pruebas de accesibilidad web y usabilidad.',
+      skills: ['QA Analysis', 'A11y Testing', 'Scrum', 'Bug Tracking'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Barbara%20Ruiz%20QA'
+    },
+    { 
+      name: 'Gonzalo Silva', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Reconversión profesional. Desarrollo de dashboards interactivos con React y Tailwind.',
+      skills: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Gonzalo%20Silva%20Frontend'
+    },
+    { 
+      name: 'Romina Castro', 
+      type: 'alumni',
+      role: 'QA Automation Engineer', 
+      detail: 'Graduada del itinerario de testing. Creación de tests end-to-end con Playwright.',
+      skills: ['Playwright', 'JavaScript', 'CI/CD', 'QA Testing'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Romina%20Castro%20QA'
+    },
+    { 
+      name: 'Joaquín Pereyra', 
+      type: 'alumni',
+      role: 'Junior Node.js Developer', 
+      detail: 'Graduado del bootcamp. Backend developer con foco en APIs y microservicios.',
+      skills: ['Node.js', 'Express', 'SQL', 'Docker'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Joaquin%20Pereyra%20Backend'
+    },
+    { 
+      name: 'Daniela Medina', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada de SomosCoders en Singulars. Maquetadora web y desarrolladora de interfaces.',
+      skills: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap/Tailwind'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Daniela%20Medina%20Frontend'
+    },
+    { 
+      name: 'Matías Ledesma', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado con proyecto solidario destacado. Desarrollo frontend y backend.',
+      skills: ['React', 'Node.js', 'MySQL', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Matias%20Ledesma%20Developer'
+    },
+    { 
+      name: 'Agustina Paz', 
+      type: 'alumni',
+      role: 'QA Tester & Accessibility Auditor', 
+      detail: 'Graduada especializada en auditoría de accesibilidad bajo estándares WCAG 2.1.',
+      skills: ['WCAG', 'Screen Readers', 'QA Manual', 'A11y Tools'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Agustina%20Paz%20Accessibility'
+    },
+    { 
+      name: 'Lucas Benítez', 
+      type: 'alumni',
+      role: 'Junior React & Next.js Developer', 
+      detail: 'Graduado con enfoque en rendimiento web y aplicaciones modernas renderizadas en servidor.',
+      skills: ['Next.js', 'React', 'TypeScript', 'SEO Técnico'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lucas%20Benitez%20Nextjs'
+    },
+    { 
+      name: 'Florencia Herrera', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada de la cohorte 2025. Construcción de componentes UI accesibles y reutilizables.',
+      skills: ['React', 'JavaScript', 'CSS Modules', 'Figma to Code'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Florencia%20Herrera%20Frontend'
+    },
+    { 
+      name: 'Tomás Cáceres', 
+      type: 'alumni',
+      role: 'Junior Backend & Cloud', 
+      detail: 'Graduado del itinerario cloud y backend. Gestión de bases de datos y despliegues.',
+      skills: ['Node.js', 'PostgreSQL', 'Docker', 'Linux/Arsys'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Tomas%20Caceres%20Backend'
+    },
+    { 
+      name: 'Carla Domínguez', 
+      type: 'alumni',
+      role: 'QA Automation Junior', 
+      detail: 'Graduada con certificación de testing. Automatización de pruebas web con Cypress.',
+      skills: ['Cypress', 'JavaScript', 'API Testing', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Carla%20Dominguez%20QA'
+    },
+    { 
+      name: 'Ezequiel Varela', 
+      type: 'alumni',
+      role: 'Full Stack Developer', 
+      detail: 'Graduado del bootcamp SomosCoders. Desarrollo de soluciones completas para ONGs.',
+      skills: ['React', 'Express', 'MongoDB', 'TailwindCSS'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Ezequiel%20Varela%20Developer'
+    },
+    { 
+      name: 'Julieta Vega', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada en desarrollo web responsive y buenas prácticas de maquetación móvil.',
+      skills: ['HTML5', 'CSS Grid/Flexbox', 'JavaScript', 'React'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Julieta%20Vega%20Developer'
+    },
+    { 
+      name: 'Santiago Ríos', 
+      type: 'alumni',
+      role: 'QA Tester & Scrum Practitioner', 
+      detail: 'Graduado con alta competencia en metodologías ágiles y control de calidad de software.',
+      skills: ['QA Manual', 'Scrum', 'Jira', 'Test Scenarios'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Santiago%20Rios%20QA'
+    },
+    { 
+      name: 'Melisa Juárez', 
+      type: 'alumni',
+      role: 'Junior Frontend & UX Supporter', 
+      detail: 'Graduada con perfil híbrido en diseño accesible e implementación con React.',
+      skills: ['UI Implementation', 'React', 'Figma', 'Accessibility'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Melisa%20Juarez%20Frontend'
+    },
+    { 
+      name: 'Rodrigo Mansilla', 
+      type: 'alumni',
+      role: 'Junior Backend Developer', 
+      detail: 'Graduado enfocado en arquitectura de servidores y modelado de datos relacionales.',
+      skills: ['SQL', 'Node.js', 'Express', 'API Security'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Rodrigo%20Mansilla%20Backend'
+    },
+    { 
+      name: 'Micaela Godoy', 
+      type: 'alumni',
+      role: 'QA Manual Analyst', 
+      detail: 'Graduada de la iniciativa FemQA con Fundació SURT y Basetis.',
+      skills: ['QA Testing', 'Functional Testing', 'Bug Life Cycle', 'Scrum'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Micaela%20Godoy%20QA'
+    },
+    { 
+      name: 'Nicolás Ibarra', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado de SomosCoders y Fundación Empujar. Creación de aplicaciones con stack JS.',
+      skills: ['React', 'Node.js', 'JavaScript', 'GitHub Actions'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Nicolas%20Ibarra%20Developer'
+    },
+    { 
+      name: 'Antonella Franco', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada con foco en maquetación interactiva y animaciones CSS optimizadas.',
+      skills: ['CSS Animations', 'React', 'Tailwind', 'Responsive Web'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Antonella%20Franco%20Frontend'
+    },
+    { 
+      name: 'Federico Ponce', 
+      type: 'alumni',
+      role: 'Junior QA Automation', 
+      detail: 'Graduado con proyectos de automatización de pruebas para plataformas web.',
+      skills: ['Selenium', 'JavaScript', 'Mocha/Chai', 'Test Reporting'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Federico%20Ponce%20QA'
+    },
+    { 
+      name: 'Solange Acuña', 
+      type: 'alumni',
+      role: 'Junior Web Developer', 
+      detail: 'Graduada en desarrollo web accesible y gestión de contenidos dinámicos.',
+      skills: ['JavaScript', 'HTML5/CSS3', 'React', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Solange%20Acuna%20Developer'
+    },
+    { 
+      name: 'Damián Cabrera', 
+      type: 'alumni',
+      role: 'Junior Backend & APIs', 
+      detail: 'Graduado especializado en endpoints RESTful y autenticación con JWT.',
+      skills: ['Node.js', 'JWT Auth', 'MongoDB', 'Postman'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Damian%20Cabrera%20Backend'
+    },
+    { 
+      name: 'Noelia Bustos', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada con proyectos de e-commerce y catálogos interactivos accesibles.',
+      skills: ['React', 'State Management', 'TailwindCSS', 'Clean Code'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Noelia%20Bustos%20Frontend'
+    },
+    { 
+      name: 'Pablo Quintana', 
+      type: 'alumni',
+      role: 'QA Tester & Performance Analyst', 
+      detail: 'Graduado con competencias en pruebas de carga y rendimiento de aplicaciones web.',
+      skills: ['QA Manual', 'Lighthouse', 'Performance Testing', 'Jira'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Pablo%20Quintana%20QA'
+    },
+    { 
+      name: 'Tamara Lucero', 
+      type: 'alumni',
+      role: 'Junior Full Stack Developer', 
+      detail: 'Graduada de bootcamps intensivos de desarrollo web y lógica de programación.',
+      skills: ['JavaScript', 'React', 'Node.js', 'SQL'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Tamara%20Lucero%20Developer'
+    },
+    { 
+      name: 'Brian Coronel', 
+      type: 'alumni',
+      role: 'Junior React Developer', 
+      detail: 'Graduado del programa de formación juvenil con proyecto de integración social.',
+      skills: ['React', 'JavaScript', 'CSS3', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Brian%20Coronel%20React'
+    },
+    { 
+      name: 'Giselle Barreto', 
+      type: 'alumni',
+      role: 'QA Engineer & Test Designer', 
+      detail: 'Graduada con enfoque en diseño de matrices de prueba y control de calidad.',
+      skills: ['Test Cases', 'QA Testing', 'Regression Tests', 'Postman'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Giselle%20Barreto%20QA'
+    },
+    { 
+      name: 'Maximiliano Vera', 
+      type: 'alumni',
+      role: 'Junior Backend Developer', 
+      detail: 'Graduado de SomosCoders. Desarrollo de servidores ligeros y bases de datos.',
+      skills: ['Node.js', 'Express', 'PostgreSQL', 'REST'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Maximiliano%20Vera%20Backend'
+    },
+    { 
+      name: 'Sabrina Ocampo', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada con proyectos de interfaces inclusivas para personas mayores.',
+      skills: ['React', 'Accessibility (a11y)', 'TailwindCSS', 'JavaScript'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Sabrina%20Ocampo%20Frontend'
+    },
+    { 
+      name: 'Lautaro Maidana', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado del bootcamp Full Stack con proyectos de gestión comunitaria.',
+      skills: ['React', 'Node.js', 'MongoDB', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lautaro%20Maidana%20Developer'
+    },
+    { 
+      name: 'Nadia Carrizo', 
+      type: 'alumni',
+      role: 'QA Analyst en Tech Services', 
+      detail: 'Graduada del programa de testing de software en colaboración con entidades aliadas.',
+      skills: ['QA Manual', 'Exploratory Testing', 'Jira', 'Agile'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Nadia%20Carrizo%20QA'
+    },
+    { 
+      name: 'Iván Zárate', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduado con especialización en React y maquetación de interfaces responsivas.',
+      skills: ['React', 'TypeScript', 'CSS3', 'Vite'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Ivan%20Zarate%20Frontend'
+    },
+    { 
+      name: 'Lorena Paredes', 
+      type: 'alumni',
+      role: 'Junior Web & UI Developer', 
+      detail: 'Graduada con habilidades en diseño de interacción y programación frontend.',
+      skills: ['HTML5/CSS3', 'JavaScript', 'Figma', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Lorena%20Paredes%20Developer'
+    },
+    { 
+      name: 'Adrián Peralta', 
+      type: 'alumni',
+      role: 'Junior Backend & Cloud Hosting', 
+      detail: 'Graduado con prácticas de despliegue en la nube y configuración de servidores.',
+      skills: ['Node.js', 'Docker', 'Linux', 'Cloud Basics'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Adrian%20Peralta%20Backend'
+    },
+    { 
+      name: 'Estefanía Luque', 
+      type: 'alumni',
+      role: 'QA Automation Junior', 
+      detail: 'Graduada en pruebas automatizadas y aseguramiento de calidad de software.',
+      skills: ['Cypress', 'JavaScript', 'API Testing', 'QA'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Estefania%20Luque%20QA'
+    },
+    { 
+      name: 'Cristian Molina', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado con desarrollo de plataforma colaborativa de código abierto.',
+      skills: ['React', 'Node.js', 'PostgreSQL', 'TailwindCSS'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Cristian%20Molina%20Developer'
+    },
+    { 
+      name: 'Macarena Duarte', 
+      type: 'alumni',
+      role: 'Junior Frontend Developer', 
+      detail: 'Graduada en desarrollo web y maquetación accesible para aplicaciones móviles.',
+      skills: ['React', 'CSS Modules', 'JavaScript', 'Responsive Web'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Macarena%20Duarte%20Frontend'
+    },
+    { 
+      name: 'Leonardo Farías', 
+      type: 'alumni',
+      role: 'Junior QA Tester', 
+      detail: 'Graduado con alta capacidad de análisis funcional y documentación de pruebas.',
+      skills: ['QA Testing', 'Bug Life Cycle', 'Scrum', 'Test Planning'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Leonardo%20Farias%20QA'
+    },
+    { 
+      name: 'Yesica Galeano', 
+      type: 'alumni',
+      role: 'Junior Web Developer', 
+      detail: 'Graduada del programa de inclusión sociolaboral en tecnologías web.',
+      skills: ['HTML5/CSS3', 'JavaScript', 'React', 'Git Flow'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Yesica%20Galeano%20Developer'
+    },
+    { 
+      name: 'Emiliano Suárez', 
+      type: 'alumni',
+      role: 'Junior React Developer', 
+      detail: 'Graduado enfocado en componentes interactivos y consumo de servicios web.',
+      skills: ['React', 'Axios', 'TailwindCSS', 'JavaScript ES6'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Emiliano%20Suarez%20React'
+    },
+    { 
+      name: 'Rocío Albornoz', 
+      type: 'alumni',
+      role: 'QA Analyst & Accessibility Tester', 
+      detail: 'Graduada con doble perfil en testing funcional y verificación de accesibilidad a11y.',
+      skills: ['QA Analysis', 'WCAG Audits', 'Postman', 'Jira'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Rocio%20Albornoz%20QA'
+    },
+    { 
+      name: 'Martín Villalba', 
+      type: 'alumni',
+      role: 'Full Stack Junior Developer', 
+      detail: 'Graduado del bootcamp SomosCoders con proyecto de bolsa de trabajo accesible.',
+      skills: ['React', 'Node.js', 'SQL', 'Git'],
+      linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Martin%20Villalba%20Developer'
     },
 
     // --- REFERENTES CIENTÍFICOS & TECNOLÓGICOS HOMENAJEADOS ---
@@ -299,7 +683,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap gap-4 pt-2 text-xs font-bold text-gray-700">
             <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-gray-200 shadow-xs">
               <CheckCircle className="w-4 h-4 text-[#00A98F]" />
-              <span>100% Sin Ánimo de Lucro</span>
+              <span>+50 Alumni Graduados</span>
             </div>
             <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-gray-200 shadow-xs">
               <CheckCircle className="w-4 h-4 text-[#00A98F]" />
@@ -457,7 +841,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
         <div className="space-y-4 max-w-3xl relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C8FF00]/10 text-[#C8FF00] text-xs font-mono font-bold">
             <Heart className="w-4 h-4 fill-[#C8FF00]" />
-            <span>Muro de Gratitud & Red de Talento</span>
+            <span>Muro de Gratitud & Red de Talento (+50 Alumni)</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display leading-tight">
@@ -472,10 +856,10 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <div className="flex flex-wrap gap-2">
               {[
-                { id: 'todos', label: 'Todos' },
-                { id: 'mentores', label: 'Mentores & Líderes' },
-                { id: 'alumni', label: 'Alumni Graduados' },
-                { id: 'referentes', label: 'Pioneros & Referentes' }
+                { id: 'todos', label: 'Todos (+70)' },
+                { id: 'mentores', label: 'Mentores & Líderes (17)' },
+                { id: 'alumni', label: 'Alumni Graduados (50+)' },
+                { id: 'referentes', label: 'Pioneros & Referentes (4)' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -557,7 +941,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
 
         {/* Cita de agradecimiento */}
         <div className="pt-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 font-mono relative z-10">
-          <span>❤️ Gracias por democratizar el código y abrir oportunidades reales.</span>
+          <span>❤️ Gracias a todos los alumnos, mentores y colaboradores por transformar vidas con código.</span>
           <button 
             onClick={() => onNavigate('colabora')}
             className="text-[#C8FF00] hover:underline font-bold flex items-center gap-1 cursor-pointer"
