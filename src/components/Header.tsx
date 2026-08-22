@@ -111,10 +111,29 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Language Toggle */}
           <button
             onClick={() => setLanguage(language === 'es' ? 'ca' : 'es')}
-            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-100 transition"
+            className="hidden lg:flex items-center gap-1.5 px-3 h-8 rounded-full border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-100 transition shadow-sm"
             title="Cambiar idioma"
           >
-            {language.toUpperCase()}
+            {language === 'es' ? (
+              <>
+                <span>CAT</span>
+                <svg viewBox="0 0 16 9" className="w-3.5 h-[9px] rounded-sm flex-shrink-0 shadow-[0_0_2px_rgba(0,0,0,0.2)]">
+                  <rect width="16" height="9" fill="#FFC400" />
+                  <rect width="16" height="1" y="1" fill="#DA121A" />
+                  <rect width="16" height="1" y="3" fill="#DA121A" />
+                  <rect width="16" height="1" y="5" fill="#DA121A" />
+                  <rect width="16" height="1" y="7" fill="#DA121A" />
+                </svg>
+              </>
+            ) : (
+              <>
+                <span>ES</span>
+                <svg viewBox="0 0 16 9" className="w-3.5 h-[9px] rounded-sm flex-shrink-0 shadow-[0_0_2px_rgba(0,0,0,0.2)]">
+                  <rect width="16" height="9" fill="#DA121A" />
+                  <rect width="16" height="4.5" y="2.25" fill="#FFC400" />
+                </svg>
+              </>
+            )}
           </button>
           
           {/* Dropdown interactivo: ÚNETE (Registrarse / Iniciar Sesión) */}
