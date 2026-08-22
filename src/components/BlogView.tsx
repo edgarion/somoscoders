@@ -53,6 +53,19 @@ export const BlogView: React.FC<BlogViewProps> = ({ onNavigate }) => {
       link: 'https://blog.basetis.com/article_basic/empowerhack-fem/'
     },
     {
+      id: 'bootcamp-programa-empujar-cenit',
+      title: 'Bootcamp Gratuito de Desarrollo Full Stack con Programa Empujar y SomosCoders',
+      excerpt: 'Consultora Cénit destaca el bootcamp intensivo y gratuito de desarrollo web impulsado por Programa Empujar y SomosCoders para formar a jóvenes con alta motivación y conectarlos con empresas del ecosistema digital.',
+      category: 'Alianzas & Empleo',
+      date: '10 Agosto 2026',
+      readTime: '4 min de lectura',
+      author: 'Consultora Cénit',
+      authorAvatar: '/images/avatars/avatar_boy_curly.png',
+      image: '/images/char_boy_backpack_peace.png',
+      tag: 'ConsultoraCenit',
+      link: 'https://consultoracenit.com.ar/bootcamp-de-programa-empujar/'
+    },
+    {
       id: 'emplear-para-igualar-empujar',
       title: 'Emplear para Igualar: El Puente entre Jóvenes Vulnerables y Empresas IT',
       excerpt: 'Alianza entre la Fundación Empujar y SomosCoders para capacitar y conectar talento joven con su primer empleo formal en la industria del software.',

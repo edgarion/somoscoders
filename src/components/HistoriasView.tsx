@@ -211,7 +211,7 @@ export const HistoriasView: React.FC<HistoriasViewProps> = ({ onNavigate }) => {
             className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full text-xs font-sans uppercase tracking-wider transition shadow-sm"
           >
             <Play className="w-4 h-4 fill-white" />
-            <span>Ver Canal @somoscoders8996</span>
+            <span>Ver Canal</span>
           </a>
         </div>
 
