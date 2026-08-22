@@ -134,9 +134,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSetCategoryFilter 
           <p className="text-xs text-gray-500 mb-4 font-bold tracking-wider uppercase">Con el apoyo de</p>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 opacity-70 hover:opacity-100 transition-opacity">
             {/* ACCIÓ Generalitat */}
-            <a href="https://www.accio.gencat.cat" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Generalitat_de_Catalunya.svg" alt="Generalitat de Catalunya" className="h-6 w-auto grayscale brightness-200" />
+            <a href="https://www.accio.gencat.cat" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center">
               <span className="text-sm font-bold text-white tracking-wide">ACCIÓ</span>
+              <span className="text-[9px] text-gray-400 uppercase tracking-widest">Generalitat de Catalunya</span>
             </a>
 
             {/* Barcelona Activa */}
