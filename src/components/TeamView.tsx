@@ -26,7 +26,7 @@ interface TeamViewProps {
 }
 
 export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
-  const [filterCategory, setFilterCategory] = useState<'todos' | 'mentores' | 'alumni' | 'referentes'>('todos');
+  const [filterCategory, setFilterCategory] = useState<'todos' | 'mentor' | 'alumni' | 'referentes'>('todos');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Cuadro 1: Lorena Criado y Jacobo Pedrosa
@@ -849,7 +849,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ onNavigate }) => {
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'todos', label: 'Todos (+65)' },
-                { id: 'mentores', label: 'Mentores & Líderes (17)' },
+                { id: 'mentor', label: 'Mentores & Líderes (17)' },
                 { id: 'alumni', label: 'Alumni Graduados (50+)' },
                 { id: 'referentes', label: 'Accesibilidad & Tech' }
               ].map((tab) => (
